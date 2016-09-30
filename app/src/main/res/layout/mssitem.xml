@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:weightSum="4"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<ImageView
+    android:layout_weight="1"
+    android:id="@+id/mss_iv"
+    android:src="@mipmap/ic_launcher"
+    android:layout_width="0dp"
+    android:layout_height="100dp"/>
+    <LinearLayout
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/mss_user"
+            android:text="姓名"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <TextView
+            android:text="消息"
+            android:id="@+id/mss"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/mss_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>
