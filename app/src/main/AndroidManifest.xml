@@ -3,7 +3,8 @@
           package="com.example.main.shop">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    //输入框的自动浮起
+    //android:windowSoftInputMode="stateVisible|adjustResize"
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.Login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -20,6 +21,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Message">
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".Activity.RegistActivity">
+        </activity>
+        <activity android:name=".Activity.LeadActivity">
+        </activity>
+        <activity android:name=".Activity.UserInfoActivity">
         </activity>
     </application>
 

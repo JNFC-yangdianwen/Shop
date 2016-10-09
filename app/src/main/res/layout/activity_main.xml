@@ -6,52 +6,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.main.shop.MainActivity">
-    <android.support.v7.widget.Toolbar
-        android:background="#437ed6"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp">
-
-    </android.support.v7.widget.Toolbar>
 <FrameLayout
     android:id="@+id/fl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 </FrameLayout>
     <LinearLayout
-        android:background="#6666f1"
         android:weightSum="4"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/iv_frd"
-            android:src="@mipmap/ic_launcher"
+        android:layout_height="50dp">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="match_parent">
+           <ImageView
+               android:id="@+id/iv_frd"
+               android:src="@drawable/shouye1"
+               android:layout_width="match_parent"
+               android:layout_height="30dp"/>
+           <TextView
+               android:textColor="#32acd4"
+               android:id="@+id/tv_frd"
+               android:gravity="center"
+               android:text="@string/friend"
+               android:textSize="15sp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/iv_mss"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_mss"
+                android:src="@drawable/shouye2_"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/tv_mss"
+                android:gravity="center"
+                android:text="@string/message"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/iv_wallet"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_wallet"
+                android:src="@drawable/shouye3_"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/tv_wallet"
+                android:gravity="center"
+                android:text="@string/wallet"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/iv_my"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_my"
+                android:src="@drawable/shouye4_"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/tv_my"
+                android:gravity="center"
+                android:text="@string/my"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
