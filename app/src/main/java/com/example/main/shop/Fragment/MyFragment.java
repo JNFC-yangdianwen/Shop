@@ -30,6 +30,7 @@ import butterknife.OnClick;
 public class MyFragment extends Fragment implements AdapterView.OnItemClickListener {
     @Bind(R.id.my_lv)ListView mListView;
     @Bind(R.id.userInfo)LinearLayout mLinearLayout;
+    private int[] AcitivityNum={};//存放Activity的数组
     private List<String> mData;
     @Nullable
     @Override
@@ -69,18 +70,7 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position==id) {
-            if (id==0){
 
-            }
-            if (id==1){
-
-            }
-            if (id==2){
-
-            }
-            if (id==3){
-
-            }
         }
     }
 }

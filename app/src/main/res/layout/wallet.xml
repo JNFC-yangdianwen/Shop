@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp">
         <TextView
+            android:id="@+id/recharge"
             android:textSize="20sp"
             android:text="充值"
             android:padding="8dp"
@@ -24,6 +25,7 @@
             android:layout_width="250dp"
             android:layout_height="match_parent"/>
         <TextView
+            android:id="@+id/detail"
             android:text="明细"
             android:padding="6dp"
             android:textSize="20sp"

@@ -6,12 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.main.shop.MainActivity">
-<FrameLayout
-    android:id="@+id/fl"
+<fragment
+    android:name="com.example.main.shop.Fragment.FriendFragment"
+    android:id="@+id/fragmemt"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-</FrameLayout>
+    android:layout_height="match_parent">
+</fragment>
+
     <LinearLayout
+        android:background="@color/white"
         android:weightSum="4"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

@@ -21,6 +21,7 @@ import butterknife.OnClick;
 
 //主界面使用frament
 public class MainActivity extends AppCompatActivity {
+    //Appkey:17bfcb6cd2ea8
     private static final String TAG = "MainActivity";
     @Bind(R.id.iv_frd) ImageView mIvFriend;
     @Bind(R.id.iv_wallet) ImageView mIvWallet;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl, fragment);
+        transaction.add(R.id.fragmemt,fragment);
         transaction.commit();
     }
 }
