@@ -42,6 +42,5 @@ public class Login extends AppCompatActivity {
        //获取用户令牌token
        Intent intent=new Intent(this,MainActivity.class);
        startActivity(intent);
-
    }
 }

@@ -2,6 +2,7 @@ package com.example.main.shop.Constans;
 
 /**
  * Created by Administrator on 2016/10/10 0010.
+ * 用户实体类
  */
 
 public class User {

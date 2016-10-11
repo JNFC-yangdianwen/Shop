@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    //切换fragment的方法
+      //切换fragment的方法
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragmemt,fragment);
-        transaction.commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();//获取fragment的管理者
+        FragmentTransaction transaction = fragmentManager.beginTransaction();//开启事物
+        transaction.add(R.id.vp,fragment);//添加fragment
+        transaction.commit();//提交事务
     }
 }

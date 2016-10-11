@@ -13,7 +13,7 @@ import retrofit2.http.QueryMap;
  */
 
 public interface RequestServer {
-    //获取手机验证码
+    //获取手机验证码传入参数手机号
     @GET("get_code")
     Call<RequestBody> getCode(@QueryMap Map<String, String> param);
     @POST("register")

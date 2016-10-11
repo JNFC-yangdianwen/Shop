@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.main.shop.MainActivity">
-<fragment
-    android:name="com.example.main.shop.Fragment.FriendFragment"
-    android:id="@+id/fragmemt"
+<android.support.v4.view.ViewPager
+    android:layout_above="@+id/llb"
+    android:id="@+id/vp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-</fragment>
+</android.support.v4.view.ViewPager>
 
     <LinearLayout
+        android:id="@+id/llb"
         android:background="@color/white"
         android:weightSum="4"
         android:layout_alignParentBottom="true"
