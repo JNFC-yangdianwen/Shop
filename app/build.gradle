@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.example.main.shop"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //短信验证
+    repositories{
+        flatDir{
+            dirs 'libs' //就是你放aar的目录地址
         }
     }
 }
@@ -33,4 +39,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+    //短信验证
+    compile name:'SMSSDK-2.1.1',ext:'aar'
+    compile name:'SMSSDKGUI-2.1.1',ext:'aar'
 }

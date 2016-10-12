@@ -41,7 +41,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
-
         <TextView
             android:padding="8dp"
             android:textSize="20sp"
@@ -69,11 +68,13 @@
         <EditText
             android:hint="请输入验证码"
             android:id="@+id/et_ident"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_marginLeft="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,8 +88,26 @@
         <EditText
             android:hint="请输入6位以上密码"
             android:id="@+id/et_psw"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
-    </LinearLayout>
 
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/l_sure"
+    android:background="@color/titleColor"
+    android:layout_centerInParent="true"
+    android:layout_width="200dp"
+    android:layout_height="25dp">
+    <TextView
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="确认"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+</RelativeLayout>
 </LinearLayout>
