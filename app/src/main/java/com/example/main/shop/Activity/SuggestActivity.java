@@ -4,13 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.main.shop.R;
+/**
+ * 意见反馈页面
+ */
 
-public class MyMssAcitivity extends AppCompatActivity {
+public class SuggestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_mss_acitivity);
-
+        setContentView(R.layout.activity_suggest);
     }
 }

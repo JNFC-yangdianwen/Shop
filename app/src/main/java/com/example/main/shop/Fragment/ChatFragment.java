@@ -19,7 +19,7 @@ import com.example.main.shop.R;
  * 消息的fragment
  */
 
-public class MssFragment extends Fragment implements  AdapterView.OnItemClickListener {
+public class ChatFragment extends Fragment implements  AdapterView.OnItemClickListener {
     private ListView mListView;
     private MssAdapter mMssAdapter;
     @Nullable

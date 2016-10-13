@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.main.shop.Fragment.FriendFragment;
-import com.example.main.shop.Fragment.MssFragment;
+import com.example.main.shop.Fragment.ChatFragment;
 import com.example.main.shop.Fragment.MyFragment;
 import com.example.main.shop.Fragment.WalletFragment;
 
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 mTvFriend.setTextColor(0x8A000000);
                 mTvWallet.setTextColor(0x8A000000);
                 mTvMy.setTextColor(0x8A000000);
-                MssFragment mssFragment = new MssFragment();
-                replaceFragment(mssFragment);
+                ChatFragment chatFragment = new ChatFragment();
+                replaceFragment(chatFragment);
                 break;
             case R.id.iv_wallet:
                 //加载钱包的fragment
@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 //加载我的fragment
                 MyFragment myFragment=new MyFragment();
                 replaceFragment(myFragment);
-                mIvMy.setImageResource(R.drawable.shouye4);
                 mIvFriend.setImageResource(R.drawable.shouye1_);
                 mIvMss.setImageResource(R.drawable.shouye2_);
                 mIvWallet.setImageResource(R.drawable.shouye3_);
+                mIvMy.setImageResource(R.drawable.shouye4);
                 mTvMy.setTextColor(Color.parseColor("#32acd4"));
                 mTvFriend.setTextColor(0x8A000000);
                 mTvMss.setTextColor(0x8A000000);

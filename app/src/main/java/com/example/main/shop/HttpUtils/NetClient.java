@@ -1,11 +1,14 @@
 package com.example.main.shop.HttpUtils;
 
+import com.example.main.shop.Constans.Picture;
+import com.example.main.shop.Constans.User;
+import com.example.main.shop.Constans.UserInfo;
+
 import java.util.Map;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2016/10/8 0008.
@@ -32,14 +35,27 @@ public class NetClient {
         return mRetrofit.create(RequestServer.class);
     }
     //call模型数据,获取手机验证码
-    public Call<RequestBody> getCode(Map<String,String> map){
-        return getApi().getCode(map);
+    public Call<RequestBody> getCode(User user){
+        return getApi().getCode(user);
     }
     //注册
-    public Call<RequestBody> register(@Field("mobile") String number,@Field("pwd")String pwd,@Field("code")String code,@Field("invite_code")String in_code){
-        return getApi().register( number,pwd,code,in_code);
+    public Call<RequestBody> register(User user){
+        return getApi().register(user);
     }
+    //登陆
     public Call<RequestBody> login(Map<String,String> map){
         return getApi().login(map);
+    }
+    //忘记密码
+    public Call<RequestBody> forgetPsw(Map<String,String> map){
+        return getApi().forgetPsw(map);
+    }
+    //添加用户信息
+    public Call<UserInfo> addUserInfo(UserInfo userInfo){
+        return getApi().addUserInfo(userInfo);
+    }
+    //获取轮播图
+    public Call<Picture.PictureInfo> getPicture(){
+        return  getApi().getPicture();
     }
 }

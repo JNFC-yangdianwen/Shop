@@ -6,20 +6,38 @@ package com.example.main.shop.Constans;
  */
 
 public class User {
-    private String telNumber;//手机号
-    private String password;//密码
+
+    private String mobile;//手机号
+    private String pwd;//密码
     private String code;//验证码
-    private String inviteCode;//邀请码
-    public String getPassword() {
-        return password;
+    private String invite_code;//邀请码
+
+    //获取验证码时调用该构造函数
+    public User(String mobile,int type) {
+        this.mobile = mobile;
+    }
+ //注册时调用该构造函数
+    public User(String mobile, String pwd, String code, String inve_code) {
+        this.mobile = mobile;
+        this.pwd = pwd;
+        this.code = code;
+        this.invite_code = invite_code;
     }
 
-    public String getInviteCode() {
-        return inviteCode;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setInviteCode(String inviteCode) {
-        this.inviteCode = inviteCode;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getCode() {
@@ -30,16 +48,11 @@ public class User {
         this.code = code;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getInvite_code() {
+        return invite_code;
     }
 
-    public String getTelNumber() {
-        return telNumber;
+    public void setInvite_code(String invite_code) {
+        this.invite_code = invite_code;
     }
-
-    public void setTelNumber(String telNumber) {
-        this.telNumber = telNumber;
-    }
-
 }

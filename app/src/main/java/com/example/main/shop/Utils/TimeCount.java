@@ -1,4 +1,4 @@
-package com.example.main.shop;
+package com.example.main.shop.Utils;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
@@ -6,6 +6,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
+
+import com.example.main.shop.R;
 
 /**
  * Created by Administrator on 2016/10/12 0012.

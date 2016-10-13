@@ -25,6 +25,7 @@ import retrofit2.Response;
 
 //登陆界面
 public class Login extends AppCompatActivity {
+    public static  int type;
     @Bind(R.id.iv_login)ImageView mImageView;
     @Bind(R.id.et_user)EditText userName;
     @Bind(R.id.et_psw)EditText psw;
@@ -55,7 +56,7 @@ public class Login extends AppCompatActivity {
        Map<String,String> map=new HashMap<>();
        map.put("mobile",user);
        map.put("pwd",passWord);
-       Call<RequestBody> login = NetClient.getInstance().getApi().login(map);
+       Call<RequestBody> login = NetClient.getInstance().login(map);
        login.enqueue(new Callback<RequestBody>() {
            @Override
            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
@@ -78,4 +79,14 @@ public class Login extends AppCompatActivity {
            }
        });
    }
+    //点击注册新用户
+    @OnClick(R.id.tv_register)
+    public void register(){
+        type=1;
+    }
+    //点击忘记密码
+    @OnClick(R.id.tv_forgetPsw)
+    public void forgetPsw(){
+        type=2;
+    }
 }
