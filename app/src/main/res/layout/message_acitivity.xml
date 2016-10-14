@@ -5,22 +5,6 @@
     android:id="@+id/activity_message_acitivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.main.shop.Message">
-    <RelativeLayout
+    tools:context="com.example.main.shop.Activity.MessageActivity">
 
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60">
-    <EditText
-        android:id="@+id/et_content"
-        android:layout_width="300dp"
-        android:layout_height="56dp"/>
-        <TextView
-            android:id="@+id/tv_send"
-            android:gravity="center"
-            android:text="发送"
-            android:layout_toRightOf="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-    </RelativeLayout>
 </RelativeLayout>

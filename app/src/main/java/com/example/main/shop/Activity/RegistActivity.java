@@ -41,7 +41,6 @@ public class RegistActivity extends AppCompatActivity {
     private String mInviteNumber;
     private String mIdent;
     private String mPswNum;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class RegistActivity extends AppCompatActivity {
         mPswNum = psw.getText().toString().trim();
         SMSSDK.setAppKey(Appkey);
     }
-
     //获取短信验证码
     @OnClick(R.id.tv_time)
     public void getSMSS() {
@@ -90,16 +88,12 @@ public class RegistActivity extends AppCompatActivity {
                     Toast.makeText(RegistActivity.this, message, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
             }
-
             @Override
             public void onFailure(Call<RequestBody> call, Throwable t) {
-
             }
         });
     }
-
     @OnClick(R.id.l_sure)
     public void sure() {
 
@@ -114,10 +108,8 @@ public class RegistActivity extends AppCompatActivity {
                     RequestBody body = response.body();
                     Log.d(TAG, "onResponse: " + body);
                 }
-
                 @Override
                 public void onFailure(Call<RequestBody> call, Throwable t) {
-
                 }
             });
         } else {

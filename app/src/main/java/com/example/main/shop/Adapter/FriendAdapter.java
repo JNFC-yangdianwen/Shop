@@ -12,6 +12,7 @@ import com.example.main.shop.R;
 
 /**
  * Created by Administrator on 2016/9/29 0029.
+ * 朋友圈列表适配器
  */
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHolder> {

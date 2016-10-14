@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.main.shop.Adapter.MssAdapter;
-import com.example.main.shop.Message;
+import com.example.main.shop.Activity.MessageActivity;
 import com.example.main.shop.R;
 
 /**
@@ -40,7 +40,7 @@ public class ChatFragment extends Fragment implements  AdapterView.OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (id==mMssAdapter.getItemId(position)) {
-            Intent intent=new Intent(getContext(),Message.class);
+            Intent intent=new Intent(getContext(),MessageActivity.class);
             startActivity(intent);
         }
     }

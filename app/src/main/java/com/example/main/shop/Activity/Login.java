@@ -83,6 +83,8 @@ public class Login extends AppCompatActivity {
     @OnClick(R.id.tv_register)
     public void register(){
         type=1;
+        Intent intent=new Intent(this,RegistActivity.class);
+        startActivity(intent);
     }
     //点击忘记密码
     @OnClick(R.id.tv_forgetPsw)

@@ -28,7 +28,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.2.0'
+    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
     testCompile 'junit:junit:4.12'
+
     compile 'com.jakewharton:butterknife:7.0.1'
     //使用RecycleView代替ListView
     compile 'com.android.support:recyclerview-v7:24.0.0'
@@ -42,4 +44,5 @@ dependencies {
     //短信验证
     compile name:'SMSSDK-2.1.1',ext:'aar'
     compile name:'SMSSDKGUI-2.1.1',ext:'aar'
+
 }
