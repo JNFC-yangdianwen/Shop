@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.main.shop.Constans.Dynamic;
 import com.example.main.shop.R;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/29 0029.
@@ -17,21 +20,25 @@ import com.example.main.shop.R;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHolder> {
    private LayoutInflater mInflater;
+    private List<Dynamic.DynamicInfo> mData;
     //空参构造函数
     public FriendAdapter() {
     }
     //初始化数据
-    public FriendAdapter(Context context) {
+    public FriendAdapter(Context context, List<Dynamic.DynamicInfo> data) {
+        mData=data;
         mInflater = LayoutInflater.from(context);
+    }
+    public void addFriend(List<Dynamic.DynamicInfo> data){
+        mData.addAll(data);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.mImageView.setImageResource(R.mipmap.ic_launcher);
-        holder.mTextViewUser.setText("123");
-        holder.mTextViewTime.setText(""+System.currentTimeMillis());
-        holder.mTextViewMss.setText("今天的消息：");
-
+        holder.mImageView.setImageResource(Integer.parseInt(mData.get(position).getPhoto()));
+        holder.mTextViewUser.setText(mData.get(position).getUser_name());
+        holder.mTextViewTime.setText(mData.get(position).getTime());
+        holder.mTextViewMss.setText(mData.get(position).getContent());
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

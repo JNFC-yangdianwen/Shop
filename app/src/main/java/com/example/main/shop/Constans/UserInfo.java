@@ -54,11 +54,4 @@ public class UserInfo {
         this.photo = photo;
     }
 
-    public UserInfo(int uid, String sex, String like, String user_name, String photo) {
-        this.uid = uid;
-        this.sex = sex;
-        this.like = like;
-        this.user_name = user_name;
-        this.photo = photo;
-    }
 }

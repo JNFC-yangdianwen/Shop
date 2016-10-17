@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.MainActivity;
 import com.example.main.shop.R;
@@ -55,8 +56,12 @@ public class Login extends AppCompatActivity {
                int code = result.getCode();
                //登陆成功
                if (code==101){
+                   mUtils.Toast(getApplicationContext(),msg);
                    Intent intent=new Intent(getApplicationContext(), MainActivity.class);
                    startActivity(intent);
+                   int uid = result.getUid();
+                   UserInfo userInfo=new UserInfo();
+                   userInfo.setUid(uid);
                    return;
                }if (code==102){
                   mUtils.Toast(getApplicationContext(),msg);
