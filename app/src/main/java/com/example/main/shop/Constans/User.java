@@ -6,24 +6,10 @@ package com.example.main.shop.Constans;
  */
 
 public class User {
-
     private String mobile;//手机号
     private String pwd;//密码
     private String code;//验证码
     private String invite_code;//邀请码
-
-    //获取验证码时调用该构造函数
-    public User(String mobile,int type) {
-        this.mobile = mobile;
-    }
- //注册时调用该构造函数
-    public User(String mobile, String pwd, String code, String inve_code) {
-        this.mobile = mobile;
-        this.pwd = pwd;
-        this.code = code;
-        this.invite_code = invite_code;
-    }
-
     public String getMobile() {
         return mobile;
     }

@@ -6,22 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.main.shop.Fragment.FriendFragment;
 import com.example.main.shop.Fragment.ChatFragment;
+import com.example.main.shop.Fragment.FriendFragment;
 import com.example.main.shop.Fragment.MyFragment;
 import com.example.main.shop.Fragment.WalletFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
 //主界面使用frament
 public class MainActivity extends AppCompatActivity {
@@ -43,23 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         String token="3A3QI7k6o8AV7jwGcC0VrLO0Zp8veqjrL783P9LaIfQgvbReLntYP/ZB7tLtpxkTzC7DWbCQ9/1F6Xqv4dp/1A==";
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
-                //token失效的状态处理，重新获取token
-            }
 
-            @Override
-            public void onSuccess(String userId) {
-                Log.d(TAG, "onSuccess: "+userId);
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.d(TAG, "onError: "+errorCode);
-
-            }
-        });
         mFriendFragment = new FriendFragment();
         replaceFragment(mFriendFragment);
     }

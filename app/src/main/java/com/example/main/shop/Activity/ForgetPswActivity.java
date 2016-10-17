@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.main.shop.Constans.Result;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 import com.example.main.shop.Utils.TimeCount;
 
 import java.util.HashMap;
@@ -18,7 +19,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,20 +39,24 @@ public class ForgetPswActivity extends AppCompatActivity {
     private String mTelNumber;
     private String mIdentNum;
     private String mPassWord;
+    private ActivityUtils mUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_psw);
         ButterKnife.bind(this);
-        mTelNumber = phoneNumber.getText().toString().trim();
-        mIdentNum = identNumber.getText().toString().trim();
-        mPassWord = psw.getText().toString().trim();
+        mUtils = new ActivityUtils();
     }
 
     //获取验证码
     @OnClick(R.id.tv_time)
     public void getIdentNumber() {
+        mTelNumber = phoneNumber.getText().toString().trim();
+        if (TextUtils.isEmpty(mTelNumber)) {
+            mUtils.Toast(this,"请输入手机号");
+            return;
+        }
         TimeCount timeCount = new TimeCount(mTextView, 6000, 1000);
         timeCount.start();
     }
@@ -60,60 +64,61 @@ public class ForgetPswActivity extends AppCompatActivity {
     //确认密码
     @OnClick(R.id.l_sure)
     public void surePsw() {
-        if (!(TextUtils.isEmpty(mTelNumber) && TextUtils.isEmpty(mIdentNum) && TextUtils.isEmpty(mPassWord))) {
+        mIdentNum = identNumber.getText().toString().trim();
+        mPassWord = psw.getText().toString().trim();
             Map<String, String> map = new HashMap();
             map.put("mobile", mTelNumber);
             map.put("code", mIdentNum);
             map.put("pwd", mPassWord);
-            Call<RequestBody> call = NetClient.getInstance().forgetPsw(map);
-            call.enqueue(new Callback<RequestBody>() {
+            Call<Result> call = NetClient.getInstance().forgetPsw(map);
+            call.enqueue(new Callback<Result>() {
                 @Override
-                public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-                    int code = response.code();
-                    String message = response.message();
+                public void onResponse(Call<Result> call, Response<Result> response) {
+                    Result result = response.body();
+                    int code = result.getCode();
+                    String msg = result.getMsg();
                     //修改密码成功
                     if (code == 101) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
                         return;
                     }
                     if (code == 102) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 103) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 104) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 105) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 106) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 107) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                     if (code == 108) {
-                        Toast.makeText(ForgetPswActivity.this, message, Toast.LENGTH_SHORT).show();
+                        mUtils.Toast(getApplicationContext(),msg);
                         return;
                     }
                 }
 
                 @Override
-                public void onFailure(Call<RequestBody> call, Throwable t) {
-
+                public void onFailure(Call<Result> call, Throwable t) {
+                         new Throwable(t.getMessage());
                 }
             });
 
         }
-    }
 }

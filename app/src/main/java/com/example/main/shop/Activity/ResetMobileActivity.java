@@ -4,17 +4,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.main.shop.Constans.User;
+import com.example.main.shop.Constans.Result;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 import com.example.main.shop.Utils.TimeCount;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,61 +37,116 @@ public class ResetMobileActivity extends AppCompatActivity {
     private String mOriginNumber;
     private String mCode;
     private String mNewNumber;
+    private ActivityUtils mUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_mobile);
         ButterKnife.bind(this);
+        mUtils = new ActivityUtils();
+
     }
 
     //获取验证码
     @OnClick(R.id.tv_getCode)
     public void getCode() {
-        mOriginNumber = originNumber.getText().toString().trim();
-        mCode = identNumber.getText().toString().trim();
-        mNewNumber = newNumber.getText().toString().trim();
-        Login.type = 3;
+        mOriginNumber = originNumber.getText().toString().trim();//原来的手机号
+        mCode = identNumber.getText().toString().trim();//验证码
+        mNewNumber = newNumber.getText().toString().trim();//新手机号
         TimeCount timeCount = new TimeCount(tvCode, 6000, 1000);
         //开始倒计时
         timeCount.start();
-        User user = new User(mNewNumber, Login.type);
-        Call<RequestBody> code = NetClient.getInstance().getCode(user);
-        code.enqueue(new Callback<RequestBody>() {
+        Map<String, String> map = new HashMap<>();
+        map.put("mobile", mOriginNumber);
+        map.put("type", String.valueOf(3));
+        Call<Result> code = NetClient.getInstance().getCode(map);
+        code.enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-                int code1 = response.code();
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Result result = response.body();
+                int code1 = result.getCode();
+                String msg = result.getMsg();
                 if (code1 == 101) {
-                    Toast.makeText(ResetMobileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    mUtils.Toast(getApplicationContext(), msg);
                     return;
                 }
                 if (code1 == 102) {
-                    Toast.makeText(ResetMobileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    mUtils.Toast(getApplicationContext(), msg);
                     return;
                 }
                 if (code1 == 103) {
-                    Toast.makeText(ResetMobileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    mUtils.Toast(getApplicationContext(), msg);
                     return;
                 }
                 if (code1 == 104) {
-                    Toast.makeText(ResetMobileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    mUtils.Toast(getApplicationContext(), msg);
                     return;
                 }
                 if (code1 == 105) {
-                    Toast.makeText(ResetMobileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    mUtils.Toast(getApplicationContext(), msg);
                     return;
                 }
             }
 
             @Override
-            public void onFailure(Call<RequestBody> call, Throwable t) {
-
+            public void onFailure(Call<Result> call, Throwable t) {
+                new Throwable(t.getMessage());
             }
         });
     }
+
     //点击保存时
     @OnClick(R.id.tv_save)
-    public void saveNewNumber(){
-        
+    public void saveNewNumber() {
+        Map<String, String> map = new HashMap<>();
+        Result result = new Result();
+        int uid = result.getUid();
+        map.put("uid", String.valueOf(uid));
+        map.put("mobile", mOriginNumber);
+        map.put("new_mobile", mNewNumber);
+        map.put("type", String.valueOf(3));
+        Call<Result> resetMobileCall = NetClient.getInstance().resetMobile(map);
+        resetMobileCall.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Result result1 = response.body();
+                int code = result1.getCode();
+                String msg = result1.getMsg();
+                if (code == 101) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 102) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 103) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 104) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 105) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 106) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+                if (code == 107) {
+                    mUtils.Toast(getApplicationContext(), msg);
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                new Throwable(t.getMessage());
+            }
+        });
     }
 }
