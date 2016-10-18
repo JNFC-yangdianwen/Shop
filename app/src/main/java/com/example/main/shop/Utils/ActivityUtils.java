@@ -10,10 +10,11 @@ import android.widget.Toast;
  */
 
 public class ActivityUtils extends AppCompatActivity{
-
+    //Toast方法
     public void Toast(Context context,String msg){
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
+    //跳转页面
     public void startActivity(Context context, Class<?> activity){
         Intent intent=new Intent(context.getApplicationContext(),activity);
         startActivity(intent);
