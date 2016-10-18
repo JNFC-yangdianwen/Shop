@@ -1,11 +1,20 @@
 package com.example.main.shop.HttpUtils;
 
+import com.example.main.shop.Constans.CashAccount;
+import com.example.main.shop.Constans.Course;
+import com.example.main.shop.Constans.CourseInfo;
 import com.example.main.shop.Constans.Dynamic;
+import com.example.main.shop.Constans.FindFriend;
+import com.example.main.shop.Constans.FriendList;
 import com.example.main.shop.Constans.MyMsg;
+import com.example.main.shop.Constans.MySelf;
+import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
+import com.example.main.shop.Constans.PostInfo;
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.Travel;
+import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
-import com.squareup.okhttp.ResponseBody;
 
 import java.util.Map;
 
@@ -13,6 +22,8 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -67,42 +78,160 @@ public class NetClient implements RequestServer {
         return mGetApi.addUserInfo(map);
     }
     //获取轮播图
-    public Call<Picture.PictureInfo> getPicture(){
+    public Call<Picture> getPicture(){
         return  mGetApi.getPicture();
     }
 
     @Override
-    public Call<Dynamic.DynamicInfo> addPost(@FieldMap Map<String,String> map) {
-        return mGetApi.addPost(map);
+    public Call<Dynamic.DynamicInfo> addPost(@Body Dynamic.DynamicInfo dynamicInfo) {
+        return mGetApi.addPost(dynamicInfo);
     }
-
+    //朋友圈消息
     @Override
-    public Call<Dynamic> getDynamic(@Query("uid") String uid) {
+    public Call<Dynamic> getDynamic(@Query("uid") int uid) {
         return mGetApi.getDynamic(uid);
     }
-
+    //我的消息
     @Override
     public Call<MyMsg> getMymsg() {
         return mGetApi.getMymsg();
     }
-
+    //动态点赞
     @Override
-    public Call<ResponseBody> clickPraise() {
-        return mGetApi.clickPraise();
+    public Call<Result> clickPraise(@Field("uid") int uid,@Field("pid") int pid) {
+        return mGetApi.clickPraise(uid, pid);
     }
 
+    //动态评论
     @Override
-    public Call<ResponseBody> comment() {
-        return mGetApi.comment();
+    public Call<Result> comment(@Field("pid") int pid,@Field("send_id") int sendId,
+                                @Field("receive_id") int rereceiveId,@Field("content")String content) {
+        return mGetApi.comment(pid, sendId, rereceiveId, content);
     }
 
+    //分享回调
     @Override
-    public Call<ResponseBody> share() {
-        return mGetApi.share();
+    public Call<Result> share(@Query("uid") int uid, @Query("pid") int pid) {
+        return mGetApi.share(uid, pid);
     }
-
+    //修改手机号
     @Override
     public Call<Result> resetMobile(@FieldMap Map<String, String> map) {
         return mGetApi.resetMobile(map);
+    }
+    //动态详情
+    @Override
+    public Call<PostInfo> postInfo(@Query("pid") int id) {
+        return mGetApi.postInfo(id);
+    }
+     //朋友列表
+    @Override
+    public Call<FriendList> friendList(@Query("id") int id) {
+        return mGetApi.friendList(id);
+    }
+    //查找朋友
+    @Override
+    public Call<FindFriend> findFriend(@Query("mobile") String mobile) {
+        return mGetApi.findFriend(mobile);
+    }
+     //手机号查找添加好友
+    @Override
+    public Call<Result> addFriend(@Query("uid")int uid ,@Query("fid") int fid) {
+        return mGetApi.addFriend(uid, fid);
+    }
+    //培训课程
+    @Override
+    public Call<Course> course() {
+        return mGetApi.course();
+    }
+   //课程详情
+    @Override
+    public Call courseDetail(@Query("id") int id) {
+        return mGetApi.courseDetail(id);
+    }
+     //购买课程
+    @Override
+    public Call<Result> buyCourse(@Query("uid") int uid,@Query("cid") int cid) {
+        return mGetApi.buyCourse(uid, cid);
+    }
+    //用户钱包
+    @Override
+    public Call<Result> wallet(@Query("id") int id) {
+        return mGetApi.wallet(id);
+    }
+    //我的
+    @Override
+    public Call<MySelf> mySelf(@Query("id") int id) {
+        return mGetApi.mySelf(id);
+    }
+    //个人信息
+    @Override
+    public Call<UserInfo> userInfo(@Query("id") int id) {
+        return mGetApi.userInfo(id);
+    }
+    //修改个人信息
+    @Override
+    public Call<Result> modifyUserInfo(@Body UserInfo userInfo) {
+        return mGetApi.modifyUserInfo(userInfo);
+    }
+   // 提现账户
+    @Override
+    public Call<CashAccount> cashAccount(@Query("id") int id) {
+        return mGetApi.cashAccount(id);
+    }
+    //修改提现账户
+    @Override
+    public Call<Result> modifyCashAccount(@FieldMap Map<String, String> map) {
+        return mGetApi.modifyCashAccount(map);
+    }
+    //修改密码
+    @Override
+    public Call<Result> modifyPsw(@FieldMap Map<String, String> map) {
+        return mGetApi.modifyPsw(map);
+    }
+   //我的发布
+    @Override
+    public Call<Dynamic.DynamicInfo> myPublish(@Query("id") int id) {
+        return mGetApi.myPublish(id);
+    }
+    //订单
+    @Override
+    public Call<Order> myOrder(@Query("id") int id, @Query("class") int type) {
+        return mGetApi.myOrder(id, type);
+    }
+    //订单详情
+    @Override
+    public Call<CourseInfo> orderDetail(@Query("id") int id) {
+        return mGetApi.orderDetail(id);
+    }
+    // 意见反馈
+    @Override
+    public Call<Result> suggest(@Field("uid") int id, @Field("content") String content) {
+        return mGetApi.suggest(id, content);
+    }
+    //添加我的上级
+    @Override
+    public Call<Result> addHighLevel(@Query("uid") int id, @Query("code") String code) {
+        return mGetApi.addHighLevel(id,code);
+    }
+      //提现
+    @Override
+    public Call<Result> cash(@Query("uid") int id, @Query("money") double money, @Query("type") int type) {
+        return mGetApi.cash(id, money, type);
+    }
+    //旅游
+    @Override
+    public Call<Travel> travel() {
+        return mGetApi.travel();
+    }
+   // 旅游详情
+    @Override
+    public Call<TravelInfo> travelInfo(@Query("id") int id) {
+        return mGetApi.travelInfo(id);
+    }
+    //购买旅游
+    @Override
+    public Call<Result> buyTravel(@Query("uid") int uid, @Query("tid") int tid) {
+        return mGetApi.buyTravel(uid,tid);
     }
 }

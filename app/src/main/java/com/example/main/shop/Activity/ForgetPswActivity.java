@@ -1,6 +1,5 @@
 package com.example.main.shop.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -60,7 +59,6 @@ public class ForgetPswActivity extends AppCompatActivity {
         TimeCount timeCount = new TimeCount(mTextView, 6000, 1000);
         timeCount.start();
     }
-
     //确认密码
     @OnClick(R.id.l_sure)
     public void surePsw() {
@@ -80,8 +78,7 @@ public class ForgetPswActivity extends AppCompatActivity {
                     //修改密码成功
                     if (code == 101) {
                         mUtils.Toast(getApplicationContext(),msg);
-                        Intent intent = new Intent(getApplicationContext(), Login.class);
-                        startActivity(intent);
+                        mUtils.startActivity(getApplicationContext(),Login.class);
                         return;
                     }
                     if (code == 102) {

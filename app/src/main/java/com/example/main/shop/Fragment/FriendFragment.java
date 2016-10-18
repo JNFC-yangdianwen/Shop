@@ -56,7 +56,7 @@ public class FriendFragment extends Fragment {
         mUtils = new ActivityUtils();
         UserInfo userInfo=new UserInfo();
         // 获取朋友圈信息
-        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(String.valueOf(userInfo.getUid()));
+        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(userInfo.getUid());
         dynamicCall.enqueue(new Callback<Dynamic>() {
             @Override
             public void onResponse(Call<Dynamic> call, Response<Dynamic> response) {

@@ -17,6 +17,15 @@ public class Result {
     private int code;
     private int uid;
     private int type;
+    private double money;
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 
     public int getUid() {
         return uid;

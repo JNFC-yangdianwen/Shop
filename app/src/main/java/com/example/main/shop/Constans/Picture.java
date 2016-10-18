@@ -8,12 +8,13 @@ import java.util.List;
  */
 
 public class Picture {
-    private  boolean result;
+    private String result;
     private String msg;
-    private  int code;
-    private List<PictureInfo> mPictureInfos;
-    public  class   PictureInfo{
-          private String info;
+    private int code;
+    private List<PictureInfo> info;
+
+    class PictureInfo {
+        private String info;
 
         public String getInfo() {
             return info;

@@ -13,7 +13,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rc_fr_conversation);
+        setContentView(R.layout.rc_fr_conversationlist);
 
     }
     @Override

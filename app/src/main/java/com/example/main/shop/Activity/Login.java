@@ -1,6 +1,5 @@
 package com.example.main.shop.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
@@ -57,14 +56,13 @@ public class Login extends AppCompatActivity {
                //登陆成功
                if (code==101){
                    mUtils.Toast(getApplicationContext(),msg);
-                   Intent intent=new Intent(getApplicationContext(), MainActivity.class);
-                   startActivity(intent);
+                   mUtils.startActivity(Login.this,MainActivity.class);
                    int uid = result.getUid();
                    UserInfo userInfo=new UserInfo();
                    userInfo.setUid(uid);
                    return;
                }if (code==102){
-                  mUtils.Toast(getApplicationContext(),msg);
+                   mUtils.Toast(getApplicationContext(),msg);
                  return;
                }if (code==103){
                    mUtils.Toast(getApplicationContext(),msg);

@@ -7,41 +7,31 @@ import java.util.List;
  * 朋友圈信息
  */
 public class Dynamic {
-    private boolean result;
+    private String result;
     private String msg;
     private int code;
-    private List<DynamicInfo> mInfos;
-    public boolean isResult() {
-        return result;
-    }
+    private List<DynamicInfo> info;
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public String getResult() {
+        return result;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public List<DynamicInfo> getInfos() {
-        return mInfos;
-    }
-
-    public void setInfos(List<DynamicInfo> infos) {
-        mInfos = infos;
-    }
-
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public List<DynamicInfo> getInfo() {
+        return info;
     }
+
+    public void setInfo(List<DynamicInfo> info) {
+        this.info = info;
+    }
+
     public class DynamicInfo{
 
         private int id;// 用户id

@@ -3,26 +3,26 @@ package com.example.main.shop.Constans;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/10/11 0011.
+ * Created by Administrator on 2016/10/18 0018.
  */
 
-public class Travel {
+public class Course {
     /**
-     * result : suc
-     * msg : 获取成功
-     * code : 101
-     * info : [{"id":"1","title":"英语课","picture":""}]
+     * \
+     * <p>
+     * Result	返回结果fail失败suc成功
+     * Msg	返回提示信息
+     * Code	返回状态
+     * 101	获取成功
+     * Info	课程
+     * Id	课程id
+     * Title	标题
+     * Picture	图片
      */
+
     private String result;
     private String msg;
     private int code;
-    /**
-     * id : 1
-     * title : 英语课
-     * picture :
-     */
-
-    private List<InfoBean> info;
 
     public String getResult() {
         return result;
@@ -36,24 +36,26 @@ public class Travel {
         return code;
     }
 
-    public List<InfoBean> getInfo() {
+    private List<CourseList> info;
+
+    public List<CourseList> getInfo() {
         return info;
     }
 
-    public void setInfo(List<InfoBean> info) {
+    public void setInfo(List<CourseList> info) {
         this.info = info;
     }
 
-    public static class InfoBean {
-        private String id;
+    class CourseList {
+        private int id;
         private String title;
         private String picture;
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 

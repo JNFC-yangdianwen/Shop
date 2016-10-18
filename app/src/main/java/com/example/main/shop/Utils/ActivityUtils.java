@@ -15,8 +15,8 @@ public class ActivityUtils extends AppCompatActivity{
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
     //跳转页面
-    public void startActivity(Context context, Class<?> activity){
-        Intent intent=new Intent(context.getApplicationContext(),activity);
+    public void startActivity(Context context, Class<? extends AppCompatActivity> activity){
+        Intent intent=new Intent(context,activity);
         startActivity(intent);
     }
 }
