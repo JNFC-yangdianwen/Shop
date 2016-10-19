@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/10/18 0018.
  */
 
-public class Course {
+public class Course extends Result {
     /**
      * \
      * <p>
@@ -19,23 +19,6 @@ public class Course {
      * Title	标题
      * Picture	图片
      */
-
-    private String result;
-    private String msg;
-    private int code;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     private List<CourseList> info;
 
     public List<CourseList> getInfo() {

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/10/18 0018.
  */
 
-public class FindFriend {
+public class FindFriend extends Result{
     /*
         Result	返回结果fail失败suc成功
         Msg	提示信息
@@ -19,19 +19,6 @@ public class FindFriend {
         user_name	用户名
         Account 账号
     */
-    private String result;
-
-    public String getResult() {
-        return result;
-    }
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     public List<FriendInfo> getInfo() {
         return info;
     }

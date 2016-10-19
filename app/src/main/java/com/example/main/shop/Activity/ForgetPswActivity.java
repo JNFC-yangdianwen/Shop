@@ -78,7 +78,7 @@ public class ForgetPswActivity extends AppCompatActivity {
                     //修改密码成功
                     if (code == 101) {
                         mUtils.Toast(getApplicationContext(),msg);
-                        mUtils.startActivity(getApplicationContext(),Login.class);
+                        mUtils.startActivity(getApplicationContext(),LoginActivity.class);
                         return;
                     }
                     if (code == 102) {

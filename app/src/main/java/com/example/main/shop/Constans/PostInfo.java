@@ -7,7 +7,7 @@ import java.util.List;
  * 动态详情
  */
 
-public class PostInfo {
+public class PostInfo extends Result{
 
     /**
      * result : fail
@@ -21,9 +21,7 @@ public class PostInfo {
      * click_count	点赞数量
      */
 
-    private String result;
-    private String msg;
-    private int code;
+
     private String user_photo;
     private String user_name;
     private String time;
@@ -89,29 +87,6 @@ public class PostInfo {
         this.info = info;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
 //    内容
 //    send_id	发送人id

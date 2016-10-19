@@ -7,26 +7,11 @@ import java.util.List;
  * 提现账户
  */
 
-public class CashAccount {
-    private String result;
-    private String msg;
-    private int code;
+public class CashAccount extends Result {
+
     private List<ZhiFuBao> zhifubao;
     private List<WeiXin> wexin;
     private List<Bank> bank;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     public List<ZhiFuBao> getZhifubao() {
         return zhifubao;
     }

@@ -6,16 +6,13 @@ import java.util.List;
  * Created by Administrator on 2016/10/11 0011.
  */
 
-public class Travel {
+public class Travel extends Result{
     /**
      * result : suc
      * msg : 获取成功
      * code : 101
      * info : [{"id":"1","title":"英语课","picture":""}]
      */
-    private String result;
-    private String msg;
-    private int code;
     /**
      * id : 1
      * title : 英语课
@@ -23,18 +20,6 @@ public class Travel {
      */
 
     private List<InfoBean> info;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
 
     public List<InfoBean> getInfo() {
         return info;

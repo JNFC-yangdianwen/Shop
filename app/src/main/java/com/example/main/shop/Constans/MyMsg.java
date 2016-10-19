@@ -7,23 +7,7 @@ import java.util.List;
  * 我的消息
  */
 
-public class MyMsg {
-private  String result;
-    private String msg;
-    private int code;
-
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
+public class MyMsg extends Result{
 
     public List<MessageInfo> getInfo() {
         return info;

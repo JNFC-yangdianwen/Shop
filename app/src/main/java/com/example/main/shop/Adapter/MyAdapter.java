@@ -20,6 +20,7 @@ import java.util.List;
 public class MyAdapter extends BaseAdapter{
     private List<String> mData;
     private LayoutInflater mInflater;
+    //空参构造函数
     public MyAdapter() {
     }
     public MyAdapter(Context context,List<String> data) {

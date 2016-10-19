@@ -7,7 +7,7 @@ import java.util.List;
  * 订单
  */
 
-public class Order {
+public class Order extends Result {
     /**
      * Result	返回结果fail失败suc成功
      * Msg	提示信息
@@ -21,22 +21,8 @@ public class Order {
      * Type 	订单状态  2下单中  1支付成功  3已完成
      * Id	课程或订单id
      */
-    private String result;
-    private String msg;
-    private int code;
+
     private List<OrderInfo> info;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
 
     public List<OrderInfo> getInfo() {
         return info;

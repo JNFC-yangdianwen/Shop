@@ -2,10 +2,12 @@ package com.example.main.shop.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.main.shop.Constans.Result;
+import com.alipay.sdk.app.PayTask;
+import com.example.main.shop.Constans.LoginResult;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.MainActivity;
@@ -23,12 +25,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //登陆界面
-public class Login extends AppCompatActivity {
-
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     @Bind(R.id.iv_login)ImageView mImageView;
     @Bind(R.id.et_user)EditText userName;
     @Bind(R.id.et_psw)EditText psw;
-    private String regs="^[1][3578][0-9]{9}";
     private ActivityUtils mUtils;
 
     @Override
@@ -37,6 +38,9 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mUtils = new ActivityUtils();
+        PayTask payTask =new PayTask(this);
+        String version = payTask.getVersion();
+        Log.d(TAG, "onCreate: "+version);
     }
    @OnClick({R.id.iv_login})
     public void login(){
@@ -46,20 +50,34 @@ public class Login extends AppCompatActivity {
        map.put("mobile",mobile);
        map.put("pwd",passWord);
        //执行登陆
-       Call<Result> login = NetClient.getInstance().login(map);
-       login.enqueue(new Callback<Result>() {
+       Call<LoginResult> login = NetClient.getInstance().login(map);
+       login.enqueue(new Callback<LoginResult>() {
            @Override
-           public void onResponse(Call<Result> call, Response<Result> response) {
-               Result result = response.body();
+           public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+               LoginResult result = response.body();
                String msg = result.getMsg();
                int code = result.getCode();
                //登陆成功
                if (code==101){
                    mUtils.Toast(getApplicationContext(),msg);
-                   mUtils.startActivity(Login.this,MainActivity.class);
+
                    int uid = result.getUid();
                    UserInfo userInfo=new UserInfo();
                    userInfo.setUid(uid);
+                   Log.d(TAG, "onResponse: "+uid);
+                   int type = result.getType();
+                   /**
+                    * 登陆之后如果type=0，不需要填写个人信息，
+                    * 如果type =1，填写个人信息
+                    */
+                   if (type == 0) {
+                       mUtils.startActivity(LoginActivity.this,MainActivity.class);
+                   return;
+                   }
+                   if (type==1){
+                       //填写个人信息
+                       mUtils.startActivity(getApplicationContext(),UserInfoActivity.class);
+                   }
                    return;
                }if (code==102){
                    mUtils.Toast(getApplicationContext(),msg);
@@ -70,7 +88,7 @@ public class Login extends AppCompatActivity {
                }
            }
            @Override
-           public void onFailure(Call<Result> call, Throwable t) {
+           public void onFailure(Call<LoginResult> call, Throwable t) {
              new Throwable(t.getMessage());
            }
        });

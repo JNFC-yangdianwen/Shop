@@ -7,7 +7,7 @@ import java.util.List;
  * 我的
  */
 
-public class MySelf {
+public class MySelf extends Result {
     /**
      *Result	返回结果fail失败suc成功
      Msg	提示信息
@@ -20,8 +20,13 @@ public class MySelf {
      Like	爱好
      *
      */
-    private String result;
-    private String msg;
-    private int code;
     private List<UserInfo> info;
+
+    public List<UserInfo> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<UserInfo> info) {
+        this.info = info;
+    }
 }

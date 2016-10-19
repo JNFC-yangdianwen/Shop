@@ -6,6 +6,7 @@ import com.example.main.shop.Constans.CourseInfo;
 import com.example.main.shop.Constans.Dynamic;
 import com.example.main.shop.Constans.FindFriend;
 import com.example.main.shop.Constans.FriendList;
+import com.example.main.shop.Constans.LoginResult;
 import com.example.main.shop.Constans.MyMsg;
 import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
@@ -37,7 +38,7 @@ public interface RequestServer {
     //1.登陆，手机号，密码
     @FormUrlEncoded
     @POST("login")
-    Call<Result> login(@FieldMap Map<String,String> map);
+    Call<LoginResult> login(@FieldMap Map<String,String> map);
     //2.获取手机验证码传入参数手机号,类型
     @GET("get_code")
     Call<Result> getCode(@QueryMap Map<String,String> map);

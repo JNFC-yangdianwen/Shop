@@ -56,7 +56,7 @@ public class RegistActivity extends AppCompatActivity {
         //手机号
         mPhoneNumber = userPhone.getText().toString().trim();
         //倒计时
-        TimeCount timeCount = new TimeCount(mTextView, 6000, 1000);
+        TimeCount timeCount = new TimeCount(mTextView, 60000, 1000);
         timeCount.start();
         Map<String, String> map = new HashMap<>();
         map.put("mobile", mPhoneNumber);
@@ -89,7 +89,6 @@ public class RegistActivity extends AppCompatActivity {
                     return;
                 }
             }
-
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 new Throwable(t.getMessage());

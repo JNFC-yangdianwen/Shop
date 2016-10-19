@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/10/18 0018.
  */
 
-public class FriendList {
+public class FriendList extends Result{
     /**
      * 出参	参数
      * Result 	返回结果fail失败suc成功
@@ -19,21 +19,6 @@ public class FriendList {
      * Photo	用户头像
      * Id	用户id
      */
-    private String result;
-    private String msg;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     public List<FriendInfo> getInfo() {
         return info;
     }

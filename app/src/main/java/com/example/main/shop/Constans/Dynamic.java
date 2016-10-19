@@ -6,24 +6,9 @@ import java.util.List;
  * Created by Administrator on 2016/10/13 0013.
  * 朋友圈信息
  */
-public class Dynamic {
-    private String result;
-    private String msg;
-    private int code;
+public class Dynamic extends Result{
+
     private List<DynamicInfo> info;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     public List<DynamicInfo> getInfo() {
         return info;
     }

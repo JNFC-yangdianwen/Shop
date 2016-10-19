@@ -7,7 +7,7 @@ import java.util.List;
  * 课程的详情
  */
 
-public class CourseInfo {
+public class CourseInfo extends Result {
     /**
      * 出参	参数
      * Result	返回结果fail失败suc成功
@@ -25,9 +25,6 @@ public class CourseInfo {
      * Mobile	联系电话
      * Address	地址
      */
-    private String result;
-    private String msg;
-    private int code;
     private List<CourseData> info;
 
     class CourseData {
@@ -35,6 +32,35 @@ public class CourseInfo {
         private String picture;
         private String time;
         private String teacher;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getPicture() {
+            return picture;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public String getTeacher() {
+            return teacher;
+        }
+
+        public String getIntro() {
+            return intro;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
         private String intro;
         private String mobile;
         private String address;

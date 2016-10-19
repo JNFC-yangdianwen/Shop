@@ -6,6 +6,7 @@ import com.example.main.shop.Constans.CourseInfo;
 import com.example.main.shop.Constans.Dynamic;
 import com.example.main.shop.Constans.FindFriend;
 import com.example.main.shop.Constans.FriendList;
+import com.example.main.shop.Constans.LoginResult;
 import com.example.main.shop.Constans.MyMsg;
 import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
@@ -66,7 +67,7 @@ public class NetClient implements RequestServer {
     }
     //登陆
     @Override
-    public Call<Result> login(@FieldMap Map<String,String> map) {
+    public Call<LoginResult> login(@FieldMap Map<String,String> map) {
         return mGetApi.login(map);
     }
     //忘记密码

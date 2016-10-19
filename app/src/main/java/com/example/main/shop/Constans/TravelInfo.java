@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/10/18 0018.
  */
 
-public class TravelInfo {
+public class TravelInfo extends Result{
     /**
      * Result	返回结果fail失败suc 成功
      * Msg	提示信息
@@ -21,22 +21,7 @@ public class TravelInfo {
      * Address	地址
      * Intro 	介绍
      */
-    private String result;
-    private String msg;
-    private int code;
     private List<DataInfo> info;
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
 
     public List<DataInfo> getInfo() {
         return info;

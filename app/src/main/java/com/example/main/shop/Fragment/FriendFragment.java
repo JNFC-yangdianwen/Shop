@@ -70,7 +70,7 @@ public class FriendFragment extends Fragment {
 
                 if (code == 101) {
                     Dynamic dynamic = response.body();
-                    List<Dynamic.DynamicInfo> infos = dynamic.getInfos();
+                    List<Dynamic.DynamicInfo> infos = dynamic.getInfo();
                     mData.addAll(infos);
                     return;
                 }

@@ -7,15 +7,10 @@ import java.util.List;
  * 轮播图
  */
 
-public class Picture {
-    private String result;
-    private String msg;
-    private int code;
+public class Picture extends Result {
     private List<PictureInfo> info;
-
     class PictureInfo {
         private String info;
-
         public String getInfo() {
             return info;
         }
