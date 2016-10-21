@@ -28,4 +28,9 @@ public class PersonalSignature extends AppCompatActivity {
         String content = mEditText.getText().toString().trim();
 
     }
+    //返回
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
+    }
 }

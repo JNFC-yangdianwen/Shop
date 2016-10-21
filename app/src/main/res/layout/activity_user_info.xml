@@ -15,12 +15,14 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_back"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/left_arrow"/>
 
         <TextView
-            android:layout_width="270dp"
+            android:layout_width="290dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/userInfo"
@@ -28,6 +30,7 @@
             android:textSize="@dimen/titleSize"/>
 
         <TextView
+
             android:id="@+id/tv_saveInfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -49,11 +52,12 @@
             android:src="@drawable/tou1"/>
 
         <Space
-            android:layout_width="210dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_setPhoto"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="设置头像"/>
@@ -71,117 +75,126 @@
         android:layout_height="20dp"
         android:background="@color/rulesColor"/>
 
-    <LinearLayout
-        android:id="@+id/ll_name"
+    <TextView
+    android:background="@color/rulesColor"
+    android:layout_width="match_parent"
+    android:layout_height="3dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tvName"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:gravity="center"
             android:text="昵称"
             android:textSize="20sp"/>
 
         <TextView
+            android:layout_toRightOf="@+id/tvName"
             android:id="@+id/tv_name"
-            android:layout_width="250dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+
             android:textSize="20sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@mipmap/right_arrow"/>
-    </LinearLayout>
-<TextView
-    android:background="@color/rulesColor"
-    android:layout_width="match_parent"
-    android:layout_height="3dp"/>
-    <LinearLayout
-        android:id="@+id/ll_like"
+    </RelativeLayout>
+    <TextView
+        android:background="@color/rulesColor"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_like"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvLike"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:gravity="center"
             android:text="爱好"
             android:textSize="20sp"/>
 
         <TextView
+            android:layout_toRightOf="@+id/tvLike"
             android:id="@+id/tv_like"
-            android:layout_width="250dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:textSize="20sp"/>
-
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:src="@mipmap/right_arrow"/>
-    </LinearLayout>
+    </RelativeLayout>
     //分割线
     <TextView
         android:background="@color/rulesColor"
         android:layout_width="match_parent"
         android:layout_height="3dp"/>
-    <LinearLayout
-        android:id="@+id/ll_sex"
+    <RelativeLayout
+        android:id="@+id/rl_sex"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvSex"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:gravity="center"
             android:text="性别"
             android:textSize="20sp"/>
-
         <TextView
+            android:layout_toRightOf="@+id/tvSex"
             android:id="@+id/tv_sex"
-            android:layout_width="250dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:textSize="20sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:src="@mipmap/right_arrow"/>
-    </LinearLayout>
+    </RelativeLayout>
     <TextView
         android:background="@color/rulesColor"
         android:layout_width="match_parent"
         android:layout_height="3dp"/>
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_mobile"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvMobile"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:gravity="center"
             android:text="手机号码"
             android:textSize="20sp"/>
-
         <TextView
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/tvMobile"
             android:id="@+id/tv_mobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:textSize="20sp"/>
-    </LinearLayout>
+    </RelativeLayout>
     //分割线
 
     <TextView
@@ -189,27 +202,23 @@
         android:layout_height="20dp"
         android:background="@color/rulesColor"/>
 
-    <LinearLayout
-        android:id="@+id/ll_cash"
+    <RelativeLayout
+        android:id="@+id/rl_cash"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:gravity="center"
             android:text="提现账号"
-            android:textSize="20sp"/>
-
-        <Space
-            android:layout_width="230dp"
-            android:layout_height="match_parent"/>
-
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:id="@+id/textView2"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/right_arrow"/>
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/right_arrow"
+            android:id="@+id/imageView2"/>
+    </RelativeLayout>
 
 </LinearLayout>

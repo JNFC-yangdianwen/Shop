@@ -61,7 +61,7 @@ public interface RequestServer {
     //7.添加动态  参数，用户id，内容，图片，是否分享有奖，有奖数量，每个钱数
     @FormUrlEncoded
     @POST("add_post")
-    Call<Dynamic.DynamicInfo> addPost(@Body Dynamic.DynamicInfo dynamicInfo);
+    Call<Result> addPost(@Body Dynamic.DynamicInfo dynamicInfo);
     //8.获取朋友圈信息
     @GET("dynamic_list")
     Call<Dynamic> getDynamic(@Query("uid")int uid);

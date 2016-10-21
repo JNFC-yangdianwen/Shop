@@ -22,7 +22,7 @@ public class Dynamic extends Result{
         private int id;// 用户id
         private String photo;//用户头像
         private String user_name;//用户名
-        private boolean is_share;//是否分享有奖，有奖为1，无奖为2
+        private int is_share;//是否分享有奖，有奖为1，无奖为2
         private String content;//内容
         private String picture;//图片
         private String time;//创建时间
@@ -31,7 +31,7 @@ public class Dynamic extends Result{
         private int count;//有奖数量
         private double money;//每个钱数
 
-        public DynamicInfo(int id, boolean is_share, String content, String picture, int count, double money) {
+        public DynamicInfo(int id, int is_share, String content, String picture, int count, double money) {
             this.id = id;
             this.is_share = is_share;
             this.content = content;
@@ -104,11 +104,11 @@ public class Dynamic extends Result{
             this.user_name = user_name;
         }
 
-        public boolean is_share() {
+        public int is_share() {
             return is_share;
         }
 
-        public void setIs_share(boolean is_share) {
+        public void setIs_share(int is_share) {
             this.is_share = is_share;
         }
 

@@ -53,7 +53,7 @@ public class FriendFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        mUtils = new ActivityUtils();
+        mUtils = new ActivityUtils(this);
         UserInfo userInfo=new UserInfo();
         // 获取朋友圈信息
         Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(userInfo.getUid());
@@ -75,7 +75,7 @@ public class FriendFragment extends Fragment {
                     return;
                 }
                 if (code == 102) {
-                    mUtils.Toast(getContext(),msg);
+                    mUtils.showToast(msg);
                     return;
                 }
             }

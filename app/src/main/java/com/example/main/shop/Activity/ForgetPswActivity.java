@@ -45,7 +45,7 @@ public class ForgetPswActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_psw);
         ButterKnife.bind(this);
-        mUtils = new ActivityUtils();
+        mUtils = new ActivityUtils(this);
     }
 
     //获取验证码
@@ -53,7 +53,7 @@ public class ForgetPswActivity extends AppCompatActivity {
     public void getIdentNumber() {
         mTelNumber = phoneNumber.getText().toString().trim();
         if (TextUtils.isEmpty(mTelNumber)) {
-            mUtils.Toast(this,"请输入手机号");
+            mUtils.showToast("请输入手机号");
             return;
         }
         TimeCount timeCount = new TimeCount(mTextView, 6000, 1000);
@@ -77,36 +77,36 @@ public class ForgetPswActivity extends AppCompatActivity {
                     String msg = result.getMsg();
                     //修改密码成功
                     if (code == 101) {
-                        mUtils.Toast(getApplicationContext(),msg);
-                        mUtils.startActivity(getApplicationContext(),LoginActivity.class);
+                        mUtils.showToast(msg);
+                        mUtils.startActivity(LoginActivity.class);
                         return;
                     }
                     if (code == 102) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 103) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 104) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 105) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 106) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 107) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                     if (code == 108) {
-                        mUtils.Toast(getApplicationContext(),msg);
+                        mUtils.showToast(msg);
                         return;
                     }
                 }
@@ -118,4 +118,9 @@ public class ForgetPswActivity extends AppCompatActivity {
             });
 
         }
+    //返回按键
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
+    }
 }

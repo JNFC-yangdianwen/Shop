@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
@@ -44,7 +45,7 @@ public class ResetMobileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_mobile);
         ButterKnife.bind(this);
-        mUtils = new ActivityUtils();
+        mUtils = new ActivityUtils(this);
 
     }
 
@@ -68,23 +69,23 @@ public class ResetMobileActivity extends AppCompatActivity {
                 int code1 = result.getCode();
                 String msg = result.getMsg();
                 if (code1 == 101) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code1 == 102) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code1 == 103) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code1 == 104) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code1 == 105) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
             }
@@ -100,8 +101,8 @@ public class ResetMobileActivity extends AppCompatActivity {
     @OnClick(R.id.tv_save)
     public void saveNewNumber() {
         Map<String, String> map = new HashMap<>();
-        Result result = new Result();
-        int uid = result.getUid();
+        UserInfo userInfo=new UserInfo();
+        int uid = userInfo.getUid();
         map.put("uid", String.valueOf(uid));
         map.put("mobile", mOriginNumber);
         map.put("new_mobile", mNewNumber);
@@ -114,31 +115,31 @@ public class ResetMobileActivity extends AppCompatActivity {
                 int code = result1.getCode();
                 String msg = result1.getMsg();
                 if (code == 101) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 102) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 103) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 104) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 105) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 106) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 107) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
             }
@@ -148,5 +149,10 @@ public class ResetMobileActivity extends AppCompatActivity {
                 new Throwable(t.getMessage());
             }
         });
+    }
+    // 返回按键
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
     }
 }

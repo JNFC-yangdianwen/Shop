@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_release_msg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.main.shop.Activity.ReleaseMsgActivity">
-
+    <LinearLayout
+        android:background="@color/titleColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_Height">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:gravity="center"
+            android:src="@mipmap/left_arrow"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"/>
+        <Space
+            android:layout_width="280dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/send"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="发表"
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <RelativeLayout
+    android:layout_marginLeft="@dimen/sp_16"
+    android:layout_marginTop="@dimen/sp_16"
+    android:layout_marginRight="@dimen/sp_16"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <EditText
+        android:gravity="top"
+        android:hint="写点什么"
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>
+    <ImageView
+        android:id="@+id/addPic"
+        android:layout_marginTop="@dimen/sp_16"
+        android:layout_marginLeft="@dimen/sp_16"
+        android:src="@drawable/add"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
+</LinearLayout>

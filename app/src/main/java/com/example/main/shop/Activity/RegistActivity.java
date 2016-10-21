@@ -47,7 +47,7 @@ public class RegistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist);
         ButterKnife.bind(this);
-        mUtils = new ActivityUtils();
+        mUtils = new ActivityUtils(this);
     }
 
     //获取短信验证码
@@ -69,23 +69,23 @@ public class RegistActivity extends AppCompatActivity {
                 int code = result.getCode();
                 String msg = result.getMsg();
                 if (code == 101) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 102) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 103) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 104) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 105) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
             }
@@ -117,39 +117,39 @@ public class RegistActivity extends AppCompatActivity {
                 int code = result.getCode();
                 String msg = result.getMsg();
                 if (code == 101) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 102) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 103) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 104) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 105) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 106) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 107) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 108) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
                 if (code == 109) {
-                    mUtils.Toast(getApplicationContext(), msg);
+                    mUtils.showToast(msg);
                     return;
                 }
             }
@@ -159,5 +159,10 @@ public class RegistActivity extends AppCompatActivity {
                 new Throwable(t.getMessage());
             }
         });
+    }
+    // 返回按键
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
     }
 }

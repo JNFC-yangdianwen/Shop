@@ -84,7 +84,7 @@ public class NetClient implements RequestServer {
     }
 
     @Override
-    public Call<Dynamic.DynamicInfo> addPost(@Body Dynamic.DynamicInfo dynamicInfo) {
+    public Call<Result> addPost(@Body Dynamic.DynamicInfo dynamicInfo) {
         return mGetApi.addPost(dynamicInfo);
     }
     //朋友圈消息
@@ -192,8 +192,8 @@ public class NetClient implements RequestServer {
     }
    //我的发布
     @Override
-    public Call<Dynamic.DynamicInfo> myPublish(@Query("id") int id) {
-        return mGetApi.myPublish(id);
+    public Call<Dynamic.DynamicInfo> myPublish(@Query("uid") int uid) {
+        return mGetApi.myPublish(uid);
     }
     //订单
     @Override

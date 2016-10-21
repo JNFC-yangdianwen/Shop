@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools" >
+    <item android:id="@+id/camera"
+          android:title="从照相机拍照"
+          app:showAsAction="never"/>
+    <item android:id="@+id/capture"
+          android:title="从相册选取照片"
+          app:showAsAction="never"/>
+    <!--<item -->
+        <!--android:id="@+id/action_open"-->
+        <!--android:orderInCategory="-->
+       <!--android:title="打开"-->
+     <!--app:showAsAction="never"/>-->
+ </menu>
