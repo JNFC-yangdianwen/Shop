@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
         String mobile = login.getString(Mobile, "");
         String passWord = login.getString(PassWord, "");
-        mProgressDialog=ProgressDialog.show(this,"","登陆中，请稍后");
         Map<String,String> map=new HashMap<>();
         map.put("mobile", mobile);
         map.put("pwd",passWord);
@@ -59,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         loginResultCall.enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                  mProgressDialog=ProgressDialog.show(LoginActivity.this,"","登陆中，请稍后");
                 LoginResult result = response.body();
                 String msg = result.getMsg();
                 int code = result.getCode();

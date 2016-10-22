@@ -75,7 +75,8 @@ public class UserInfoActivity extends AppCompatActivity {
     //设置昵称
     @OnClick(R.id.rl_name)
     public void setUserNmae(){
-           mActivityUtils.startActivity(PersonalSignature.class);
+           mActivityUtils.startActivity(UserNameActivity.class);
+           tvName.setText(UserNameActivity.mName);
     }
     //设置性别
     @OnClick(R.id.rl_sex)

@@ -111,7 +111,7 @@
     <TextView
         android:background="@color/rulesColor"
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="2dp"/>
 
     <RelativeLayout
         android:id="@+id/rl_like"

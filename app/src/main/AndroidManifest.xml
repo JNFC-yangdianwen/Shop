@@ -103,6 +103,8 @@
         </activity>
         <activity android:name=".Activity.CameraActivity">
         </activity>
+        <activity android:name=".Activity.UserNameActivity">
+        </activity>
     </application>
 
 </manifest>
