@@ -17,7 +17,7 @@ public class Dynamic extends Result{
         this.info = info;
     }
 
-    public class DynamicInfo{
+   public class DynamicInfo{
 
         private int id;// 用户id
         private String photo;//用户头像
@@ -31,7 +31,8 @@ public class Dynamic extends Result{
         private int count;//有奖数量
         private double money;//每个钱数
 
-        public DynamicInfo(int id, int is_share, String content, String picture, int count, double money) {
+        public DynamicInfo(int id, int is_share, String content,
+                           String picture, int count, double money) {
             this.id = id;
             this.is_share = is_share;
             this.content = content;

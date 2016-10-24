@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
@@ -62,7 +63,7 @@ public interface RequestServer {
     //7.添加动态  参数，用户id，内容，图片，是否分享有奖，有奖数量，每个钱数
     @FormUrlEncoded
     @POST("add_post")
-    Call<Result> addPost(@Body Dynamic.DynamicInfo dynamicInfo);
+    Call<Result> addPost(@Body ReleaseDynamic rd);
     //8.获取朋友圈信息
     @GET("dynamic_list")
     Call<Dynamic> getDynamic(@Query("uid")int uid);

@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
@@ -83,10 +84,10 @@ public class NetClient implements RequestServer {
     public Call<Picture> getPicture(){
         return  mGetApi.getPicture();
     }
-
+    //添加动态
     @Override
-    public Call<Result> addPost(@Body Dynamic.DynamicInfo dynamicInfo) {
-        return mGetApi.addPost(dynamicInfo);
+    public Call<Result> addPost(@Body ReleaseDynamic rd) {
+        return mGetApi.addPost(rd);
     }
     //朋友圈消息
     @Override
