@@ -13,6 +13,7 @@ import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
@@ -210,6 +211,12 @@ public class NetClient implements RequestServer {
     public Call<Result> suggest(@Field("uid") int id, @Field("content") String content) {
         return mGetApi.suggest(id, content);
     }
+    //我的推广
+    @Override
+    public Call<SpreadResult> spread(@Query("uid") int id) {
+        return mGetApi.spread(id);
+    }
+
     //添加我的上级
     @Override
     public Call<Result> addHighLevel(@Query("uid") int id, @Query("code") String code) {

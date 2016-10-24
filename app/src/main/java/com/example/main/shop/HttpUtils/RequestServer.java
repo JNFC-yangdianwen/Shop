@@ -13,6 +13,7 @@ import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
@@ -143,8 +144,8 @@ public interface RequestServer {
     @POST("opinion")
     Call<Result> suggest(@Field("uid") int id,@Field("content") String content);
 //    //32 我的推广 用户id
-//    @GET("my_exten")
-//    Call<> spread(@Query("uid") int id);
+    @GET("my_exten")
+    Call<SpreadResult> spread(@Query("uid") int id);
     //33 添加我的上级
     @GET("add_father")
     Call<Result> addHighLevel(@Query("uid")  int id,@Query("code") String code);

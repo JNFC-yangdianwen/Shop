@@ -1,11 +1,14 @@
 package com.example.main.shop.Activity;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.UserInfo;
@@ -81,8 +84,44 @@ public class UserInfoActivity extends AppCompatActivity {
     //设置性别
     @OnClick(R.id.rl_sex)
     public void setUserSex(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle("请选择性别");
+        final String[] sex = {"男", "女",};
+        //    设置一个单项选择下拉框
+        /**
+         * 第一个参数指定我们要显示的一组下拉单选框的数据集合
+         * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
+         * 第三个参数给每一个单选项绑定一个监听器
+         */
+        builder.setSingleChoiceItems(sex, 1, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(UserInfoActivity.this, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
 
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+            }
+        });
+        builder.show();
     }
+
+
     //设置爱好
     @OnClick(R.id.rl_like)
     public void setUserLike(){
@@ -94,7 +133,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
     }
     //保存
-    @OnClick(R.id.tv_save)
+    @OnClick(R.id.tv_saveInfo)
     public void saveUserInfo(){
         UserInfo userInfo=new UserInfo();
         //上传个人信息
