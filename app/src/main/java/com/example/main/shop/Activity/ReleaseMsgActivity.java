@@ -41,9 +41,8 @@ public class ReleaseMsgActivity extends AppCompatActivity {
         String content = tvContent.getText().toString();
         UserInfo userInfo=new UserInfo();
         int uid = userInfo.getUid();
-        ReleaseDynamic releaseDynamic=new ReleaseDynamic(uid,content,"",1,1,1);
-//        //添加动态
-        Call<Result> resultCall = NetClient.getInstance().addPost(releaseDynamic);
+         //  //添加动态
+        Call<Result> resultCall = NetClient.getInstance().addPost(uid,content, String.valueOf(R.drawable.rc_ic_picture),2,1,1);
         resultCall.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {

@@ -69,9 +69,23 @@ public interface RequestServer {
     @GET("get_picture")
     Call<Picture> getPicture();
     //7.添加动态  参数，用户id，内容，图片，是否分享有奖，有奖数量，每个钱数
-    @FormUrlEncoded
+/**
+ * Uid	用户id
+ Content	内容
+ Picture	图片
+ is_share	是否分享有奖 有奖为1 无奖为2
+ Count	有奖数量
+ money_one	每个钱数
+ */
+
+    @Multipart
     @POST("add_post")
-    Call<Result> addPost(@Body ReleaseDynamic rd);
+    Call<Result> addPost(@Part ("uid") int id,
+                         @Part("content") String content,
+                         @Part("picture") String picture,
+                         @Part("is_share") int award,
+                         @Part("count") int count,
+                         @Part("money_one") double money);
     //8.获取朋友圈信息
     @GET("dynamic_list")
     Call<Dynamic> getDynamic(@Query("uid")int uid);

@@ -1,7 +1,9 @@
 package com.example.main.shop.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.main.shop.Constans.LoginResult;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
@@ -47,24 +50,11 @@ public class UserInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mActivityUtils = new ActivityUtils(this);
         mView = (ImageView) findViewById(R.id.iv_photo);
+        userInfo1=new UserInfo();
         //手机号
-        SharedPreferences sp = getSharedPreferences("mobile", MODE_PRIVATE);
-       String moblie = sp.getString(LoginActivity.Mobile, "");
+        SharedPreferences sp = getSharedPreferences(LoginActivity.Login, MODE_PRIVATE);
+        String moblie = sp.getString(LoginActivity.Mobile, "");
         tvMobile.setText(moblie);
-        UserInfo userInfo=new UserInfo();
-        int uid = userInfo.getUid();
-        Call<UserInfo> userInfoCall =  NetClient.getInstance().userInfo(uid);
-        userInfoCall.enqueue(new Callback<UserInfo>() {
-            @Override
-            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-                userInfo1 = response.body();
-                //只有手机号
-            }
-            @Override
-            public void onFailure(Call<UserInfo> call, Throwable t) {
-
-            }
-        });
     }
 
     //设置头像
@@ -75,10 +65,25 @@ public class UserInfoActivity extends AppCompatActivity {
     //设置昵称
     @OnClick(R.id.rl_name)
     public void setUserNmae(){
-           mActivityUtils.startActivity(UserNameActivity.class);
-           tvName.setText(UserNameActivity.mName);
-        userInfo1.setUser_name(UserNameActivity.mName);
+        //回传值
+        Intent intent = new Intent();
+        intent.putExtra("message",1);
+        intent.setClass(this, UserNameActivity.class);
+        startActivityForResult(intent, 1000);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //处理回传的数据
+        if (requestCode==1000&&resultCode==1001){
+            String result_value = data.getStringExtra("result");
+            tvName.setText(result_value);
+            userInfo1.setUser_name(result_value);
+            Log.d(TAG, "onActivityResult: 。。。。。。"+result_value);
+        }
+    }
+
     //设置性别
     @OnClick(R.id.rl_sex)
     public void setUserSex(){
@@ -140,8 +145,12 @@ builder.show();
                 int code = result.getCode();
                 String msg = result.getMsg();
                 if (code== 101) {
+                    //保存成功之后，
                    mActivityUtils.showToast(msg);
-                   finish();
+                    //type值为0
+                    LoginResult loginResult=new LoginResult();
+                    loginResult.setType(0);
+                    mActivityUtils.startActivity(MainActivity.class);
                     return;
                 } if (code== 102) {
                     mActivityUtils.showToast(msg);
@@ -151,7 +160,6 @@ builder.show();
                     return;
                 }
             }
-
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                   new Throwable(t.getMessage());

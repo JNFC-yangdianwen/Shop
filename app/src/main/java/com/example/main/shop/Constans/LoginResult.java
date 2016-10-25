@@ -8,6 +8,10 @@ public class LoginResult extends Result {
     private int uid;
     private int type;
 
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public int getUid() {
         return uid;
     }

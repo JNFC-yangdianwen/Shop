@@ -35,10 +35,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.mImageView.setImageResource(Integer.parseInt(mData.get(position).getPhoto()));
-        holder.mTextViewUser.setText(mData.get(position).getUser_name());
-        holder.mTextViewTime.setText(mData.get(position).getTime());
-        holder.mTextViewMss.setText(mData.get(position).getContent());
+//        holder.mImageView.setImageResource(Integer.parseInt(mData.get(position).getPhoto()));
+//        holder.mTextViewUser.setText(mData.get(position).getUser_name());
+//        holder.mTextViewTime.setText(mData.get(position).getTime());
+//        holder.mTextViewMss.setText(mData.get(position).getContent());
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

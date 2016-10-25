@@ -34,8 +34,8 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     @Bind(R.id.recharge)TextView mTextViewPay;
     @Bind(R.id.detail)TextView detail;
     @Bind(R.id.gv)GridView mGridView;
-    private List<Map<Integer,String>> mData;
-    private int mImage[] ={R.drawable.benjing};
+    private List < String> mData;
+
     private String mString[]={"旅游","培训课程","工厂店","网上超市","敬请期待","敬请期待"};
 
     @Nullable
@@ -50,11 +50,14 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
         mData=new ArrayList<>();
-        //使用map集合添加数据
-        Map<Integer,String>map =new HashMap<>();
-        for (int i = 0; i < 5; i++) {
-            map.put(mImage[i],mString[i]);
+        for (int i = 0; i <6; i++) {
+
+            mData.add(mString[i]);
         }
+        WalletAdapter walletAdapter =new WalletAdapter(getContext(),mData);
+        mGridView.setAdapter(walletAdapter);
+        //item点击事件
+        mGridView.setOnItemClickListener(this);
     }
     @OnClick({R.id.recharge,R.id.detail})
     public void onClick(View v){
@@ -71,15 +74,6 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
                 break;
         }
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        WalletAdapter walletAdapter =new WalletAdapter(getContext(),mData);
-        mGridView.setAdapter(walletAdapter);
-        mGridView.setOnItemClickListener(this);
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

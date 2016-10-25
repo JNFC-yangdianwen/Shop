@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();//获取fragment的管理者
         FragmentTransaction transaction = fragmentManager.beginTransaction();//开启事物
-        transaction.add(R.id.vp,fragment);//添加fragment
+        transaction.replace(R.id.fl,fragment);
         transaction.commit();//提交事务
     }
 }

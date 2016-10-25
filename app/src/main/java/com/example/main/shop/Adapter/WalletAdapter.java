@@ -19,11 +19,12 @@ import java.util.Map;
 
 public class WalletAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<Map<Integer,String>> mData;
+    private  List<String> mData;
+    private int mImage[] ={R.drawable.benjing,R.drawable.benjing,R.drawable.benjing,R.drawable.benjing,R.drawable.benjing,R.drawable.benjing,};
     public WalletAdapter() {
 
     }
-    public WalletAdapter(Context context,List<Map<Integer,String>> data) {
+    public WalletAdapter(Context context,List< String> data) {
         mInflater = LayoutInflater.from(context);
         mData=data;
     }
@@ -47,9 +48,12 @@ public class WalletAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.wallet_item, null);
         }
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_gv);
-        imageView.setImageResource(Integer.parseInt(mData.get(position).get(position)));
+        imageView.setImageResource(R.drawable.benjing);
+        for (int i = 0; i < position; i++) {
+            imageView.setImageResource(mImage[i]);
+        }
         TextView textView = (TextView) convertView.findViewById(R.id.tv_sub);
-        textView.setText( mData.get(position).get(""));
+        textView.setText( mData.get(position));
         return convertView;
     }
 }

@@ -141,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     * 如果type =1，填写个人信息
                     */
                    if (type == 0) {
+
                        mUtils.startActivity(MainActivity.class);
                    return;
                    }
@@ -150,9 +151,11 @@ public class LoginActivity extends AppCompatActivity {
                    }
                    return;
                }if (code==102){
+                   mProgressDialog.dismiss();
                    mUtils.showToast(msg);
                  return;
                }if (code==103){
+                   mProgressDialog.dismiss();
                    mUtils.showToast(msg);
                    return;
                }

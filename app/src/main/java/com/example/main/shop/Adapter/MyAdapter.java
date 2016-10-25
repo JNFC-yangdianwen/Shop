@@ -46,7 +46,7 @@ public class MyAdapter extends BaseAdapter{
         }
         TextView textView = (TextView) convertView.findViewById(R.id.tv_MyLv);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_MyLv);
-        imageView.setImageResource(R.mipmap.lead);
+        imageView.setImageResource(R.mipmap.right_arrow);
         textView.setText(mData.get(position));
         return convertView;
     }

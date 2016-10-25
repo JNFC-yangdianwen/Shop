@@ -90,11 +90,18 @@ public class NetClient implements RequestServer {
     public Call<Picture> getPicture(){
         return  mGetApi.getPicture();
     }
-    //添加动态
+   //发表动态
     @Override
-    public Call<Result> addPost(@Body ReleaseDynamic rd) {
-        return mGetApi.addPost(rd);
+    public Call<Result> addPost(@Part("uid") int id,
+                                @Part("content") String content,
+                                @Part("picture") String picture,
+                                @Part("is_share") int award,
+                                @Part("count") int count,
+                                @Part("money_one") double money) {
+        return mGetApi.addPost(id, content, picture, award, count, money);
     }
+    //添加动态
+
     //朋友圈消息
     @Override
     public Call<Dynamic> getDynamic(@Query("uid") int uid) {
