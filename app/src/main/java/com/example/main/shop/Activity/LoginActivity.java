@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.et_user)EditText userName;
     @Bind(R.id.et_psw)EditText psw;
     private ActivityUtils mUtils;
-    private String Login="login";
-    private String Mobile="mobile";
+    public static String Login="login";
+    public static String Mobile="mobile";
     private String PassWord="psw";
     private ProgressDialog mProgressDialog;
     @Override
@@ -47,64 +47,65 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mUtils = new ActivityUtils(this);
-        //自动登陆
-        SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
-        String mobile = login.getString(Mobile, "");
-        String passWord = login.getString(PassWord, "");
-        Map<String,String> map=new HashMap<>();
-        map.put("mobile", mobile);
-        map.put("pwd",passWord);
-        Call<LoginResult> loginResultCall = NetClient.getInstance().login(map);
-        loginResultCall.enqueue(new Callback<LoginResult>() {
-            @Override
-            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-                  mProgressDialog=ProgressDialog.show(LoginActivity.this,"","登陆中，请稍后");
-                LoginResult result = response.body();
-                String msg = result.getMsg();
-                int code = result.getCode();
-                //登陆成功
-                if (code==101){
-                    mProgressDialog.dismiss();
-                    mUtils.showToast(msg);
-                    int uid = result.getUid();
-                    UserInfo userInfo=new UserInfo();
-                    userInfo.setUid(uid);
-                    Log.d(TAG, "onResponse: "+uid);
-                    int type = result.getType();
-                    /**
-                     * 登陆之后如果type=0，不需要填写个人信息，
-                     * 如果type =1，填写个人信息
-                     */
-                    if (type == 0) {
-                        mUtils.startActivity(MainActivity.class);
-                        return;
-                    }
-                    if (type==1){
-                        //填写个人信息
-                        mUtils.startActivity(UserInfoActivity.class);
-                    }
-                    return;
-                }if (code==102){
-                    mUtils.showToast(msg);
-                    return;
-                }if (code==103){
-                    mUtils.showToast(msg);
-                    return;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResult> call, Throwable t) {
-                new Throwable(t.getMessage());
-            }
-        });
-//        PayTask payTask =new PayTask(this);
-//        String version = payTask.getVersion();
-//        Log.d(TAG, "onCreate: "+version);
+//        //自动登陆
+//        SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
+//        String mobile = login.getString(Mobile, "");
+//        String passWord = login.getString(PassWord, "");
+//        Map<String,String> map=new HashMap<>();
+//        map.put("mobile", mobile);
+//        map.put("pwd",passWord);
+//        Call<LoginResult> loginResultCall = NetClient.getInstance().login(map);
+//        loginResultCall.enqueue(new Callback<LoginResult>() {
+//            @Override
+//            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+////                  mProgressDialog=ProgressDialog.show(LoginActivity.this,"","登陆中，请稍后");
+//                LoginResult result = response.body();
+//                String msg = result.getMsg();
+//                int code = result.getCode();
+//                //登陆成功
+//                if (code==101){
+////                    mProgressDialog.dismiss();
+//                    mUtils.showToast(msg);
+//                    int uid = result.getUid();
+//                    UserInfo userInfo=new UserInfo();
+//                    userInfo.setUid(uid);
+//                    Log.d(TAG, "onResponse: "+uid);
+//                    int type = result.getType();
+//                    /**
+//                     * 登陆之后如果type=0，不需要填写个人信息，
+//                     * 如果type =1，填写个人信息
+//                     */
+//                    if (type == 0) {
+//                        mUtils.startActivity(MainActivity.class);
+//                        return;
+//                    }
+//                    if (type==1){
+//                        //填写个人信息
+//                        mUtils.startActivity(UserInfoActivity.class);
+//                    }
+//                    return;
+//                }if (code==102){
+//                    mUtils.showToast(msg);
+//                    return;
+//                }if (code==103){
+//                    mUtils.showToast(msg);
+//                    return;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<LoginResult> call, Throwable t) {
+//                new Throwable(t.getMessage());
+//            }
+//        });
+////        PayTask payTask =new PayTask(this);
+////        String version = payTask.getVersion();
+////        Log.d(TAG, "onCreate: "+version);
     }
 
    @OnClick({R.id.iv_login})
     public void login(){
+//       mUtils.startActivity(UserInfoActivity.class);
        mProgressDialog=ProgressDialog.show(this,"","登陆中，请稍后");
        String  mobile = userName.getText().toString().trim();
        String passWord = psw.getText().toString().trim();

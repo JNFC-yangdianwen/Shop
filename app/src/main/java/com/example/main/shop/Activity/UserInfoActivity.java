@@ -11,8 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.MainActivity;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 
@@ -36,6 +38,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private static final String TAG = "UserInfoActivity";
     private ActivityUtils mActivityUtils;
     public static ImageView mView;
+    private UserInfo userInfo1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +49,16 @@ public class UserInfoActivity extends AppCompatActivity {
         mView = (ImageView) findViewById(R.id.iv_photo);
         //手机号
         SharedPreferences sp = getSharedPreferences("mobile", MODE_PRIVATE);
-        final String mobile = sp.getString("login", "");
+       String moblie = sp.getString(LoginActivity.Mobile, "");
+        tvMobile.setText(moblie);
         UserInfo userInfo=new UserInfo();
         int uid = userInfo.getUid();
         Call<UserInfo> userInfoCall =  NetClient.getInstance().userInfo(uid);
         userInfoCall.enqueue(new Callback<UserInfo>() {
             @Override
             public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-                UserInfo userInfo1 = response.body();
-                String userame = userInfo1.getUser_name();
-                String sex = userInfo1.getSex();
-                String like = userInfo1.getLike();
-                tvName.setText(userame);
-                tvLike.setText(like);
-                tvSex.setText(sex);
-                tvMobile.setText(mobile);
-               Log.d(TAG, "onResponse: "+userame+sex+like);
+                userInfo1 = response.body();
+                //只有手机号
             }
             @Override
             public void onFailure(Call<UserInfo> call, Throwable t) {
@@ -80,12 +77,12 @@ public class UserInfoActivity extends AppCompatActivity {
     public void setUserNmae(){
            mActivityUtils.startActivity(UserNameActivity.class);
            tvName.setText(UserNameActivity.mName);
+        userInfo1.setUser_name(UserNameActivity.mName);
     }
     //设置性别
     @OnClick(R.id.rl_sex)
     public void setUserSex(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.mipmap.ic_launcher);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("请选择性别");
         final String[] sex = {"男", "女",};
         //    设置一个单项选择下拉框
@@ -94,31 +91,28 @@ public class UserInfoActivity extends AppCompatActivity {
          * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
          * 第三个参数给每一个单选项绑定一个监听器
          */
-        builder.setSingleChoiceItems(sex, 1, new DialogInterface.OnClickListener()
+        builder.setSingleChoiceItems(sex,0, new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                Toast.makeText(UserInfoActivity.this, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+                if (which ==0) {
+                    tvSex.setText("男");
+                    userInfo1.setSex("男");
+                    dialog.dismiss();
+                    return;
+                }if (which == 1) {
+                tvSex.setText("女");
+                userInfo1.setSex("女");
+                dialog.dismiss();
+                return;
 
             }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-
             }
         });
-        builder.show();
+
+builder.show();
+
     }
 
 
@@ -135,31 +129,32 @@ public class UserInfoActivity extends AppCompatActivity {
     //保存
     @OnClick(R.id.tv_saveInfo)
     public void saveUserInfo(){
-        UserInfo userInfo=new UserInfo();
-        //上传个人信息
-        Call<Result> resultCall = NetClient.getInstance().modifyUserInfo(userInfo);
-        resultCall.enqueue(new Callback<Result>() {
+
+        //添加个人信息
+        Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(1, String.valueOf(R.drawable.tou1),"旅游","男","1234");
+        Log.d(TAG, "saveUserInfo: "+userInfo1.getUid());
+        userInfoCall.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
-                Result body = response.body();
-                int code = body.getCode();
-                String msg = body.getMsg();
-                if (code == 101) {
-                  mActivityUtils.showToast(msg);
+                Result result = response.body();
+                int code = result.getCode();
+                String msg = result.getMsg();
+                if (code== 101) {
+                   mActivityUtils.showToast(msg);
+                   finish();
                     return;
-                }
-                if (code == 102) {
+                } if (code== 102) {
                     mActivityUtils.showToast(msg);
                     return;
-                }
-                if (code == 103) {
+                } if (code== 103) {
                     mActivityUtils.showToast(msg);
                     return;
                 }
             }
+
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
-                new Throwable(t.getMessage());
+                  new Throwable(t.getMessage());
             }
         });
     }
@@ -167,5 +162,7 @@ public class UserInfoActivity extends AppCompatActivity {
     @OnClick(R.id.iv_back)
     public void back(){
         finish();
+        //进入主页
+        mActivityUtils.startActivity(MainActivity.class);
     }
 }

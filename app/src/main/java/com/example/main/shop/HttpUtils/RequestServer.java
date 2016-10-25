@@ -27,7 +27,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -54,9 +56,15 @@ public interface RequestServer {
     Call<Result> forgetPsw(@FieldMap  Map<String,String> map);
 
     //5.添加个人信息，兴趣，用户名，性别。。。
-    @FormUrlEncoded
+    //多部分上传
+    @Multipart
     @POST("add_userinfo")
-    Call<UserInfo> addUserInfo(@FieldMap Map<String,String> map);
+    Call<Result> addUserInfo(@Part("uid") int uid,
+                             @Part("photo") String photo,
+                             @Part("like") String like,
+                             @Part("sex") String sex,
+                             @Part("user_name") String name
+                             );
     //6.获取轮播图
     @GET("get_picture")
     Call<Picture> getPicture();

@@ -23,7 +23,7 @@ public class SpreadActivity extends AppCompatActivity {
 @Bind(R.id.tv_Super)TextView mTvSuper;//我的上级
     @Bind(R.id.tv_oneLevel)TextView mTvOneLevel;//一级成员
      @Bind(R.id.tv_secondLevel)TextView mTvSecondLevel;//二级成员
-    @Bind(R.id.tv_secondLevel)TextView mTvThirdLevel;//三级成员
+    @Bind(R.id.tv_thirdLevel)TextView mTvThirdLevel;//三级成员
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

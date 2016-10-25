@@ -13,15 +13,6 @@ public class UserInfo {
     private String like;//爱好
     private String user_name;//用户名
     private String photo;//头像
-    private String sign;//个性签名
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
 
     public int getUid() {
         return uid;

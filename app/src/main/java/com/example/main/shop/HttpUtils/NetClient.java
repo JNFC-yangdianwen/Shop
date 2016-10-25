@@ -17,6 +17,7 @@ import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
+import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
 
 import java.util.Map;
@@ -28,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -77,9 +79,13 @@ public class NetClient implements RequestServer {
         return mGetApi.forgetPsw(map);
     }
     //添加用户信息
-    public Call<UserInfo> addUserInfo(@FieldMap Map<String,String> map){
-        return mGetApi.addUserInfo(map);
+    @Override
+    public Call<Result> addUserInfo(@Part("uid") int uid, @Part("photo") String photo, @Part("like") String like, @Part("sex") String sex, @Part("user_name") String name) {
+        return mGetApi.addUserInfo(uid, photo, like, sex, name);
     }
+
+
+
     //获取轮播图
     public Call<Picture> getPicture(){
         return  mGetApi.getPicture();
