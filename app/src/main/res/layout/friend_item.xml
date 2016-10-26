@@ -3,17 +3,19 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 <ImageView
+    android:layout_margin="10dp"
     android:id="@+id/iv_user"
-    android:layout_width="100dp"
-    android:layout_height="100dp"/>
+    android:layout_width="30dp"
+    android:layout_height="30dp"/>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="70dp">
     <TextView
         android:id="@+id/tv_user"
         android:layout_width="match_parent"
@@ -28,56 +30,65 @@
         android:layout_height="30dp"/>
     </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
+        android:layout_marginLeft="50dp"
         android:weightSum="3"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Space
-            android:layout_width="100dp"
-            android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/clickGood"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="30dp">
             <ImageView
                 android:src="@mipmap/good"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
             <TextView
                 android:text="点赞"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/clickSu"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="30dp">
             <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:src="@mipmap/good"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
             <TextView
-                android:text="点赞"
-                android:textSize="20sp"
+                android:text="评论"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/clickShare"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="30dp">
             <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:src="@mipmap/good"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
             <TextView
-                android:text="点赞"
-                android:textSize="20sp"
+                android:text="分享"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

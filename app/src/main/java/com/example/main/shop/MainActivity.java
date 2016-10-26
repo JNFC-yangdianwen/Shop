@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(mFriendFragment);
                 break;
             case R.id.iv_mss:
-                //加载消息的fragment
+                //加载聊天的fragment
                 mIvFriend.setImageResource(R.drawable.shouye1_);
                 mIvMss.setImageResource(R.drawable.shouye2);
                 mIvWallet.setImageResource(R.drawable.shouye3_);

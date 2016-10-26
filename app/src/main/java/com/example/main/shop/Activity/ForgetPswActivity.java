@@ -56,7 +56,7 @@ public class ForgetPswActivity extends AppCompatActivity {
             mUtils.showToast("请输入手机号");
             return;
         }
-        TimeCount timeCount = new TimeCount(mTextView, 6000, 1000);
+        TimeCount timeCount = new TimeCount(mTextView, 60000, 1000);
         timeCount.start();
     }
     //确认密码

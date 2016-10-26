@@ -2,6 +2,7 @@ package com.example.main.shop.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -55,6 +56,10 @@ public class RegistActivity extends AppCompatActivity {
     public void getSMSS() {
         //手机号
         mPhoneNumber = userPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(mPhoneNumber)) {
+            mUtils.showToast("请输入手机号");
+            return;
+        }
         //倒计时
         TimeCount timeCount = new TimeCount(mTextView, 60000, 1000);
         timeCount.start();

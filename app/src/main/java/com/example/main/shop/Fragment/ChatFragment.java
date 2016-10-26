@@ -7,7 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.main.shop.Constans.FriendList;
+import com.example.main.shop.Constans.MyMsg;
+import com.example.main.shop.Constans.User;
+import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
+
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/9/29 0029.
@@ -18,14 +31,45 @@ public class ChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.rc_fr_conversationlist, container, false);
+        View view = inflater.inflate(R.layout.mss, container, false);
         return view;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
+        UserInfo userInfo=new UserInfo();
+        int uid = userInfo.getUid();
+         Call<FriendList> friendListCall = NetClient.getInstance().friendList(uid);
+        friendListCall.enqueue(new Callback<FriendList>() {
+            @Override
+            public void onResponse(Call<FriendList> call, Response<FriendList> response) {
+                FriendList body = response.body();
+                int code = body.getCode();
+                if (code == 101) {
 
+                }
+                if (code == 101) {
+
+                }
+                if (code == 101) {
+
+                }
+                if (code == 101) {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FriendList> call, Throwable t) {
+
+            }
+        });
     }
-    //点击每个item之后跳转到对应的聊天窗口
-
+    //添加朋友，通讯录
+   @OnClick(R.id.iv_addFrd)
+    public void addFriend(){
+         //跳转至通讯录页面
+   }
 }

@@ -124,7 +124,7 @@ builder.show();
     //设置爱好
     @OnClick(R.id.rl_like)
     public void setUserLike(){
-
+           mActivityUtils.startActivity(LikeActivity.class);
     }
     //设置银行卡
     @OnClick(R.id.rl_cash)

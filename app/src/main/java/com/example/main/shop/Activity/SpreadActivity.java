@@ -8,9 +8,12 @@ import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,11 +27,13 @@ public class SpreadActivity extends AppCompatActivity {
     @Bind(R.id.tv_oneLevel)TextView mTvOneLevel;//一级成员
      @Bind(R.id.tv_secondLevel)TextView mTvSecondLevel;//二级成员
     @Bind(R.id.tv_thirdLevel)TextView mTvThirdLevel;//三级成员
+    private ActivityUtils activityUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spread);
         ButterKnife.bind(this);
+        activityUtils=new ActivityUtils(this);
         UserInfo userInfo =new UserInfo();
         int uid = userInfo.getUid();
         //获取我的推广
@@ -78,5 +83,17 @@ public class SpreadActivity extends AppCompatActivity {
 
             }
         });
+    }
+    //明细
+    @OnClick(R.id.detail)
+    public void detail(){
+        activityUtils.startActivity(DetailActivity.class);
+        finish();
+    }
+    //充值
+    @OnClick(R.id.recharge)
+    public void recharge(){
+        activityUtils.startActivity(RechargeActivity.class);
+        finish();
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.main.shop.Adapter.FriendAdapter;
 import com.example.main.shop.Constans.Dynamic;
@@ -34,7 +35,7 @@ import retrofit2.Response;
  */
 public class FriendFragment extends Fragment {
     private String AppKey="17bfcb6cd2ea8";
-    @Bind(R.id.rc)RecyclerView mRecyclerView;
+    @Bind(R.id.rc)ListView mListview;
     private List<Dynamic.DynamicInfo> mData;
     private ActivityUtils mUtils;
 
@@ -54,9 +55,10 @@ public class FriendFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
         mUtils = new ActivityUtils(this);
+        mData=new ArrayList<>();
         UserInfo userInfo=new UserInfo();
         // 获取朋友圈信息
-        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(userInfo.getUid());
+        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(0);
         dynamicCall.enqueue(new Callback<Dynamic>() {
             @Override
             public void onResponse(Call<Dynamic> call, Response<Dynamic> response) {
@@ -84,12 +86,10 @@ public class FriendFragment extends Fragment {
                 new Throwable(t.getMessage());
             }
         });
-        mData=new ArrayList<>();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FriendAdapter friendAdapter=new FriendAdapter(getContext(),mData);
-        mRecyclerView.setAdapter(friendAdapter);
+        FriendAdapter friendAdapter=new FriendAdapter(mData,getContext());
+        mListview.setAdapter(friendAdapter);
         //add a FooterView
-        RecyclerViewUtils.setFooterView(mRecyclerView, new FooterView(getContext()));
+
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
