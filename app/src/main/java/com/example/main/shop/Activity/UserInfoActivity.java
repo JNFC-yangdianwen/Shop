@@ -1,9 +1,13 @@
 package com.example.main.shop.Activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +21,13 @@ import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.MainActivity;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.hybridsquad.android.library.CropHandler;
+import org.hybridsquad.android.library.CropHelper;
+import org.hybridsquad.android.library.CropParams;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,11 +44,13 @@ public class UserInfoActivity extends AppCompatActivity {
     @Bind(R.id.tv_like)TextView tvLike;
     @Bind(R.id.tv_sex)TextView tvSex;
     @Bind(R.id.tv_mobile)TextView tvMobile;
-//    @Bind(R.id.iv_photo)
-//    static ImageView ivPhoto;//头像
+    protected static final int CHOOSE_PICTURE = 0;
+    protected static final int TAKE_PICTURE = 1;
+    private static final int CROP_SMALL_PICTURE = 2;
+    protected static Uri tempUri;
+    @Bind(R.id.iv_photo) ImageView ivPhoto;//头像
     private static final String TAG = "UserInfoActivity";
     private ActivityUtils mActivityUtils;
-    public static ImageView mView;
 
 
     @Override
@@ -46,17 +59,71 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
         mActivityUtils = new ActivityUtils(this);
-        mView = (ImageView) findViewById(R.id.iv_photo);
         //手机号
         SharedPreferences sp = getSharedPreferences(LoginActivity.Login, MODE_PRIVATE);
         String moblie = sp.getString(LoginActivity.Mobile, "");
         tvMobile.setText(moblie);
     }
+    //裁剪图片处理
+    private CropHandler mCropHandler=new CropHandler() {
+    @Override
+    public void onPhotoCropped(Uri uri) {
+        Log.d(TAG, "onPhotoCropped: .................        运行");
+        ImageLoader.getInstance().displayImage("file://"+uri.getPath(),ivPhoto);
+        String photo ="file://"+uri.getPath();
+        UserInfo.getInstance().setPhoto(photo);
+    }
+
+    @Override
+    public void onCropCancel() {
+        mActivityUtils.showToast("cancel");
+    }
+
+    @Override
+    public void onCropFailed(String message) {
+        mActivityUtils.showToast(message);
+    }
+
+    @Override
+    public CropParams getCropParams() {
+        CropParams cropParams = new CropParams();
+        cropParams.aspectX = 300;
+        cropParams.aspectY = 300;
+        return cropParams;
+    }
+
+    @Override
+    public Activity getContext() {
+        return UserInfoActivity.this;
+    }
+};
 
     //设置头像
     @OnClick({R.id.iv_photo,R.id.tv_setPhoto})
     public void setPhoto(){
-        mActivityUtils.startActivity(CameraActivity.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("设置头像");
+        String[] items = { "选择本地照片", "拍照" };
+        builder.setNegativeButton("取消", null);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case CHOOSE_PICTURE: // 选择本地照片
+                        CropHelper.clearCachedCropFile(mCropHandler.getCropParams().uri);
+                        Intent intent = CropHelper.buildCropFromGalleryIntent(mCropHandler.getCropParams());
+                        startActivityForResult(intent, CropHelper.REQUEST_CROP);
+                        break;
+                    case TAKE_PICTURE: // 拍照
+                        CropHelper.clearCachedCropFile(mCropHandler.getCropParams().uri);
+                        Intent intent1 = CropHelper.buildCaptureIntent(mCropHandler.getCropParams().uri);
+                        startActivityForResult(intent1, CropHelper.REQUEST_CAMERA);
+                        break;
+                }
+            }
+        });
+        builder.create().show();
     }
     //设置昵称
     @OnClick(R.id.rl_name)
@@ -84,6 +151,12 @@ public class UserInfoActivity extends AppCompatActivity {
             tvLike.setText(like);
             UserInfo.getInstance().setLike(like);
             Log.d(TAG, "onActivityResult: ........爱好"+like);
+                //处理图像
+            case CropHelper.REQUEST_CROP://相机
+                CropHelper.handleResult(mCropHandler, requestCode, resultCode, data);
+                break;
+            case CropHelper.REQUEST_CAMERA://相册
+                CropHelper.handleResult(mCropHandler, requestCode, resultCode, data);
                 break;
 
         }
@@ -124,8 +197,6 @@ public class UserInfoActivity extends AppCompatActivity {
 builder.show();
 
     }
-
-
     //设置爱好
     @OnClick(R.id.rl_like)
     public void setUserLike(){
@@ -139,7 +210,7 @@ builder.show();
     public void saveUserInfo(){
         //添加个人信息
         Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(UserInfo.getInstance().getUid(),
-                String.valueOf(R.drawable.tou1),UserInfo.getInstance().getUser_name(),
+                UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
                 UserInfo.getInstance().getLike(),UserInfo.getInstance().getSex()
                 );
         Log.d(TAG, "saveUserInfo: "+UserInfo.getInstance().getUid());
