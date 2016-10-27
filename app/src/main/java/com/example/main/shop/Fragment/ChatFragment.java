@@ -8,13 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.main.shop.Constans.FriendList;
-import com.example.main.shop.Constans.MyMsg;
-import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,7 +34,7 @@ public class ChatFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        UserInfo userInfo=new UserInfo();
+        UserInfo userInfo=new UserInfo(getContext());
         int uid = userInfo.getUid();
          Call<FriendList> friendListCall = NetClient.getInstance().friendList(uid);
         friendListCall.enqueue(new Callback<FriendList>() {

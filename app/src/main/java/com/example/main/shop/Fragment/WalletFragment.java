@@ -9,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.main.shop.Activity.DetailActivity;
 import com.example.main.shop.Activity.RechargeActivity;
-import com.example.main.shop.Adapter.WalletAdapter;
+
 import com.example.main.shop.R;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.main.shop.R.layout.wallet_item;
+
 /**
  * Created by Administrator on 2016/10/9 0009.
  * 钱包的fragment
@@ -34,9 +37,15 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     @Bind(R.id.recharge)TextView mTextViewPay;
     @Bind(R.id.detail)TextView detail;
     @Bind(R.id.gv)GridView mGridView;
-    private List < String> mData;
-
-    private String mString[]={"旅游","培训课程","工厂店","网上超市","敬请期待","敬请期待"};
+    private List<Map<String,Object>> data;
+    private int image[]={
+            R.drawable.benjing,R.drawable.benjing,
+            R.drawable.benjing,R.drawable.benjing,
+            R.drawable.benjing,R.drawable.benjing};
+    private String mString[]={
+            "旅游","培训课程",
+            "工厂店","网上超市",
+            "敬请期待","敬请期待"};
 
     @Nullable
     @Override
@@ -49,13 +58,18 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        mData=new ArrayList<>();
-        for (int i = 0; i <6; i++) {
-
-            mData.add(mString[i]);
+        data=new ArrayList<>();
+        for (int i = 0; i <image.length; i++) {
+            //放入图片，文字
+            Map<String,Object> map=new HashMap<>();
+               map.put("image",image[i]);
+               map.put("text",mString[i]);
+            data.add(map);
         }
-        WalletAdapter walletAdapter =new WalletAdapter(getContext(),mData);
-        mGridView.setAdapter(walletAdapter);
+
+        SimpleAdapter simpleAdapter=new SimpleAdapter(getContext(),data,
+                R.layout.wallet_item,new String[]{"image","text"},new int[]{R.id.iv_gv,R.id.tv_sub});
+        mGridView.setAdapter(simpleAdapter);
         //item点击事件
         mGridView.setOnItemClickListener(this);
     }

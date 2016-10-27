@@ -131,9 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                    //进度条关闭
                    mProgressDialog.dismiss();
                    mUtils.showToast(msg);
-                   int uid = result.getUid();
-                   UserInfo userInfo=new UserInfo();
-                   userInfo.setUid(uid);
+                   int uid = UserInfo.getInstance().getUid();
                    Log.d(TAG, "onResponse: "+uid);
                    int type = result.getType();
                    /**
@@ -141,7 +139,6 @@ public class LoginActivity extends AppCompatActivity {
                     * 如果type =1，填写个人信息
                     */
                    if (type == 0) {
-
                        mUtils.startActivity(MainActivity.class);
                    return;
                    }

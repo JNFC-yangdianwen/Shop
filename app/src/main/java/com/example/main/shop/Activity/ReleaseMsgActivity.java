@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
-import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
@@ -17,8 +16,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * 发布消息
@@ -39,7 +36,7 @@ public class ReleaseMsgActivity extends AppCompatActivity {
     public void send(){
         //文本内容
         String content = tvContent.getText().toString();
-        UserInfo userInfo=new UserInfo();
+        UserInfo userInfo=new UserInfo(this);
         int uid = userInfo.getUid();
          //  //添加动态
         Call<Result> resultCall = NetClient.getInstance().addPost(uid,content, String.valueOf(R.drawable.rc_ic_picture),2,1,1);

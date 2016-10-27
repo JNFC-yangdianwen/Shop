@@ -12,7 +12,6 @@ import com.example.main.shop.Utils.ActivityUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +33,7 @@ public class SpreadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spread);
         ButterKnife.bind(this);
         activityUtils=new ActivityUtils(this);
-        UserInfo userInfo =new UserInfo();
+        UserInfo userInfo =new UserInfo(getApplicationContext());
         int uid = userInfo.getUid();
         //获取我的推广
         Call<SpreadResult> spreadCall = NetClient.getInstance().spread(uid);

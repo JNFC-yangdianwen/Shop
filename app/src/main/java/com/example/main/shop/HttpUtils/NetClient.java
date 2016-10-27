@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
@@ -66,7 +67,7 @@ public class NetClient implements RequestServer {
         return mGetApi.getCode(map);
     }
     //注册
-    public Call<Result> register(@FieldMap Map<String,String> map){
+    public Call<RegistResult> register(@FieldMap Map<String,String> map){
         return mGetApi.register(map);
     }
     //登陆
@@ -80,8 +81,11 @@ public class NetClient implements RequestServer {
     }
     //添加用户信息
     @Override
-    public Call<Result> addUserInfo(@Part("uid") int uid, @Part("photo") String photo, @Part("like") String like, @Part("sex") String sex, @Part("user_name") String name) {
-        return mGetApi.addUserInfo(uid, photo, like, sex, name);
+    public Call<Result> addUserInfo(
+            @Part("uid") int uid,
+            @Part("photo") String photo, @Part("user_name") String name,
+            @Part("like") String like, @Part("sex") String sex){
+        return mGetApi.addUserInfo(uid, photo, name, like, sex);
     }
 
 

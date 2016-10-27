@@ -1,8 +1,10 @@
 package com.example.main.shop.Activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +33,7 @@ public class LikeActivity extends AppCompatActivity {
              "运动","旅游","美食","购物",
              "游戏","休闲","爬山","娱乐",
              "金融","语言","艺术","乐器"};
+    private static  String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,13 @@ public class LikeActivity extends AppCompatActivity {
          gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int postion, long id) {
-                 if (id==postion) {
-                     TextView item = (TextView) likeAdapter.getItem(postion);
-                     //字体变颜色
-                         item.setTextColor(Color.parseColor("#32acd4"));
-                 } else{
-                     TextView item = (TextView) likeAdapter.getItem(postion);
-                     //字体变颜色
-                     item.setTextColor(0x8A000000);
+                 if (postion==id) {
+                     LikeAdapter.type=1;
+                     Log.d(TAG, "onItemClick: 。。。。。。。。。。；。。");
+                     String text = (String) likeAdapter.getItem(postion);
+                     item =text;
+                     Log.d(TAG, "onItemClick: 。。。。。。。。。"+item);
+                     Toast.makeText(LikeActivity.this,item, Toast.LENGTH_SHORT).show();
                  }
              }
          });
@@ -62,11 +64,25 @@ public class LikeActivity extends AppCompatActivity {
     //保存
     @OnClick(R.id.tvSave)
     public  void save(){
-
+        if (TextUtils.isEmpty(item) ) {
+            Toast.makeText(this, "请选择您的爱好", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "save: ，，，，，，，，，，，，，"+item);
+            return;
+        }
+        Intent intent = new Intent();
+        intent.putExtra("like", item);
+                /*
+                 * 调用setResult方法表示我将Intent对象返回给之前的那个Activity，这样就可以在onActivityResult方法中得到Intent对象，
+                 */
+        setResult(1002, intent);
+        //    结束当前这个Activity对象的生命
+        LikeAdapter.type=1;
+          finish();
     }
     //返回
     @OnClick(R.id.iv_back)
     public void back(){
+        LikeAdapter.type=1;
         finish();
     }
 }

@@ -101,7 +101,7 @@ public class ResetMobileActivity extends AppCompatActivity {
     @OnClick(R.id.tv_save)
     public void saveNewNumber() {
         Map<String, String> map = new HashMap<>();
-        UserInfo userInfo=new UserInfo();
+        UserInfo userInfo=new UserInfo(getApplicationContext());
         int uid = userInfo.getUid();
         map.put("uid", String.valueOf(uid));
         map.put("mobile", mOriginNumber);

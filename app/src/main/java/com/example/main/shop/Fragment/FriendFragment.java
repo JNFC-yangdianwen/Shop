@@ -3,8 +3,6 @@ package com.example.main.shop.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +13,7 @@ import com.example.main.shop.Constans.Dynamic;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.Utils.ActivityUtils;
-import com.example.main.shop.View.FooterView;
 import com.example.main.shop.R;
-import com.github.jdsjlzx.util.RecyclerViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +52,9 @@ public class FriendFragment extends Fragment {
         ButterKnife.bind(this,view);
         mUtils = new ActivityUtils(this);
         mData=new ArrayList<>();
-        UserInfo userInfo=new UserInfo();
+        UserInfo userInfo=new UserInfo(getContext());
         // 获取朋友圈信息
-        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(0);
+        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(userInfo.getUid());
         dynamicCall.enqueue(new Callback<Dynamic>() {
             @Override
             public void onResponse(Call<Dynamic> call, Response<Dynamic> response) {
@@ -69,7 +65,6 @@ public class FriendFragment extends Fragment {
                  *   如果返回码为101表明获取朋友圈的信息成功
                  *   如果返回码为102表明参数为空
                  */
-
                 if (code == 101) {
                     Dynamic dynamic = response.body();
                     List<Dynamic.DynamicInfo> infos = dynamic.getInfo();

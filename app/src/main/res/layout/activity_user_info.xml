@@ -199,29 +199,9 @@
             android:textSize="20sp"/>
     </RelativeLayout>
     //分割线
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="3dp"
         android:background="@color/rulesColor"/>
-
-    <RelativeLayout
-        android:id="@+id/rl_cash"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="提现账号"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            android:id="@+id/textView2"/>
-        <ImageView
-            android:layout_alignParentRight="true"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:src="@mipmap/right_arrow"
-            android:id="@+id/imageView2"/>
-    </RelativeLayout>
 
 </LinearLayout>

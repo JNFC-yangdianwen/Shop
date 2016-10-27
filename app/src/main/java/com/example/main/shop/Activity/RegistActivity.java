@@ -6,7 +6,9 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
@@ -113,16 +115,20 @@ public class RegistActivity extends AppCompatActivity {
         map.put("code", mIdent);
         map.put("invite_code", mInviteNumber);
         map.put("pwd", mPswNum);
-        Call<Result> register = NetClient.getInstance().register(map);
-        register.enqueue(new Callback<Result>() {
+        Call<RegistResult> register = NetClient.getInstance().register(map);
+        register.enqueue(new Callback<RegistResult>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(Call<RegistResult> call, Response<RegistResult> response) {
                 //注册成功
-                Result result = response.body();
+                RegistResult result = response.body();
                 int code = result.getCode();
                 String msg = result.getMsg();
+                //用户id
+                int id = result.getId();
                 if (code == 101) {
                     mUtils.showToast(msg);
+                    //设置用户id
+                    UserInfo.getInstance().setUid(id);
                     return;
                 }
                 if (code == 102) {
@@ -160,7 +166,7 @@ public class RegistActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
+            public void onFailure(Call<RegistResult> call, Throwable t) {
                 new Throwable(t.getMessage());
             }
         });

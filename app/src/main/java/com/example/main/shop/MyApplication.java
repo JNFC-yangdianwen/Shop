@@ -2,6 +2,9 @@ package com.example.main.shop;
 
 import android.app.Application;
 
+import com.example.main.shop.Constans.RegistResult;
+import com.example.main.shop.Constans.UserInfo;
+
 import io.rong.imkit.RongIM;
 
 /**
@@ -14,5 +17,7 @@ public class MyApplication extends Application {
         super.onCreate();
         //初始化融云
         RongIM.init(this);
+        //初始化用户
+       UserInfo.init(this);
     }
 }

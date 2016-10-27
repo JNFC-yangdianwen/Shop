@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
@@ -49,7 +50,7 @@ public interface RequestServer {
     //3.注册接口,手机号，验证码，邀请码（选填），密码
     @FormUrlEncoded
     @POST("register")
-    Call<Result>register(@FieldMap Map<String,String> map);
+    Call<RegistResult>register(@FieldMap Map<String,String> map);
     //4.忘记密码
     @FormUrlEncoded
     @POST("forget_pwd")
@@ -61,9 +62,10 @@ public interface RequestServer {
     @POST("add_userinfo")
     Call<Result> addUserInfo(@Part("uid") int uid,
                              @Part("photo") String photo,
+                             @Part("user_name") String name,
                              @Part("like") String like,
-                             @Part("sex") String sex,
-                             @Part("user_name") String name
+                             @Part("sex") String sex
+
                              );
     //6.获取轮播图
     @GET("get_picture")

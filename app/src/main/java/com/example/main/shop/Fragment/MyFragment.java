@@ -37,7 +37,6 @@ import butterknife.OnClick;
 public class MyFragment extends Fragment implements AdapterView.OnItemClickListener {
     @Bind(R.id.my_lv)ListView mListView;
     @Bind(R.id.userInfo) RelativeLayout mRelativeLayout;
-    private int[] AcitivityNum={};//存放Activity的数组
     private List<String> mData;
     private ActivityUtils mActivityUtils;
     @Nullable

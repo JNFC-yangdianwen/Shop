@@ -9,6 +9,7 @@ public class Result {
      * result : fail
      * msg : 参数不能为空
      * code : 102
+     * 返回用户id
      */
     private String result;
     private String msg;
