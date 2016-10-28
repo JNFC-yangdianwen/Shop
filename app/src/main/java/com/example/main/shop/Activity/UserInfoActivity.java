@@ -68,9 +68,11 @@ public class UserInfoActivity extends AppCompatActivity {
     private CropHandler mCropHandler=new CropHandler() {
     @Override
     public void onPhotoCropped(Uri uri) {
+
         Log.d(TAG, "onPhotoCropped: .................        运行");
-        ImageLoader.getInstance().displayImage("file://"+uri.getPath(),ivPhoto);
         String photo ="file://"+uri.getPath();
+        ImageLoader.getInstance().displayImage(photo,ivPhoto);
+
         UserInfo.getInstance().setPhoto(photo);
     }
 
@@ -111,11 +113,17 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case CHOOSE_PICTURE: // 选择本地照片
+                        //清理缓存
+                        ImageLoader.getInstance().clearMemoryCache();
+                        ImageLoader.getInstance().clearDiskCache();
                         CropHelper.clearCachedCropFile(mCropHandler.getCropParams().uri);
                         Intent intent = CropHelper.buildCropFromGalleryIntent(mCropHandler.getCropParams());
                         startActivityForResult(intent, CropHelper.REQUEST_CROP);
                         break;
                     case TAKE_PICTURE: // 拍照
+                        //清理缓存
+                        ImageLoader.getInstance().clearMemoryCache();
+                        ImageLoader.getInstance().clearDiskCache();
                         CropHelper.clearCachedCropFile(mCropHandler.getCropParams().uri);
                         Intent intent1 = CropHelper.buildCaptureIntent(mCropHandler.getCropParams().uri);
                         startActivityForResult(intent1, CropHelper.REQUEST_CAMERA);

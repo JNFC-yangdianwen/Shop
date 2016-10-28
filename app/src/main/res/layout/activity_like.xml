@@ -26,8 +26,15 @@
             android:layout_width="300dp"
             android:layout_height="match_parent" />
     </LinearLayout>
+<!-- android:horizontalSpacing="10dp" 水平间距10dp
+     android:verticalSpacing="10dp" 垂直间距10dp
+     android:stretchMode="columnWidth"
+-->
 
     <GridView
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
     android:layout_margin="30dp"
     android:id="@+id/gv"
     android:numColumns="3"

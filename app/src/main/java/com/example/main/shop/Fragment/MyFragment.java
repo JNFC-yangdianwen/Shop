@@ -58,8 +58,7 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
     //跳转个人信息的Activity
     @OnClick(R.id.userInfo)
     public void onClick(){
-        Intent intent =new Intent(getContext(), UserInfoActivity.class);
-        startActivity(intent);
+      mActivityUtils.startActivity(UserInfoActivity.class);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

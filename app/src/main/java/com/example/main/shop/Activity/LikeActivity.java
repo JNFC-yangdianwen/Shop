@@ -25,6 +25,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 设置爱好页面
+ */
+
 public class LikeActivity extends AppCompatActivity {
     @Bind(R.id.gv)GridView gridView;
     private static final String TAG = "LikeActivity";
@@ -33,7 +37,7 @@ public class LikeActivity extends AppCompatActivity {
              "运动","旅游","美食","购物",
              "游戏","休闲","爬山","娱乐",
              "金融","语言","艺术","乐器"};
-    private static  String item;
+    private String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +54,9 @@ public class LikeActivity extends AppCompatActivity {
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int postion, long id) {
                  if (postion==id) {
-                     LikeAdapter.type=1;
-                     Log.d(TAG, "onItemClick: 。。。。。。。。。。；。。");
-                     String text = (String) likeAdapter.getItem(postion);
-                     item =text;
-                     Log.d(TAG, "onItemClick: 。。。。。。。。。"+item);
-                     Toast.makeText(LikeActivity.this,item, Toast.LENGTH_SHORT).show();
+                     item = (String) likeAdapter.getItem(postion);
+//                     LikeAdapter.textView.setTextColor(Color.parseColor("#32acd4"));
+                     Toast.makeText(LikeActivity.this, item, Toast.LENGTH_SHORT).show();
                  }
              }
          });

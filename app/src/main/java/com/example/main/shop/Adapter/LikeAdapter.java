@@ -20,6 +20,8 @@ public class LikeAdapter extends BaseAdapter {
     private List<String> mData;
     private LayoutInflater mInflater;
     public static int type=1;
+    public static  TextView textView;
+
     public LikeAdapter(List<String> mData, Context context) {
         this.mData = mData;
         mInflater=LayoutInflater.from(context);
@@ -45,16 +47,8 @@ public class LikeAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.likeitem, null);
         }
-        final TextView textView = (TextView) convertView.findViewById(R.id.tvLike);
+        textView = (TextView) convertView.findViewById(R.id.tvLike);
         textView.setText(mData.get(postion));
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (type==1)
-                textView.setTextColor(Color.parseColor("#32acd4"));
-            }
-        });
         return convertView;
     }
 }

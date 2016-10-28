@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     >
 <TextView
-    android:layout_margin="3dp"
     android:id="@+id/tvLike"
     android:gravity="center"
     android:background="@drawable/bg_like"

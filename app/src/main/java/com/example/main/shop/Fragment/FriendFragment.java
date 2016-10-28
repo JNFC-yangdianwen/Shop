@@ -31,7 +31,7 @@ import retrofit2.Response;
  */
 public class FriendFragment extends Fragment {
     private String AppKey="17bfcb6cd2ea8";
-    @Bind(R.id.rc)ListView mListview;
+    @Bind(R.id.lv_frd)ListView mListview;//朋友圈的listview
     private List<Dynamic.DynamicInfo> mData;
     private ActivityUtils mUtils;
 
@@ -44,7 +44,6 @@ public class FriendFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -52,9 +51,8 @@ public class FriendFragment extends Fragment {
         ButterKnife.bind(this,view);
         mUtils = new ActivityUtils(this);
         mData=new ArrayList<>();
-        UserInfo userInfo=new UserInfo(getContext());
         // 获取朋友圈信息
-        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(userInfo.getUid());
+        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(UserInfo.getInstance().getUid());
         dynamicCall.enqueue(new Callback<Dynamic>() {
             @Override
             public void onResponse(Call<Dynamic> call, Response<Dynamic> response) {
