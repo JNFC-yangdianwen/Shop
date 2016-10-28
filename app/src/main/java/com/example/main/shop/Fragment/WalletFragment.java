@@ -39,9 +39,9 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     @Bind(R.id.gv)GridView mGridView;
     private List<Map<String,Object>> data;
     private int image[]={
-            R.drawable.benjing,R.drawable.benjing,
-            R.drawable.benjing,R.drawable.benjing,
-            R.drawable.benjing,R.drawable.benjing};
+            R.drawable.wode1,R.drawable.qianbao2,
+            R.drawable.qianbao3,R.drawable.qianbao4,
+            R.drawable.qianbao4,R.drawable.qianbao5};
     private String mString[]={
             "旅游","培训课程",
             "工厂店","网上超市",

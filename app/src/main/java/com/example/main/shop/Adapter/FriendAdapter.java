@@ -54,6 +54,18 @@ private List<Dynamic.DynamicInfo> mData;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.friend_item, null);
         }
+        TextView tvUser = (TextView) convertView.findViewById(R.id.tv_user);
+        TextView tvTime = (TextView) convertView.findViewById(R.id.tv_time);
+        TextView mss = (TextView) convertView.findViewById(R.id.tv_mss);
+        LinearLayout clikGood = (LinearLayout) convertView.findViewById(R.id.clickGood);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_clickGood);
+        TextView tv = (TextView) convertView.findViewById(R.id.tvclick1);
+        imageView.setImageResource(R.mipmap.good);
+        tv.setText("点赞");
+        tvUser.setText(mData.get(postion).getUser_name());
+        tvTime.setText(mData.get(postion).getTime());
+        mss.setText(mData.get(postion).getContent());
+
         return convertView;
     }
 }

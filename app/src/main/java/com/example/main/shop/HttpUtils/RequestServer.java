@@ -19,6 +19,7 @@ import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.Constans.UserList;
 
 import java.util.Map;
 
@@ -186,4 +187,14 @@ public interface RequestServer {
     // 37 购买旅游
     @GET("buy_travel")
      Call<Result> buyTravel(@Query("uid") int uid,@Query("tid") int tid);
+    //38 升级vip
+    /**
+     * 参数uid，时间month（格式必须为：年 -月） 钱数money
+     */
+    @GET("rise_vip")
+    Call <Result> vip(@QueryMap Map<String,String> map);
+    //爱好查找好友 参数：uid ，爱好
+    @POST("get_aihaouser")
+    Call<UserList.UserListInfo> likeFriend(@Field("uid")int uid , @Field("like") String like);
+
 }

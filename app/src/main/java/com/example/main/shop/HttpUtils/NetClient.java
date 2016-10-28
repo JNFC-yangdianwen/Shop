@@ -20,6 +20,7 @@ import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.Constans.UserList;
 
 import java.util.Map;
 
@@ -259,5 +260,20 @@ public class NetClient implements RequestServer {
     @Override
     public Call<Result> buyTravel(@Query("uid") int uid, @Query("tid") int tid) {
         return mGetApi.buyTravel(uid,tid);
+    }
+
+    /**
+     * 参数uid，时间month（格式必须为：年 -月） 钱数money
+     *   升级vip
+     * @param map
+     */
+    @Override
+    public Call<Result> vip(@QueryMap Map<String, String> map) {
+        return mGetApi.vip(map);
+    }
+    //按照爱好查找用户
+    @Override
+    public Call<UserList.UserListInfo> likeFriend(@Field("uid") int uid, @Field("like") String like) {
+        return mGetApi.likeFriend(uid, like);
     }
 }

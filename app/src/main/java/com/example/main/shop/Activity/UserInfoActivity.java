@@ -46,8 +46,6 @@ public class UserInfoActivity extends AppCompatActivity {
     @Bind(R.id.tv_mobile)TextView tvMobile;
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
-    private static final int CROP_SMALL_PICTURE = 2;
-    protected static Uri tempUri;
     @Bind(R.id.iv_photo) ImageView ivPhoto;//头像
     private static final String TAG = "UserInfoActivity";
     private ActivityUtils mActivityUtils;
@@ -59,6 +57,7 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
         mActivityUtils = new ActivityUtils(this);
+        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),ivPhoto);
         //手机号
         SharedPreferences sp = getSharedPreferences(LoginActivity.Login, MODE_PRIVATE);
         String moblie = sp.getString(LoginActivity.Mobile, "");
@@ -68,11 +67,9 @@ public class UserInfoActivity extends AppCompatActivity {
     private CropHandler mCropHandler=new CropHandler() {
     @Override
     public void onPhotoCropped(Uri uri) {
-
         Log.d(TAG, "onPhotoCropped: .................        运行");
         String photo ="file://"+uri.getPath();
         ImageLoader.getInstance().displayImage(photo,ivPhoto);
-
         UserInfo.getInstance().setPhoto(photo);
     }
 
@@ -221,7 +218,9 @@ builder.show();
                 UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
                 UserInfo.getInstance().getLike(),UserInfo.getInstance().getSex()
                 );
-        Log.d(TAG, "saveUserInfo: "+UserInfo.getInstance().getUid());
+        Log.d(TAG, "saveUserInfo 用户id"+UserInfo.getInstance().getUid()+ "用户头像"+ UserInfo.getInstance().getPhoto()+
+                "用户名"+  UserInfo.getInstance().getUser_name()+"用户爱好"+ UserInfo.getInstance().getLike()+
+                "用户性别"+UserInfo.getInstance().getSex());
         userInfoCall.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
