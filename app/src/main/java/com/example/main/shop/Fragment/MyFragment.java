@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.main.shop.Activity.LoginActivity;
+import com.example.main.shop.Activity.MyInfoActivity;
 import com.example.main.shop.Activity.MyMssAcitivity;
 import com.example.main.shop.Activity.ReleaseMsgActivity;
 import com.example.main.shop.Activity.SpreadActivity;
@@ -65,7 +66,7 @@ public class MyFragment extends Fragment{
     public void onClick(View v){
         switch (v.getId()){
             case R.id.userInfo:  //跳转个人信息的Activity
-                mActivityUtils.startActivity(UserInfoActivity.class);
+                mActivityUtils.startActivity(MyInfoActivity.class);
             break;
             case R.id.rl_mss://进入我的消息页面
                 mActivityUtils.startActivity(MyMssAcitivity.class);

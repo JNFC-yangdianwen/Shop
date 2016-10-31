@@ -26,7 +26,6 @@ public class PersonalSignature extends AppCompatActivity {
     public void saveContent(){
         //点击确认之后保存个性签名到服务器
         String content = mEditText.getText().toString().trim();
-
     }
     //返回
     @OnClick(R.id.iv_back)

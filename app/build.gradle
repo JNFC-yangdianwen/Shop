@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25'
     defaultConfig {
         applicationId "com.example.main.shop"
         minSdkVersion 15
@@ -23,7 +23,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.2.0'
     testCompile 'junit:junit:4.12'
-    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
+    //    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
     compile 'com.jakewharton:butterknife:7.0.1'
     //使用RecycleView代替ListView
     compile 'com.android.support:recyclerview-v7:24.0.0'
@@ -39,5 +39,7 @@ dependencies {
     compile 'org.hybridsquad.android.photocropper:library:2.1.0'
     //处理图片
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
+    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
+//    compile files('libs/core-3.2.1.jar')
+//    compile project(':libzxing')
 }

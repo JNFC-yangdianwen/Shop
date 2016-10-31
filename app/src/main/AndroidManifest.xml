@@ -31,35 +31,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Activity.RegistActivity"></activity>
-        <activity android:name=".Activity.LeadActivity"></activity>
-        <activity android:name=".Activity.UserInfoActivity"></activity>
-        <activity android:name=".Activity.MyMssAcitivity"></activity>
-        <activity android:name=".Activity.RechargeActivity"></activity>
-        <activity android:name=".Activity.DetailActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.RegistActivity" />
+        <activity android:name=".Activity.LeadActivity" />
+        <activity android:name=".Activity.UserInfoActivity" />
+        <activity android:name=".Activity.MyMssAcitivity" />
+        <activity android:name=".Activity.RechargeActivity" />
+        <activity android:name=".Activity.DetailActivity" />
         //支付宝
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".Activity.ForgetPswActivity"></activity>
-        <activity android:name=".Activity.PersonalSignature"></activity>
-        <activity android:name=".Activity.SuggestActivity"></activity>
-        <activity android:name=".Activity.SpreadActivity"></activity>
-        <activity android:name=".Activity.ResetMobileActivity"></activity>
+        <activity android:name=".Activity.ForgetPswActivity" />
+        <activity android:name=".Activity.PersonalSignature" />
+        <activity android:name=".Activity.SuggestActivity" />
+        <activity android:name=".Activity.SpreadActivity" />
+        <activity android:name=".Activity.ResetMobileActivity" />
         //输入框的自动浮起
         //android:windowSoftInputMode="stateVisible|adjustResize"
         <activity
@@ -84,9 +84,12 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ReleaseMsgActivity"></activity>
-        <activity android:name=".Activity.UserNameActivity"></activity>
-        <activity android:name=".Activity.LikeActivity"></activity>
+        <activity android:name=".Activity.ReleaseMsgActivity" />
+        <activity android:name=".Activity.UserNameActivity" />
+        <activity android:name=".Activity.LikeActivity" />
+        <activity android:name=".Activity.AddFeiendActivity" />
+        <activity android:name=".Activity.MyInfoActivity" />
+        <activity android:name=".Activity.QrcodeAcitivity"></activity>
     </application>
 
 </manifest>

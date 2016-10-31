@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_feiend"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.main.shop.Activity.AddFeiendActivity">
+<LinearLayout
+
+    android:background="@color/titleColor"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_Height">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:src="@mipmap/left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="@dimen/titleSize"
+        android:gravity="center"
+        android:text="添加好友"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
+    <EditText
+        android:id="@+id/et_input"
+        android:textSize="15sp"
+        android:hint="请输入好友手机号"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <RelativeLayout
+        android:id="@+id/rl_scan"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/iv_1"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/chazhao1"
+            android:layout_width="35dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="#252323"
+            android:id="@+id/tv_1"
+            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:text="扫一扫"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/iv_1"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_1"
+            android:text="扫描二维码名片"
+            android:layout_below="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:background="#dcdcdc"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:id="@+id/rl_contact"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/iv_2"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/chazhao2"
+            android:layout_width="35dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="#252323"
+            android:id="@+id/tv_2"
+            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:text="手机联系人"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/iv_2"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_2"
+            android:text="添加通讯录中的朋友"
+            android:layout_below="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:background="#dcdcdc"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:id="@+id/rl_here"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/iv_3"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/chazhao3"
+            android:layout_width="35dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="#252323"
+            android:id="@+id/tv_3"
+            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:text="附近的人"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/iv_3"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_3"
+            android:text="添加身边朋友"
+            android:layout_below="@+id/tv_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:background="#dcdcdc"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:id="@+id/rl_like"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/iv_4"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/chazhao4"
+            android:layout_width="35dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_4"
+            android:textSize="17sp"
+            android:textColor="#252323"
+            android:layout_marginLeft="10dp"
+            android:text="相同兴趣的人"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/iv_4"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_4"
+            android:text="添加兴趣相同的朋友"
+            android:layout_below="@+id/tv_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>
