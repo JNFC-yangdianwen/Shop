@@ -26,6 +26,7 @@ import butterknife.OnClick;
 
 //主界面使用frament
 public class MainActivity extends AppCompatActivity {
+
     //Appkey:17bfcb6cd2ea8
     private static final String TAG = "MainActivity";
     @Bind(R.id.iv_frd) ImageView mIvFriend;
