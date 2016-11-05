@@ -17,6 +17,7 @@ public class FooterView extends View {
         super(context);
     }
 
+
     public FooterView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
