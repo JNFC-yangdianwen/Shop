@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    android:background="@drawable/benjing"
-    tools:context="com.example.main.shop.Activity.LoginActivity">
+    tools:context="com.example.main.shop.Activity.User.LoginActivity">
     <TextView
         android:gravity="center"
         android:textColor="@color/white"
@@ -23,7 +23,7 @@
     android:layout_marginTop="200dp"
     android:background="@color/white"
     android:layout_width="350dp"
-    android:layout_height="104dp"
+    android:layout_height="110dp"
     android:orientation="vertical">
     <LinearLayout
         android:orientation="horizontal"
@@ -37,13 +37,25 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView"/>
         <EditText
+            android:background="@drawable/bg_et"
             android:layout_marginLeft="50dp"
             android:hint="@string/phoneNumber"
             android:id="@+id/et_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:background="#cfcfcf"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+    </RelativeLayout>
+
     <LinearLayout
+
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -53,6 +65,8 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"/>
         <EditText
+
+            android:background="@drawable/bg_et"
             android:layout_marginLeft="50dp"
             android:inputType="numberPassword"
             android:hint="@string/password"

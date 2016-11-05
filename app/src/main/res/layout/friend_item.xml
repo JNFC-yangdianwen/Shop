@@ -15,7 +15,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_user"
         android:layout_width="match_parent"
@@ -28,7 +28,17 @@
         <TextView
             android:id="@+id/tv_mss"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_praiseCount"
+            android:text="20人觉得很赞"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
     </LinearLayout>
 
@@ -47,11 +57,10 @@
             android:layout_height="30dp">
             <ImageView
                 android:id="@+id/iv_clickGood"
-                android:src="@mipmap/good"
+                android:src="@drawable/shouye5_"
                 android:layout_width="15dp"
                 android:layout_height="15dp"/>
             <TextView
-                android:id="@+id/tvclick1"
                 android:text="点赞"
                 android:textSize="15sp"
                 android:layout_width="wrap_content"
@@ -65,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp">
             <ImageView
-                android:src="@mipmap/good"
+                android:src="@drawable/shouye6"
                 android:layout_width="15dp"
                 android:layout_height="15dp"/>
             <TextView
@@ -82,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp">
             <ImageView
-                android:src="@mipmap/good"
+                android:src="@drawable/shouye7"
                 android:layout_width="15dp"
                 android:layout_height="15dp"/>
             <TextView

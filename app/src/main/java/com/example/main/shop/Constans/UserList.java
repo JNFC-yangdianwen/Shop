@@ -12,7 +12,7 @@ public class UserList extends Result {
     }
 
     private List<UserListInfo> info;
-    public class UserListInfo {
+    public static class UserListInfo {
         private int uid;
         private String username;
         private String like;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_bank_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.main.shop.Activity.PayActivity.WeachatPayActivity">
+    <LinearLayout
+        android:background="@color/titleColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_Height">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:src="@mipmap/left_arrow"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="@dimen/titleSize"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@string/wechat_account"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/name"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/titleSize"
+            android:gravity="center|left"
+            android:text="姓名"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_toRightOf="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:background="#dedbdb"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/wechatNum"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/titleSize"
+            android:gravity="center|left"
+            android:text="微信账号"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/et_wechatNum"
+            android:layout_toRightOf="@+id/wechatNum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:background="#dedbdb"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:textColor="#ba4a2b"
+            android:textSize="15sp"
+            android:layout_centerInParent="true"
+            android:text="• 请正确填写微信账号方便我们为您打钱。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_sure"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="确定"
+            android:background="@color/titleColor"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="30dp" />
+
+    </RelativeLayout>
+</LinearLayout>
+

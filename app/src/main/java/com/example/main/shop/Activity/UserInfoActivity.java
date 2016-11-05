@@ -6,15 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.main.shop.Constans.LoginResult;
+import com.example.main.shop.Activity.User.LoginActivity;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
@@ -26,8 +24,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.hybridsquad.android.library.CropHandler;
 import org.hybridsquad.android.library.CropHelper;
 import org.hybridsquad.android.library.CropParams;
-
-import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
         mActivityUtils = new ActivityUtils(this);
-        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),ivPhoto);
+//        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),ivPhoto);
         //手机号
         SharedPreferences sp = getSharedPreferences(LoginActivity.Login, MODE_PRIVATE);
         String moblie = sp.getString(LoginActivity.Mobile, "");
@@ -67,7 +63,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private CropHandler mCropHandler=new CropHandler() {
     @Override
     public void onPhotoCropped(Uri uri) {
-        Log.d(TAG, "onPhotoCropped: .................        运行");
+        Log.d(TAG, "onPhotoCropped: .................运行");
         String photo ="file://"+uri.getPath();
         ImageLoader.getInstance().displayImage(photo,ivPhoto);
         UserInfo.getInstance().setPhoto(photo);
@@ -146,6 +142,9 @@ public class UserInfoActivity extends AppCompatActivity {
         //处理回传的数据
         switch (requestCode){
             case 1000:
+                if (data == null) {
+                    return;
+                }
                 String result_value = data.getStringExtra("result");
                 tvName.setText(result_value);
                 UserInfo.getInstance().setUser_name(result_value);
@@ -214,8 +213,9 @@ builder.show();
     @OnClick(R.id.tv_saveInfo)
     public void saveUserInfo(){
         //添加个人信息
-        Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(UserInfo.getInstance().getUid(),
-                UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
+        String uid = UserInfo.getInstance().getUid();
+        Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(uid,
+              UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
                 UserInfo.getInstance().getLike(),UserInfo.getInstance().getSex()
                 );
         Log.d(TAG, "saveUserInfo 用户id"+UserInfo.getInstance().getUid()+ "用户头像"+ UserInfo.getInstance().getPhoto()+
@@ -231,9 +231,8 @@ builder.show();
                     //保存成功之后，
                    mActivityUtils.showToast(msg);
                     //type值为0
-                    LoginResult loginResult=new LoginResult();
-                    loginResult.setType(0);
                     mActivityUtils.startActivity(MainActivity.class);
+                    finish();
                     return;
                 } if (code== 102) {
                     mActivityUtils.showToast(msg);

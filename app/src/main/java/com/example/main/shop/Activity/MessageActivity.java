@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.example.main.shop.R;
-
 
 //具体的聊天窗口页面
 public class MessageActivity extends AppCompatActivity {
@@ -13,7 +11,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rc_fr_conversationlist);
+//        setContentView(R.layout.rc_fr_conversationlist);
 
     }
     @Override

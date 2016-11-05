@@ -34,7 +34,7 @@ public class SpreadActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         activityUtils=new ActivityUtils(this);
         UserInfo userInfo =new UserInfo(getApplicationContext());
-        int uid = userInfo.getUid();
+        String uid = userInfo.getUid();
         //获取我的推广
         Call<SpreadResult> spreadCall = NetClient.getInstance().spread(uid);
         spreadCall.enqueue(new Callback<SpreadResult>() {

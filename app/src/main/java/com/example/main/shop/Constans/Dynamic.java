@@ -17,9 +17,9 @@ public class Dynamic extends Result{
         this.info = info;
     }
 
-   public class DynamicInfo{
+   public static class DynamicInfo{
 
-        private int id;// 用户id
+        private int id;// 动态id
         private String photo;//用户头像
         private String user_name;//用户名
         private int is_share;//是否分享有奖，有奖为1，无奖为2
@@ -27,28 +27,7 @@ public class Dynamic extends Result{
         private String picture;//图片
         private String time;//创建时间
         private int click_count;//点赞数量
-        private int comment_count;//评论内容
-        private int count;//有奖数量
-        private double money;//每个钱数
-
-        public DynamicInfo(int id, int is_share, String content,
-                           String picture, int count, double money) {
-            this.id = id;
-            this.is_share = is_share;
-            this.content = content;
-            this.picture = picture;
-            this.count = count;
-            this.money = money;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public void setMoney(double money) {
-            this.money = money;
-        }
-
+        private int comment_count;//评论数量
         public String getPicture() {
             return picture;
         }

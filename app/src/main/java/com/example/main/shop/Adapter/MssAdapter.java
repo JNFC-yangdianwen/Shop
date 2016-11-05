@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.main.shop.Constans.MyMsg;
 import com.example.main.shop.R;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/29 0029.
@@ -16,14 +18,24 @@ import com.example.main.shop.R;
 
 public class MssAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
+    private List<MyMsg> mData;
     public MssAdapter() {
     }
-    public MssAdapter(Context context) {
+    public MssAdapter(Context context,List<MyMsg> data) {
+        mData=data;
         mInflater = LayoutInflater.from(context);
+    }
+    //添加一条消息
+    public void addMsg(MyMsg msg){
+        mData.add(msg);
+    }
+    //删除消息
+    public void clearMsy(){
+        mData.clear();
     }
     @Override
     public int getCount() {
-        return 20;
+        return mData.size();
     }
     @Override
     public Object getItem(int position) {
@@ -37,16 +49,12 @@ public class MssAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         //首先判断convertview是否为空，如果为空则去加载mss的item布局
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.mssitem, null);
+            convertView = mInflater.inflate(R.layout.mymssitem, null);
         }
-        ImageView mssIv = (ImageView) convertView.findViewById(R.id.mss_iv);
-        TextView mssUser = (TextView) convertView.findViewById(R.id.mss_user);
-        TextView mss = (TextView) convertView.findViewById(R.id.mss);
-        TextView mssTime = (TextView) convertView.findViewById(R.id.mss_time);
-        mssIv.setImageResource(R.mipmap.ic_launcher);
-        mssUser.setText("姓名");
-        mss.setText("消息");
-        mssTime.setText(""+System.currentTimeMillis());
+        TextView time = (TextView) convertView.findViewById(R.id.dateTime);
+        TextView content = (TextView) convertView.findViewById(R.id.tvContent);
+        time.setText(mData.get(position).getInfo().get(position).getTime());
+        content.setText(mData.get(position).getInfo().get(position).getContent());
         return convertView;
     }
 }

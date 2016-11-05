@@ -13,7 +13,6 @@ import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
 import com.example.main.shop.Constans.RegistResult;
-import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
@@ -24,7 +23,6 @@ import com.example.main.shop.Constans.UserList;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -61,13 +59,11 @@ public interface RequestServer {
     //多部分上传
     @Multipart
     @POST("add_userinfo")
-    Call<Result> addUserInfo(@Part("uid") int uid,
+    Call<Result> addUserInfo(@Part("uid") String uid,
                              @Part("photo") String photo,
                              @Part("user_name") String name,
                              @Part("like") String like,
-                             @Part("sex") String sex
-
-                             );
+                             @Part("sex") String sex);
     //6.获取轮播图
     @GET("get_picture")
     Call<Picture> getPicture();
@@ -83,7 +79,7 @@ public interface RequestServer {
 
     @Multipart
     @POST("add_post")
-    Call<Result> addPost(@Part ("uid") int id,
+    Call<Result> addPost(@Part ("uid") String id,
                          @Part("content") String content,
                          @Part("picture") String picture,
                          @Part("is_share") int award,
@@ -91,14 +87,14 @@ public interface RequestServer {
                          @Part("money_one") double money);
     //8.获取朋友圈信息
     @GET("dynamic_list")
-    Call<Dynamic> getDynamic(@Query("uid")int uid);
+    Call<Dynamic> getDynamic(@Query("uid")String uid);
     //9.我的消息
     @GET("get_message")
     Call<MyMsg> getMymsg();
     //10.动态点赞
     //需要参数动态id
     @GET("post_click")
-    Call<Result> clickPraise(@Field("uid") int uid,@Field("pid") int pid);
+    Call<Result> clickPraise(@Field("uid") String uid,@Field("pid") int pid);
     //11.动态评论 需要评论者信息  动态id,发送人id，接收人回复id，content 内容
     @FormUrlEncoded
     @POST("post_comment")
@@ -106,7 +102,7 @@ public interface RequestServer {
                          @Field("receive_id") int rereceiveId,@Field("content")String content);
     //12分享回调  需要用户 id ，动态id
     @GET("share_return")
-    Call<Result> share(@Query("uid") int uid, @Query("pid") int pid);
+    Call<Result> share(@Query("uid") String uid, @Query("pid") int pid);
     //13.修改手机号 参数 用户id，原手机号,新手机号，验证码
     @FormUrlEncoded
     @POST("edit_mobile" )
@@ -116,13 +112,13 @@ public interface RequestServer {
     Call<PostInfo> postInfo(@Query("pid") int id);
     //15.朋友列表 参数用户id
     @GET("my_friends")
-    Call<FriendList> friendList(@Query("uid") int id);
+    Call<FriendList> friendList(@Query("uid") String id);
     //16查找朋友
     @GET("find_user")
     Call<FindFriend> findFriend(@Query("mobile") String mobile);
     //17手机号查找添加好友
     @GET("mobile_add")
-    Call<Result> addFriend(@Query("uid")int uid ,@Query("fid") int fid);
+    Call<Result> addFriend(@Query("uid")String uid ,@Query("fid") int fid);
     // 18培训课程
     @GET("course_list")
     Call<Course> course();
@@ -131,23 +127,38 @@ public interface RequestServer {
     Call<CourseInfo> courseDetail(@Query("id" ) int id);
     //20.购买课程 参数 用户id 课程 id
     @GET ("buy_course")
-    Call<Result> buyCourse(@Query("uid") int uid,@Query("cid") int cid);
+    Call<Result> buyCourse(@Query("uid") String uid,@Query("cid") int cid);
     //21 钱包 参数 用户id
     @GET("wallet")
-    Call<Result> wallet(@Query("uid") int id);
+    Call<Result> wallet(@Query("uid") String id);
     // 22 我的
     @GET("myoneself")
-    Call<MySelf> mySelf(@Query("uid") int id);
+    Call<MySelf> mySelf(@Query("uid") String id);
     //23 个人信息
     @GET ("user_info")
-    Call<UserInfo> userInfo(@Query("uid" ) int id);
+    Call<UserInfo> userInfo(@Query("uid" ) String id);
     //24 修改个人信息
-    @FormUrlEncoded
+    /**
+     * 多部分上传Uid	用户id
+     Picture	头像
+     user_name	用户名
+     Like	爱好
+     Sex	性别
+     Sign	个性签名
+
+     */
+
+    @Multipart
     @POST("user_info_edit")
-    Call<Result> modifyUserInfo(@Body UserInfo userInfo);
+    Call<Result> modifyUserInfo(@Part ("uid") String uid,
+                                @Part("picture") String picture,
+                                @Part("user_name") String name,
+                                @Part("like") String like,
+                                @Part("sex") String sex,
+                                @Part("sign") String sign);
     // 25 提现账号 参数用户id
     @GET ("cash_account")
-    Call<CashAccount> cashAccount(@Query("uid") int id);
+    Call<CashAccount> cashAccount(@Query("uid") String id);
    // 26 提现账户修改       参数 用户：id,   提现方式：1 支付宝 2，微信 3，银行卡   用户名  账号 ，银行卡开户行
     @FormUrlEncoded
     @POST("edit_account")
@@ -158,35 +169,35 @@ public interface RequestServer {
     Call<Result> modifyPsw(@FieldMap  Map<String,String> map);
     //28 我的发布 参数 用户id
     @GET("my_send")
-    Call<Dynamic.DynamicInfo> myPublish(@Query("uid") int id);
+    Call<Dynamic.DynamicInfo> myPublish(@Query("uid") String id);
     // 29 我的订单 参数 用户id 课程  1为课程，2为旅游
     @GET("my_order")
-    Call<Order> myOrder(@Query("uid") int id, @Query("class") int type);
+    Call<Order> myOrder(@Query("uid") String id, @Query("class") int type);
     //30订单详情
     @GET("course_detal")
-    Call<CourseInfo> orderDetail(@Query("id" ) int id);
+    Call<CourseInfo> orderDetail(@Query("id" ) String id);
     //31 意见反馈  参数 用户id  意见反馈内容
     @FormUrlEncoded
     @POST("opinion")
-    Call<Result> suggest(@Field("uid") int id,@Field("content") String content);
+    Call<Result> suggest(@Field("uid") String id,@Field("content") String content);
 //    //32 我的推广 用户id
     @GET("my_exten")
-    Call<SpreadResult> spread(@Query("uid") int id);
+    Call<SpreadResult> spread(@Query("uid") String id);
     //33 添加我的上级
     @GET("add_father")
-    Call<Result> addHighLevel(@Query("uid")  int id,@Query("code") String code);
+    Call<Result> addHighLevel(@Query("uid")  String id,@Query("code") String code);
     //34 提现 参数用户 id 提现金额， 提现分类
     @GET("cash")
-    Call<Result> cash(@Query("uid") int id,@Query("money") double money ,@Query("type") int type);
+    Call<Result> cash(@Query("uid") String id,@Query("money") double money ,@Query("type") int type);
     // 35 旅游
     @GET("travel")
     Call<Travel> travel();
     //36 旅游详情 参数 旅游id
     @GET("travel_info")
-    Call<TravelInfo> travelInfo(@Query("id") int id);
+    Call<TravelInfo> travelInfo(@Query("id") String id);
     // 37 购买旅游
     @GET("buy_travel")
-     Call<Result> buyTravel(@Query("uid") int uid,@Query("tid") int tid);
+     Call<Result> buyTravel(@Query("uid") String uid,@Query("tid") int tid);
     //38 升级vip
     /**
      * 参数uid，时间month（格式必须为：年 -月） 钱数money
@@ -194,7 +205,8 @@ public interface RequestServer {
     @GET("rise_vip")
     Call <Result> vip(@QueryMap Map<String,String> map);
     //爱好查找好友 参数：uid ，爱好
+    @Multipart
     @POST("get_aihaouser")
-    Call<UserList.UserListInfo> likeFriend(@Field("uid")int uid , @Field("like") String like);
+    Call<UserList.UserListInfo> likeFriend(@Part("uid")String uid , @Part("like") String like);
 
 }

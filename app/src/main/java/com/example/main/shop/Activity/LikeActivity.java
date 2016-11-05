@@ -1,18 +1,13 @@
 package com.example.main.shop.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.main.shop.Adapter.LikeAdapter;
@@ -77,13 +72,11 @@ public class LikeActivity extends AppCompatActivity {
                  */
         setResult(1002, intent);
         //    结束当前这个Activity对象的生命
-        LikeAdapter.type=1;
           finish();
     }
     //返回
     @OnClick(R.id.iv_back)
     public void back(){
-        LikeAdapter.type=1;
         finish();
     }
 }

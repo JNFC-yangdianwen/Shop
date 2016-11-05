@@ -1,7 +1,6 @@
 package com.example.main.shop.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.main.shop.Constans.Dynamic;
+import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.R;
-import com.mob.commons.SHARESDK;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
-
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
-import io.rong.imageloader.utils.L;
 
 /**
  * Created by Administrator on 2016/9/29 0029.
@@ -54,18 +50,22 @@ private List<Dynamic.DynamicInfo> mData;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.friend_item, null);
         }
-        TextView tvUser = (TextView) convertView.findViewById(R.id.tv_user);
-        TextView tvTime = (TextView) convertView.findViewById(R.id.tv_time);
-        TextView mss = (TextView) convertView.findViewById(R.id.tv_mss);
+        ImageView ivUser = (ImageView) convertView.findViewById(R.id.iv_user);
+        TextView tvUser = (TextView) convertView.findViewById(R.id.tv_user);//用户名
+        TextView tvTime = (TextView) convertView.findViewById(R.id.tv_time);//时间
+        TextView mss = (TextView) convertView.findViewById(R.id.tv_mss);//文本信息
+        ImageView pic = (ImageView) convertView.findViewById(R.id.iv_pic);//图片
+        TextView count = (TextView) convertView.findViewById(R.id.tv_praiseCount);
         LinearLayout clikGood = (LinearLayout) convertView.findViewById(R.id.clickGood);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_clickGood);
-        TextView tv = (TextView) convertView.findViewById(R.id.tvclick1);
-        imageView.setImageResource(R.mipmap.good);
-        tv.setText("点赞");
+
+        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),ivUser);//设置头像
+
+        ImageLoader.getInstance().displayImage(mData.get(postion).getPicture(),pic);//设置图片
         tvUser.setText(mData.get(postion).getUser_name());
         tvTime.setText(mData.get(postion).getTime());
         mss.setText(mData.get(postion).getContent());
-
+        count.setText(mData.get(postion).getClick_count()+"人觉得很赞");
         return convertView;
     }
 }

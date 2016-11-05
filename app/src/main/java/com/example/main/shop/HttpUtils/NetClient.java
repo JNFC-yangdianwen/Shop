@@ -13,12 +13,10 @@ import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
 import com.example.main.shop.Constans.RegistResult;
-import com.example.main.shop.Constans.ReleaseDynamic;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
 import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
-import com.example.main.shop.Constans.User;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.Constans.UserList;
 
@@ -28,7 +26,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.Part;
@@ -83,7 +80,7 @@ public class NetClient implements RequestServer {
     //添加用户信息
     @Override
     public Call<Result> addUserInfo(
-            @Part("uid") int uid,
+            @Part("uid") String uid,
             @Part("photo") String photo, @Part("user_name") String name,
             @Part("like") String like, @Part("sex") String sex){
         return mGetApi.addUserInfo(uid, photo, name, like, sex);
@@ -97,7 +94,7 @@ public class NetClient implements RequestServer {
     }
    //发表动态
     @Override
-    public Call<Result> addPost(@Part("uid") int id,
+    public Call<Result> addPost(@Part("uid") String id,
                                 @Part("content") String content,
                                 @Part("picture") String picture,
                                 @Part("is_share") int award,
@@ -109,7 +106,7 @@ public class NetClient implements RequestServer {
 
     //朋友圈消息
     @Override
-    public Call<Dynamic> getDynamic(@Query("uid") int uid) {
+    public Call<Dynamic> getDynamic(@Query("uid") String uid) {
         return mGetApi.getDynamic(uid);
     }
     //我的消息
@@ -119,7 +116,7 @@ public class NetClient implements RequestServer {
     }
     //动态点赞
     @Override
-    public Call<Result> clickPraise(@Field("uid") int uid,@Field("pid") int pid) {
+    public Call<Result> clickPraise(@Field("uid") String uid,@Field("pid") int pid) {
         return mGetApi.clickPraise(uid, pid);
     }
 
@@ -132,7 +129,7 @@ public class NetClient implements RequestServer {
 
     //分享回调
     @Override
-    public Call<Result> share(@Query("uid") int uid, @Query("pid") int pid) {
+    public Call<Result> share(@Query("uid") String uid, @Query("pid") int pid) {
         return mGetApi.share(uid, pid);
     }
     //修改手机号
@@ -147,7 +144,7 @@ public class NetClient implements RequestServer {
     }
      //朋友列表
     @Override
-    public Call<FriendList> friendList(@Query("id") int id) {
+    public Call<FriendList> friendList(@Query("id") String id) {
         return mGetApi.friendList(id);
     }
     //查找朋友
@@ -157,7 +154,7 @@ public class NetClient implements RequestServer {
     }
      //手机号查找添加好友
     @Override
-    public Call<Result> addFriend(@Query("uid")int uid ,@Query("fid") int fid) {
+    public Call<Result> addFriend(@Query("uid")String uid ,@Query("fid") int fid) {
         return mGetApi.addFriend(uid, fid);
     }
     //培训课程
@@ -172,32 +169,47 @@ public class NetClient implements RequestServer {
     }
      //购买课程
     @Override
-    public Call<Result> buyCourse(@Query("uid") int uid,@Query("cid") int cid) {
+    public Call<Result> buyCourse(@Query("uid") String uid,@Query("cid") int cid) {
         return mGetApi.buyCourse(uid, cid);
     }
     //用户钱包
     @Override
-    public Call<Result> wallet(@Query("id") int id) {
+    public Call<Result> wallet(@Query("id") String id) {
         return mGetApi.wallet(id);
     }
     //我的
     @Override
-    public Call<MySelf> mySelf(@Query("id") int id) {
+    public Call<MySelf> mySelf(@Query("id") String id) {
         return mGetApi.mySelf(id);
     }
-    //个人信息
+    //获取个人信息
     @Override
-    public Call<UserInfo> userInfo(@Query("id") int id) {
+    public Call<UserInfo> userInfo(@Query("id") String id) {
         return mGetApi.userInfo(id);
     }
-    //修改个人信息
+
+    /**    //修改个人信息
+     * 多部分上传Uid	用户id
+     * Picture	头像
+     * user_name	用户名
+     * Like	爱好
+     * Sex	性别
+     * Sign	个性签名
+     *
+     * @param uid
+     * @param picture
+     * @param name
+     * @param like
+     * @param sex
+     * @param sign
+     */
     @Override
-    public Call<Result> modifyUserInfo(@Body UserInfo userInfo) {
-        return mGetApi.modifyUserInfo(userInfo);
+    public Call<Result> modifyUserInfo(@Part("uid") String uid, @Part("picture") String picture, @Part("user_name") String name, @Part("like") String like, @Part("sex") String sex, @Part("sign") String sign) {
+        return mGetApi.modifyUserInfo(uid, picture, name, like, sex, sign);
     }
    // 提现账户
     @Override
-    public Call<CashAccount> cashAccount(@Query("id") int id) {
+    public Call<CashAccount> cashAccount(@Query("id") String id) {
         return mGetApi.cashAccount(id);
     }
     //修改提现账户
@@ -212,38 +224,38 @@ public class NetClient implements RequestServer {
     }
    //我的发布
     @Override
-    public Call<Dynamic.DynamicInfo> myPublish(@Query("uid") int uid) {
+    public Call<Dynamic.DynamicInfo> myPublish(@Query("uid") String uid) {
         return mGetApi.myPublish(uid);
     }
     //订单
     @Override
-    public Call<Order> myOrder(@Query("id") int id, @Query("class") int type) {
+    public Call<Order> myOrder(@Query("id") String id, @Query("class") int type) {
         return mGetApi.myOrder(id, type);
     }
     //订单详情
     @Override
-    public Call<CourseInfo> orderDetail(@Query("id") int id) {
+    public Call<CourseInfo> orderDetail(@Query("id") String id) {
         return mGetApi.orderDetail(id);
     }
     // 意见反馈
     @Override
-    public Call<Result> suggest(@Field("uid") int id, @Field("content") String content) {
+    public Call<Result> suggest(@Field("uid") String id, @Field("content") String content) {
         return mGetApi.suggest(id, content);
     }
     //我的推广
     @Override
-    public Call<SpreadResult> spread(@Query("uid") int id) {
+    public Call<SpreadResult> spread(@Query("uid") String id) {
         return mGetApi.spread(id);
     }
 
     //添加我的上级
     @Override
-    public Call<Result> addHighLevel(@Query("uid") int id, @Query("code") String code) {
+    public Call<Result> addHighLevel(@Query("uid") String id, @Query("code") String code) {
         return mGetApi.addHighLevel(id,code);
     }
       //提现
     @Override
-    public Call<Result> cash(@Query("uid") int id, @Query("money") double money, @Query("type") int type) {
+    public Call<Result> cash(@Query("uid") String id, @Query("money") double money, @Query("type") int type) {
         return mGetApi.cash(id, money, type);
     }
     //旅游
@@ -253,12 +265,12 @@ public class NetClient implements RequestServer {
     }
    // 旅游详情
     @Override
-    public Call<TravelInfo> travelInfo(@Query("id") int id) {
+    public Call<TravelInfo> travelInfo(@Query("id") String id) {
         return mGetApi.travelInfo(id);
     }
     //购买旅游
     @Override
-    public Call<Result> buyTravel(@Query("uid") int uid, @Query("tid") int tid) {
+    public Call<Result> buyTravel(@Query("uid") String uid, @Query("tid") int tid) {
         return mGetApi.buyTravel(uid,tid);
     }
 
@@ -273,7 +285,7 @@ public class NetClient implements RequestServer {
     }
     //按照爱好查找用户
     @Override
-    public Call<UserList.UserListInfo> likeFriend(@Field("uid") int uid, @Field("like") String like) {
+    public Call<UserList.UserListInfo> likeFriend(@Part("uid") String uid, @Part("like") String like) {
         return mGetApi.likeFriend(uid, like);
     }
 }

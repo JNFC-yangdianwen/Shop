@@ -1,7 +1,6 @@
 package com.example.main.shop.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,7 +34,7 @@ public class UserNameActivity extends AppCompatActivity {
                 break;
             //保存昵称
             case R.id.ll_save:
-                mName = etName.getText().toString().trim();
+                mName = etName.getText().toString();
                 Intent intent = new Intent();
                 intent.putExtra("result", mName);
                 /*

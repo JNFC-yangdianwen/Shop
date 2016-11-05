@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.main.shop">
-
+<uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.User.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activity.RegistActivity" />
+        <activity android:name=".Activity.User.RegistActivity" />
         <activity android:name=".Activity.LeadActivity" />
         <activity android:name=".Activity.UserInfoActivity" />
         <activity android:name=".Activity.MyMssAcitivity" />
@@ -55,11 +56,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".Activity.ForgetPswActivity" />
-        <activity android:name=".Activity.PersonalSignature" />
+        <activity android:name=".Activity.User.ForgetPswActivity" />
+        <activity android:name=".Activity.PersonalSign" />
         <activity android:name=".Activity.SuggestActivity" />
         <activity android:name=".Activity.SpreadActivity" />
-        <activity android:name=".Activity.ResetMobileActivity" />
+        <activity android:name=".Activity.User.ResetMobileActivity" />
         //输入框的自动浮起
         //android:windowSoftInputMode="stateVisible|adjustResize"
         <activity
@@ -87,9 +88,18 @@
         <activity android:name=".Activity.ReleaseMsgActivity" />
         <activity android:name=".Activity.UserNameActivity" />
         <activity android:name=".Activity.LikeActivity" />
-        <activity android:name=".Activity.AddFeiendActivity" />
+        <activity android:name=".Activity.AddFriend.AddFeiendActivity" />
         <activity android:name=".Activity.MyInfoActivity" />
-        <activity android:name=".Activity.QrcodeAcitivity"></activity>
+        <activity android:name=".Activity.QrcodeAcitivity" />
+        <activity android:name=".Activity.User.ResetPswActivity" />
+        <activity android:name=".Activity.PayActivity.CashActivity" />
+        <activity android:name=".Activity.PayActivity.WeachatPayActivity" />
+        <activity android:name=".Activity.PayActivity.BankCardActivity" />
+        <activity android:name=".Activity.PayActivity.AlipayActivity" />
+        <activity android:name=".Activity.AddFriend.SameHobby" />
+        <activity android:name=".Activity.AddFriend.ContactActivity" />
+        <activity android:name=".Activity.ShareReward" />
+        <activity android:name=".Activity.MyRelease" />
     </application>
 
 </manifest>

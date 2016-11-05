@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_my_mss_acitivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.main.shop.Activity.MyMssAcitivity">
 <LinearLayout
     android:background="@color/titleColor"
     android:layout_width="match_parent"
     android:layout_height="56dp">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:src="@drawable/fanhui"/>
 <TextView
     android:textColor="@color/white"
     android:gravity="center"
@@ -18,4 +25,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 </LinearLayout>
-</RelativeLayout>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+</LinearLayout>

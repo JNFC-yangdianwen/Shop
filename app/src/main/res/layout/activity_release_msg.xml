@@ -11,22 +11,28 @@
         android:background="@color/titleColor"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_Height">
-        <ImageView
-            android:id="@+id/iv_back"
+        <TextView
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:id="@+id/tv_cancel"
             android:gravity="center"
-            android:src="@mipmap/left_arrow"
-            android:layout_width="40dp"
+            android:text="取消"
+            android:layout_width="60dp"
             android:layout_height="match_parent"/>
-        <Space
-            android:layout_width="280dp"
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="朋友圈"
+            android:layout_width="260dp"
             android:layout_height="match_parent"/>
+
         <TextView
             android:id="@+id/send"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
-            android:text="发表"
-            android:layout_alignParentRight="true"
+            android:text="发布"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -44,10 +50,37 @@
         android:layout_height="match_parent"/>
 </RelativeLayout>
     <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_marginTop="@dimen/sp_16"
+        android:layout_marginLeft="@dimen/sp_16"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    <ImageView
         android:id="@+id/addPic"
         android:layout_marginTop="@dimen/sp_16"
         android:layout_marginLeft="@dimen/sp_16"
         android:src="@drawable/add"
         android:layout_width="60dp"
         android:layout_height="60dp"/>
+     <TextView
+         android:gravity="center"
+         android:text="最多3张"
+         android:layout_marginLeft="@dimen/sp_16"
+         android:layout_width="60dp"
+         android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_margin="@dimen/sp_16"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+     <CheckBox
+         android:id="@+id/cb"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/dark"
+            android:text="是否分享有奖"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>

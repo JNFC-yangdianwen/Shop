@@ -8,6 +8,14 @@
     <string name="message">聊天</string>
     <string name="wallet">钱包</string>
     <string name="my">我的</string>
+    <string name="myRelease">我的发布</string>
     <string name="release">发布</string>
     <string name="userInfo">个人信息</string>
+    <string name="hobby_Title">兴趣爱好</string>
+    <string name="find">查找</string>
+    <string name="sure">确定</string>
+    <string name="addFrd">添加好友</string>
+    <string name="contact">通讯录</string>
+    <string name="wechat_account">微信账号</string>
+    <string name="sureInfo">确认之后,直接从我的钱包里面扣除相应钱数。</string>
 </resources>

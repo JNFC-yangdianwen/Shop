@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.main.shop.Activity.AddFriend.ContactActivity;
 import com.example.main.shop.Constans.FriendList;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,18 +26,23 @@ import retrofit2.Response;
  */
 
 public class ChatFragment extends Fragment {
+
+    private ActivityUtils activityUtils;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mss, container, false);
         return view;
+
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        activityUtils = new ActivityUtils(this);
         UserInfo userInfo=new UserInfo(getContext());
-        int uid = userInfo.getUid();
+        String uid = userInfo.getUid();
          Call<FriendList> friendListCall = NetClient.getInstance().friendList(uid);
         friendListCall.enqueue(new Callback<FriendList>() {
             @Override
@@ -67,5 +74,7 @@ public class ChatFragment extends Fragment {
    @OnClick(R.id.iv_addFrd)
     public void addFriend(){
          //跳转至通讯录页面
+       activityUtils.startActivity(ContactActivity.class);
+       onDetach();
    }
 }

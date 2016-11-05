@@ -8,18 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.main.shop.Activity.ReleaseMsgActivity;
 import com.example.main.shop.Adapter.FriendAdapter;
 import com.example.main.shop.Constans.Dynamic;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
-import com.example.main.shop.Utils.ActivityUtils;
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sharesdk.framework.ShareSDK;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +54,8 @@ public class FriendFragment extends Fragment {
         mUtils = new ActivityUtils(this);
         mData=new ArrayList<>();
         // 获取朋友圈信息
-        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(UserInfo.getInstance().getUid());
+        String uid = UserInfo.getInstance().getUid();
+        Call<Dynamic> dynamicCall = NetClient.getInstance().getDynamic(uid);
         dynamicCall.enqueue(new Callback<Dynamic>() {
             @Override
             public void onResponse(Call<Dynamic> call, Response<Dynamic> response) {
@@ -90,4 +93,9 @@ public class FriendFragment extends Fragment {
         //初始化Sdk
         ShareSDK.initSDK(getContext(),AppKey);
     }
+    @OnClick(R.id.release)
+    public void release(){
+        mUtils.startActivity(ReleaseMsgActivity.class);
+    }
+
 }

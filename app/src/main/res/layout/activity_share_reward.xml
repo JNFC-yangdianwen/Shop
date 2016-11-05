@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_share_reward"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.main.shop.Activity.ShareReward">
+<LinearLayout
+
+    android:background="@color/titleColor"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_Height">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_gravity="center"
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp" />
+    <TextView
+        android:gravity="center"
+        android:textSize="@dimen/titleSize"
+        android:textColor="@color/white"
+        android:text="有奖分享"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:textColor="@color/dark"
+            android:gravity="center"
+            android:text="分享个数"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:background="@drawable/bg_et"
+            android:gravity="center"
+            android:id="@+id/et_count"
+            android:layout_toLeftOf="@+id/count"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="@color/dark"
+            android:id="@+id/count"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="个"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:background="@color/rulesColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:textColor="@color/dark"
+            android:gravity="center"
+            android:text="每个钱数"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:background="@drawable/bg_et"
+            android:gravity="center"
+            android:id="@+id/et_money"
+            android:layout_toLeftOf="@+id/money"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="@color/dark"
+            android:id="@+id/money"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="元"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:background="@color/rulesColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+  <RelativeLayout
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="30dp">
+  <LinearLayout
+
+      android:orientation="horizontal"
+      android:layout_alignParentRight="true"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent">
+      <TextView
+          android:textColor="@color/dark"
+          android:gravity="center"
+          android:text="总计："
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent" />
+      <TextView
+          android:id="@+id/tv_sum"
+          android:textColor="@color/dark"
+          android:gravity="center"
+          android:text="0.0"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent" />
+      <TextView
+          android:textColor="@color/dark"
+          android:layout_marginRight="5dp"
+          android:gravity="center"
+          android:text="元"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent" />
+  </LinearLayout>
+  </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_sure"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:background="@color/titleColor"
+            android:textColor="@color/white"
+            android:text="@string/sure"
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/dark"
+            android:text="@string/sureInfo"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.main.shop.Activity.AddFeiendActivity">
+    tools:context="com.example.main.shop.Activity.AddFriend.AddFeiendActivity">
 <LinearLayout
 
     android:background="@color/titleColor"
@@ -21,18 +21,30 @@
         android:textColor="@color/white"
         android:textSize="@dimen/titleSize"
         android:gravity="center"
-        android:text="添加好友"
+        android:text="@string/addFrd"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
+    <LinearLayout
+        android:background="#edecec"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
     <EditText
         android:id="@+id/et_input"
         android:textSize="15sp"
+
         android:hint="请输入好友手机号"
-        android:layout_margin="16dp"
-        android:background="@color/white"
-        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_et"
+        android:layout_width="300dp"
         android:layout_height="30dp" />
+  <ImageView
+      android:id="@+id/iv_search"
+      android:layout_margin="4dp"
+      android:src="@mipmap/serche"
+      android:layout_width="match_parent"
+      android:layout_height="40dp" />
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/rl_scan"
         android:orientation="horizontal"
@@ -164,5 +176,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-
+    <TextView
+        android:background="#dcdcdc"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 </LinearLayout>

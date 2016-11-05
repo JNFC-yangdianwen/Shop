@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:background="@color/titleColor"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_Height">
@@ -17,12 +17,12 @@
         <ImageView
             android:layout_marginRight="10dp"
             android:id="@+id/iv_addFrd"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="18dp"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/addfriend"
+            android:src="@drawable/tongxunlu"
             android:layout_width="30dp"
-            android:layout_height="30dp" />
-    </LinearLayout>
+            android:layout_height="20dp" />
+    </RelativeLayout>
 <ListView
     android:id="@+id/lv"
     android:layout_width="match_parent"

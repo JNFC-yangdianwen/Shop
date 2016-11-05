@@ -11,9 +11,6 @@ public class MyMsg extends Result{
     public List<MessageInfo> getInfo() {
         return info;
     }
-    public void setInfo(List<MessageInfo> info) {
-        this.info = info;
-    }
     private List<MessageInfo> info;
     public class MessageInfo{
     private int id;//用户id

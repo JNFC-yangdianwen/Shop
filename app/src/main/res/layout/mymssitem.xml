@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="20dp">
+    <TextView
+        android:inputType="datetime"
+        android:id="@+id/dateTime"
+        android:text="2016-11-11       11:22:22"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <!--<TextView-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:inputType="datetime"-->
+        <!--android:id="@+id/time"-->
+        <!--android:text="11:05"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent" />-->
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:textSize="20sp"
+            android:text="一条添加好友的消息。"
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

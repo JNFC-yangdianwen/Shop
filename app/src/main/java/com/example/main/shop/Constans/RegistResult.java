@@ -7,9 +7,9 @@ package com.example.main.shop.Constans;
  */
 
 public class RegistResult extends Result {
-    private int id;
+    private String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

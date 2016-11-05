@@ -6,6 +6,8 @@ import com.example.main.shop.Constans.UserInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+//
+//import io.rong.imkit.RongIM;
 
 /**
  * Created by Administrator on 2016/10/14 0014.

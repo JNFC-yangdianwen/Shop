@@ -1,7 +1,6 @@
 package com.example.main.shop.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import java.util.List;
 public class LikeAdapter extends BaseAdapter {
     private List<String> mData;
     private LayoutInflater mInflater;
-    public static int type=1;
     public static  TextView textView;
 
     public LikeAdapter(List<String> mData, Context context) {

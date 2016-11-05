@@ -5,14 +5,9 @@ package com.example.main.shop.Constans;
  */
 
 public class LoginResult extends Result {
-    private int uid;
+    private String uid;
     private int type;
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
     public int getType() {

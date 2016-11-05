@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.main.shop.Activity.QrcodeAcitivity">
-<RelativeLayout
+<LinearLayout
 
     android:background="@color/titleColor"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_Height">
     <ImageView
         android:id="@+id/iv_back"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="50dp"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:src="@drawable/fanhui"/>
     <TextView
         android:textSize="@dimen/titleSize"
         android:gravity="center"
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>
 
     <RelativeLayout
 
@@ -56,7 +57,7 @@
             <TextView
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:background="#000"
+                android:background="#bfbaba"
                 android:layout_width="200dp"
                 android:layout_height="1dp" />
             <LinearLayout
@@ -67,9 +68,10 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/qr_photo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
                 <LinearLayout
+                    android:layout_marginLeft="2dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

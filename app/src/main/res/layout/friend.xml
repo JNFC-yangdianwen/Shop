@@ -4,21 +4,24 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/titleColor"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/friend"
             android:textColor="@color/white"
-            android:textSize="30sp"/>
+            android:textSize="@dimen/titleSize"/>
 
         <TextView
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/release"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -26,7 +29,7 @@
             android:textColor="#fff"
             android:textSize="20sp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/lv_frd"

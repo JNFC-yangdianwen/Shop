@@ -13,7 +13,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.main.shop.Activity.PayActivity.CashActivity;
+import com.example.main.shop.Activity.User.LoginActivity;
+import com.example.main.shop.Activity.User.ResetMobileActivity;
+import com.example.main.shop.Activity.User.ResetPswActivity;
+import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,6 +31,9 @@ import org.hybridsquad.android.library.CropParams;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.main.shop.Activity.UserInfoActivity.CHOOSE_PICTURE;
 import static com.example.main.shop.Activity.UserInfoActivity.TAKE_PICTURE;
@@ -48,6 +57,24 @@ public class MyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_infon);
         ButterKnife.bind(this);
         mActivityUtils=new ActivityUtils(this);
+        //进入此页面则立即获取个人信息
+        String uid = UserInfo.getInstance().getUid();
+        Call<UserInfo> userInfoCall = NetClient.getInstance().userInfo(uid);
+        userInfoCall.enqueue(new Callback<UserInfo>() {
+            @Override
+            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                
+                UserInfo userInfo = response.body();
+                String photo = userInfo.getPhoto();
+                String sign = userInfo.getSign();
+
+            }
+            @Override
+            public void onFailure(Call<UserInfo> call, Throwable t) {
+
+
+            }
+        });
         ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),photo);
         name.setText(UserInfo.getInstance().getUser_name());
         like.setText(UserInfo.getInstance().getLike());
@@ -97,16 +124,32 @@ public class MyInfoActivity extends AppCompatActivity {
         //处理回传的数据
         switch (requestCode){
             case 1000:
+                if (data == null) {
+                    return;
+                }
                 String result_value = data.getStringExtra("result");
                 name.setText(result_value);
                 UserInfo.getInstance().setUser_name(result_value);
                 Log.d(TAG, "onActivityResult: 。。。。。。用户名"+result_value);
                 break;
             case 1001:
+                if (data == null) {
+                    return;
+                }
                 String hobby = data.getStringExtra("like");
                 like.setText(hobby);
                 UserInfo.getInstance().setLike(hobby);
                 Log.d(TAG, "onActivityResult: ........爱好"+hobby);
+                break;
+            case 1002:
+                if (data == null) {
+                    sign.setText("未设置个性签名");
+                    return;
+                }
+                String userSign = data.getStringExtra("sign");
+                sign.setText(userSign);
+                UserInfo.getInstance().setSign(userSign);
+                break;
 //                //处理图像
             case CropHelper.REQUEST_CROP://相机
                 CropHelper.handleResult(mCropHandler, requestCode, resultCode, data);
@@ -122,7 +165,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 R.id.rl_like, R.id.rl_sex,
                 R.id.rl_sign, R.id.rl_qrcode,
                 R.id.rl_mobile, R.id.rl_cash,
-                R.id.rl_fix})
+                R.id.rl_fix,R.id.tv_saveInfo})
         public void setInfo(View v) {
 
             switch (v.getId()) {
@@ -200,25 +243,56 @@ public class MyInfoActivity extends AppCompatActivity {
                     builder1.show();
                     break;
                 case R.id.rl_sign://修改个性签名
-                         mActivityUtils.startActivity(PersonalSignature.class);
+                    Intent intent2 = new Intent();
+                    intent2.putExtra("message",1);
+                    intent2.setClass(this,PersonalSign.class);
+                    startActivityForResult(intent2, 1002);
                     break;
                 case R.id.rl_qrcode://查看二维码
                       mActivityUtils.startActivity(QrcodeAcitivity.class);
 
                     break;
                 case R.id.rl_mobile://修改手机号
-
-
+                      mActivityUtils.startActivity(ResetMobileActivity.class);
                     break;
-                case R.id.rl_cash://查看银行卡
-
+                case R.id.rl_cash://提现
+                   mActivityUtils.startActivity(CashActivity.class);
 
                     break;
                 case R.id.rl_fix://修改密码
+                      mActivityUtils.startActivity(ResetPswActivity.class);
+                    break;
+                case R.id.tv_saveInfo://保存个人信息
+                    UserInfo userInfo = UserInfo.getInstance();
+                    Call<Result> saveUserInfo = NetClient.getInstance().modifyUserInfo(userInfo.getUid(),userInfo.getPhoto()
+                    ,userInfo.getUser_name(),userInfo.getLike(),userInfo.getSex(),"opjknoippokjnmkj");
+                    saveUserInfo.enqueue(new Callback<Result>() {
+                        @Override
+                        public void onResponse(Call<Result> call, Response<Result> response) {
+                            Result result = response.body();
+                            int code = result.getCode();
+                            String msg = result.getMsg();
+                            if (code == 101) {
+                                mActivityUtils.showToast(msg);
+                                return;
+                            }
+                            if (code == 102) {
+                                mActivityUtils.showToast(msg);
+                                return;
+                            }  if (code == 103) {
+                                mActivityUtils.showToast(msg);
+                                return;
+                            }
+                        }
 
-
+                        @Override
+                        public void onFailure(Call<Result> call, Throwable t) {
+                              new Throwable(t.getMessage());
+                        }
+                    });
                     break;
 
             }
         }
+
     }
