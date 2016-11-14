@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.Result;
-import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
@@ -128,7 +127,6 @@ public class RegistActivity extends AppCompatActivity {
                 if (code == 101) {
                     mUtils.showToast(msg);
                     //设置用户id
-                    UserInfo.getInstance().setUid(id);
                     return;
                 }
                 if (code == 102) {

@@ -18,16 +18,19 @@ import java.util.List;
 
 public class MssAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<MyMsg> mData;
+    private List<MyMsg.MessageInfo> mData;
     public MssAdapter() {
     }
-    public MssAdapter(Context context,List<MyMsg> data) {
+    public MssAdapter(Context context,List<MyMsg.MessageInfo> data) {
         mData=data;
         mInflater = LayoutInflater.from(context);
     }
     //添加一条消息
-    public void addMsg(MyMsg msg){
+    public void addMsg(MyMsg.MessageInfo msg){
         mData.add(msg);
+    }
+    public void addAll(List<MyMsg.MessageInfo> data){
+        mData.addAll(data);
     }
     //删除消息
     public void clearMsy(){
@@ -53,8 +56,8 @@ public class MssAdapter extends BaseAdapter {
         }
         TextView time = (TextView) convertView.findViewById(R.id.dateTime);
         TextView content = (TextView) convertView.findViewById(R.id.tvContent);
-        time.setText(mData.get(position).getInfo().get(position).getTime());
-        content.setText(mData.get(position).getInfo().get(position).getContent());
+        time.setText(mData.get(position).getTime());
+        content.setText(mData.get(position).getMessage());
         return convertView;
     }
 }

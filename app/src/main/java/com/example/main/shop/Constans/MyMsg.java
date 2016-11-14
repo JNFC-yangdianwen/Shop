@@ -12,17 +12,19 @@ public class MyMsg extends Result{
         return info;
     }
     private List<MessageInfo> info;
-    public class MessageInfo{
-    private int id;//用户id
-    private  String content;//消息内容
+    public static class MessageInfo{
+    private String id;//消息id
+    private  String message;//消息内容
     private String time;//时间
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public String getContent() {
-        return content;
-    }
-    public String getTime() {
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getTime() {
         return time;
     }
 }

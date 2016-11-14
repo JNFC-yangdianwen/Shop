@@ -1,4 +1,4 @@
-package com.example.main.shop.Activity;
+package com.example.main.shop.Activity.UserInfo;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -13,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.main.shop.Activity.User.LoginActivity;
-import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.User1;
 import com.example.main.shop.Constans.UserInfo;
-import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.HttpUtils.MyRequest;
+import com.example.main.shop.HttpUtils.NetOkHttp;
 import com.example.main.shop.MainActivity;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
@@ -24,13 +25,18 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.hybridsquad.android.library.CropHandler;
 import org.hybridsquad.android.library.CropHelper;
 import org.hybridsquad.android.library.CropParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 用户个人信息的界面
@@ -213,38 +219,73 @@ builder.show();
     @OnClick(R.id.tv_saveInfo)
     public void saveUserInfo(){
         //添加个人信息
-        String uid = UserInfo.getInstance().getUid();
-        Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(uid,
-              UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
-                UserInfo.getInstance().getLike(),UserInfo.getInstance().getSex()
-                );
         Log.d(TAG, "saveUserInfo 用户id"+UserInfo.getInstance().getUid()+ "用户头像"+ UserInfo.getInstance().getPhoto()+
                 "用户名"+  UserInfo.getInstance().getUser_name()+"用户爱好"+ UserInfo.getInstance().getLike()+
                 "用户性别"+UserInfo.getInstance().getSex());
-        userInfoCall.enqueue(new Callback<Result>() {
+//        Call<Result> userInfoCall = NetClient.getInstance().addUserInfo(uid,
+//              UserInfo.getInstance().getPhoto(),UserInfo.getInstance().getUser_name(),
+//                UserInfo.getInstance().getLike(),UserInfo.getInstance().getSex()
+//                );
+//
+//        userInfoCall.enqueue(new Callback<Result>() {
+//            @Override
+//            public void onResponse(Call<Result> call, Response<Result> response) {
+//                Result result = response.body();
+//                int code = result.getCode();
+//                String msg = result.getMsg();
+//                if (code== 101) {
+//                    //保存成功之后，
+//                   mActivityUtils.showToast(msg);
+//                    //type值为0
+//                    mActivityUtils.startActivity(MainActivity.class);
+//                    finish();
+//                    return;
+//                } if (code== 102) {
+//                    mActivityUtils.showToast(msg);
+//                    return;
+//                } if (code== 103) {
+//                    mActivityUtils.showToast(msg);
+//                    return;
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<Result> call, Throwable t) {
+//                  new Throwable(t.getMessage());
+//            }
+//        });
+
+        String uid = User1.getInstance().getUid();
+        Request request = MyRequest.getInstance().addUserInfo(uid, UserInfo.getInstance().getPhoto(),
+                UserInfo.getInstance().getUser_name(),
+                UserInfo.getInstance().getLike(), UserInfo.getInstance().getSex());
+        Call call = NetOkHttp.getInstance().getCall(request);
+        call.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                Result result = response.body();
-                int code = result.getCode();
-                String msg = result.getMsg();
-                if (code== 101) {
-                    //保存成功之后，
-                   mActivityUtils.showToast(msg);
-                    //type值为0
-                    mActivityUtils.startActivity(MainActivity.class);
-                    finish();
-                    return;
-                } if (code== 102) {
-                    mActivityUtils.showToast(msg);
-                    return;
-                } if (code== 103) {
-                    mActivityUtils.showToast(msg);
-                    return;
-                }
+            public void onFailure(Call call, IOException e) {
+
             }
+
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                  new Throwable(t.getMessage());
+            public void onResponse(Call call, Response response) throws IOException {
+                String string = response.body().string();
+                Log.d(TAG, "login: "+string);
+                try {
+                    JSONObject jsonObject=new JSONObject(string);
+                    int code = (int) jsonObject.get("code");
+                    String msg = (String) jsonObject.get("msg");
+                    if (code == 101) {
+                        mActivityUtils.showToast(msg);
+                        return;
+                    } if (code == 102) {
+                        mActivityUtils.showToast(msg);
+                        return;
+                    } if (code == 103) {
+                        mActivityUtils.showToast(msg);
+                        return;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

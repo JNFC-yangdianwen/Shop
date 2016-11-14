@@ -12,10 +12,11 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.main.shop.Activity.CourseActivity;
 import com.example.main.shop.Activity.DetailActivity;
 import com.example.main.shop.Activity.RechargeActivity;
-
 import com.example.main.shop.R;
+import com.example.main.shop.Utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +26,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.example.main.shop.R.layout.wallet_item;
 
 /**
  * Created by Administrator on 2016/10/9 0009.
@@ -46,6 +45,7 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
             "旅游","培训课程",
             "工厂店","网上超市",
             "敬请期待","敬请期待"};
+    private ActivityUtils activityUtils;
 
     @Nullable
     @Override
@@ -58,6 +58,7 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        activityUtils = new ActivityUtils(this);
         data=new ArrayList<>();
         for (int i = 0; i <image.length; i++) {
             //放入图片，文字
@@ -90,6 +91,8 @@ public class WalletFragment extends Fragment implements AdapterView.OnItemClickL
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        if (position == 1) {
+           activityUtils.startActivity(CourseActivity.class);
+        }
     }
 }

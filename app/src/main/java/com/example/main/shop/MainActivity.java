@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,10 @@ import com.example.main.shop.Fragment.WalletFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
-//主界面使用frament
+//主界面使用frament,开启融云连接服务
 public class MainActivity extends AppCompatActivity {
 
     //Appkey:17bfcb6cd2ea8
@@ -46,10 +49,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         String token="3A3QI7k6o8AV7jwGcC0VrLO0Zp8veqjrL783P9LaIfQgvbReLntYP/ZB7tLtpxkTzC7DWbCQ9/1F6Xqv4dp/1A==";
-
         mFriendFragment = new FriendFragment();
         replaceFragment(mFriendFragment);
+        //连接融云
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                //token失效，重新获取
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                Log.d(TAG, "onSuccess: 。。。。。。。。。融云连接成功");
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+
     }
+
+
+
+
+
+
+
+
+
     //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu_main, menu);

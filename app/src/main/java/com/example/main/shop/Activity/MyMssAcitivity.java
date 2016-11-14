@@ -1,9 +1,11 @@
 package com.example.main.shop.Activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,8 +29,10 @@ import retrofit2.Response;
 //我的消息，点击删除单条消息
 public class MyMssAcitivity extends AppCompatActivity {
 @Bind(R.id.lv)ListView mListView;
-    private List<MyMsg> mData;
+    private List<MyMsg.MessageInfo> mData;
     private ActivityUtils activityUtils;
+    private static final String TAG = "MyMssAcitivity";
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MyMssAcitivity extends AppCompatActivity {
         mData=new ArrayList<>();
         ButterKnife.bind(this);
         activityUtils = new ActivityUtils(this);
+        progress = new ProgressDialog(this);
         Call<MyMsg> mymsg = NetClient.getInstance().getMymsg();
         mymsg.enqueue(new Callback<MyMsg>() {
             @Override
@@ -44,13 +49,18 @@ public class MyMssAcitivity extends AppCompatActivity {
                 MyMsg msg = response.body();
                 int code = msg.getCode();
                 String s = msg.getMsg();
+                List<MyMsg.MessageInfo> info = msg.getInfo();
                 if (code == 101) {
-                    mData.add(msg);
+                    progress.dismiss();
+                    mData.addAll(info);
+                    Log.d(TAG, "onResponse: ................"+info);
                     return;
                 }  if (code == 102) {
+                    progress.dismiss();
                     activityUtils.showToast(s);
                     return;
                 }  if (code == 103) {
+                    progress.dismiss();
                     activityUtils.showToast(s);
                     return;
                 }

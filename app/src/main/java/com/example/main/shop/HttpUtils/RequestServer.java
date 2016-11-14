@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.Publish;
 import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
@@ -20,8 +21,10 @@ import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.Constans.UserList;
 
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -60,7 +63,7 @@ public interface RequestServer {
     @Multipart
     @POST("add_userinfo")
     Call<Result> addUserInfo(@Part("uid") String uid,
-                             @Part("photo") String photo,
+                             @Part ("picture")String picture,
                              @Part("user_name") String name,
                              @Part("like") String like,
                              @Part("sex") String sex);
@@ -79,12 +82,11 @@ public interface RequestServer {
 
     @Multipart
     @POST("add_post")
-    Call<Result> addPost(@Part ("uid") String id,
-                         @Part("content") String content,
-                         @Part("picture") String picture,
-                         @Part("is_share") int award,
-                         @Part("count") int count,
-                         @Part("money_one") double money);
+    Call<Result> addPost(@Part("uid")String uid, @Part("content")String content,
+                         @Part ("picture")List<String> picture,
+                         @Part("is_share")String is_share,
+                         @Part("count")String count,
+                         @Part("money_one")String moneyone);
     //8.获取朋友圈信息
     @GET("dynamic_list")
     Call<Dynamic> getDynamic(@Query("uid")String uid);
@@ -115,13 +117,13 @@ public interface RequestServer {
     Call<FriendList> friendList(@Query("uid") String id);
     //16查找朋友
     @GET("find_user")
-    Call<FindFriend> findFriend(@Query("mobile") String mobile);
+    Call<FindFriend.FriendInfo> findFriend(@Query("mobile") String mobile);
     //17手机号查找添加好友
     @GET("mobile_add")
     Call<Result> addFriend(@Query("uid")String uid ,@Query("fid") int fid);
     // 18培训课程
     @GET("course_list")
-    Call<Course> course();
+    Call<Course.InfoBean> course();
     //19 课程详情 需要课程id
     @GET("course_detal")
     Call<CourseInfo> courseDetail(@Query("id" ) int id);
@@ -145,13 +147,11 @@ public interface RequestServer {
      Like	爱好
      Sex	性别
      Sign	个性签名
-
      */
-
     @Multipart
     @POST("user_info_edit")
     Call<Result> modifyUserInfo(@Part ("uid") String uid,
-                                @Part("picture") String picture,
+                                @Part MultipartBody.Part picture,
                                 @Part("user_name") String name,
                                 @Part("like") String like,
                                 @Part("sex") String sex,
@@ -169,7 +169,7 @@ public interface RequestServer {
     Call<Result> modifyPsw(@FieldMap  Map<String,String> map);
     //28 我的发布 参数 用户id
     @GET("my_send")
-    Call<Dynamic.DynamicInfo> myPublish(@Query("uid") String id);
+    Call<Publish> myPublish(@Query("uid") String id);
     // 29 我的订单 参数 用户id 课程  1为课程，2为旅游
     @GET("my_order")
     Call<Order> myOrder(@Query("uid") String id, @Query("class") int type);

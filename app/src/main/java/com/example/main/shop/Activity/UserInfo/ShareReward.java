@@ -1,4 +1,4 @@
-package com.example.main.shop.Activity;
+package com.example.main.shop.Activity.UserInfo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.main.shop.Activity.Publish.ReleaseMsgActivity;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 

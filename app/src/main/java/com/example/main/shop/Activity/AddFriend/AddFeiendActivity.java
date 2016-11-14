@@ -13,21 +13,38 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.main.shop.Constans.FindFriend;
+import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
-//import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-//添加好友的页面
+//import com.xys.libzxing.zxing.activity.CaptureActivity;
+
+/**
+ * 添加好友的页面,
+ *         1.扫码添加好友
+ *         2.添加手机联系人
+ *         3.附近的人
+ */
+
 public class AddFeiendActivity extends AppCompatActivity {
     private static final String TAG = "AddFeiendActivity";
 @Bind(R.id.et_input)EditText eTmobile;
     private ActivityUtils activityUtils;
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
+    public static String user_name;
+    public static String photo;
+    public static String account;
+    public static String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +56,31 @@ public class AddFeiendActivity extends AppCompatActivity {
     @OnClick({R.id.iv_search,R.id.rl_scan,R.id.rl_contact,R.id.rl_here,R.id.rl_like})
     public void addFrd(View v){
         switch (v.getId()){
-            case R.id.iv_search: //输入手机号添加朋友， 好友的id
+            case R.id.iv_search: //根据手机号查找好友，返回所查手机号的id及用户信息
                 String mobile = eTmobile.getText().toString().trim();
+                Call<FindFriend.FriendInfo> friendCall = NetClient.getInstance().findFriend(mobile);
+                friendCall.enqueue(new Callback<FindFriend.FriendInfo>() {
+                    @Override
+                    public void onResponse(Call<FindFriend.FriendInfo> call, Response<FindFriend.FriendInfo> response) {
+                        FindFriend.FriendInfo body = response.body();
+                        Log.d(TAG, "addActivity查询号码的信息。。。。。。。。。" +body);
+                        FindFriend.FriendInfo friend = response.body();
+                        //所查手机号的id
+                        id = friend.getId();
+                        account = friend.getAccount();
+                        photo = friend.getPhoto();
+                        user_name = friend.getUser_name();
+                        //跳转结果页面
+                        activityUtils.startActivity(SearchResult.class);
+                    }
 
-//                NetClient.getInstance().addFriend(UserInfo.getInstance().getUid(),);
+                    @Override
+                    public void onFailure(Call<FindFriend.FriendInfo> call, Throwable t) {
+
+                    }
+                });
+
+
                 break;
             case R.id.rl_scan://扫描二维码
                 AlertDialog.Builder dialog=new  AlertDialog.Builder(this);

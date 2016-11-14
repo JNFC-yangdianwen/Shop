@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_marginTop="10dp"
         android:id="@+id/userInfo"
@@ -60,7 +61,8 @@
             android:layout_alignParentEnd="true"
             android:id="@+id/imageView3" />
     </RelativeLayout>
-<TextView
+
+    <TextView
     android:background="#e7e7e7"
     android:layout_width="match_parent"
     android:layout_height="10dp" />

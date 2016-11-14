@@ -1,4 +1,4 @@
-package com.example.main.shop.Activity;
+package com.example.main.shop.Activity.UserInfo;
 
 import android.content.Intent;
 import android.os.Bundle;

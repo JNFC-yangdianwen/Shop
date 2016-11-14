@@ -31,7 +31,7 @@ dependencies {
     compile 'com.github.jdsjlzx:LRecyclerView:1.0.8'
     //请求网络框架
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.retrofit2:retrofit-converters:2.1.0'
@@ -39,8 +39,9 @@ dependencies {
     compile 'org.hybridsquad.android.photocropper:library:2.1.0'
     //处理图片
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-//    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
-//        compile files('libs/core-3.2.1.jar')
+    //    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
+    //        compile files('libs/core-3.2.1.jar')
     //    compile project(':libzxing')
     compile project(':libzxing')
+    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
 }

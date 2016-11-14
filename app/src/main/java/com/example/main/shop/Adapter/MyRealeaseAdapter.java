@@ -21,10 +21,10 @@ import java.util.List;
  */
 
 public class MyRealeaseAdapter extends BaseAdapter {
-    private List<Dynamic.DynamicInfo> mData;
+    private List<Dynamic.InfoBean> mData;
     private LayoutInflater mInflater;
 
-    public MyRealeaseAdapter(List<Dynamic.DynamicInfo> mData,Context context) {
+    public MyRealeaseAdapter(List<Dynamic.InfoBean> mData,Context context) {
         this.mData = mData;
         mInflater=LayoutInflater.from(context);
     }
@@ -58,7 +58,7 @@ public class MyRealeaseAdapter extends BaseAdapter {
         LinearLayout clikGood = (LinearLayout) convertView.findViewById(R.id.clickGood);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_clickGood);
         ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),ivUser);//设置头像
-        ImageLoader.getInstance().displayImage(mData.get(postion).getPicture(),pic);//设置图片
+        ImageLoader.getInstance().displayImage(mData.get(postion).getPhoto(),pic);//设置图片
         tvUser.setText(UserInfo.getInstance().getUser_name());//用户名
         tvTime.setText(mData.get(postion).getTime());//时间
         mss.setText(mData.get(postion).getContent());//内容

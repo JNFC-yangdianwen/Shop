@@ -25,15 +25,13 @@ public class FindFriend extends Result{
     public void setInfo(List<FriendInfo> info) {
         this.info = info;
     }
-    private String msg;
-    private int code;
     private List<FriendInfo> info;
-    class FriendInfo {
-        private int id;
+   public static class FriendInfo {
+        private String id;
         private String photo;
         private String user_name;
         private String account;
-        public int getId() {
+        public String getId() {
             return id;
         }
         public String getPhoto() {

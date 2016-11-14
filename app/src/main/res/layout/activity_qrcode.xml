@@ -4,7 +4,7 @@
     android:id="@+id/activity_qrcode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.main.shop.Activity.QrcodeAcitivity">
+    tools:context="com.example.main.shop.Activity.UserInfo.QrcodeAcitivity">
 <LinearLayout
 
     android:background="@color/titleColor"

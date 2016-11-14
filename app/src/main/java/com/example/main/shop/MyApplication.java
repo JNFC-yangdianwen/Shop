@@ -6,6 +6,7 @@ import com.example.main.shop.Constans.UserInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 //
 //import io.rong.imkit.RongIM;
 
@@ -28,6 +29,7 @@ public class MyApplication extends Application {
                 .showImageOnLoading(R.drawable.tou1)
                 .showImageOnFail(R.drawable.tou1)
                 .showImageForEmptyUri(R.drawable.tou1)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 // .displayer(new RoundedBitmapDisplayer(getResources().getDimensionPixelOffset(R.dimen.dp_10)))
                 .cacheOnDisk(true)  // 打开disk
                 .cacheInMemory(true) // 打开cache
@@ -36,6 +38,7 @@ public class MyApplication extends Application {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .memoryCacheSize(5*1024*1024) // 设置内存缓存5MB
                 .defaultDisplayImageOptions(options)// 设置默认的显示选项
+
                 .build();
 
         ImageLoader.getInstance().init(config);

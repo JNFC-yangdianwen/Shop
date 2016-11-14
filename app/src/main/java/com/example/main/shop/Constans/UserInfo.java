@@ -72,7 +72,7 @@ public class UserInfo {
     }
 
     public String getUid() {
-        return preferences.getString(KEY_UID,"");
+        return preferences.getString(KEY_UID, "");
     }
 
     public void setUid(String uid) {

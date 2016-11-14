@@ -7,38 +7,33 @@ import java.util.List;
  */
 
 public class Course extends Result {
-    /**
-     * \
-     * <p>
-     * Result	返回结果fail失败suc成功
-     * Msg	返回提示信息
-     * Code	返回状态
-     * 101	获取成功
-     * Info	课程
-     * Id	课程id
-     * Title	标题
-     * Picture	图片
-     */
-    private List<CourseList> info;
 
-    public List<CourseList> getInfo() {
+    /**
+     * id : 1
+     * title : 英语课
+     * picture :
+     */
+
+    private List<InfoBean> info;
+
+    public List<InfoBean> getInfo() {
         return info;
     }
 
-    public void setInfo(List<CourseList> info) {
+    public void setInfo(List<InfoBean> info) {
         this.info = info;
     }
 
-    class CourseList {
-        private int id;
+    public static class InfoBean {
+        private String id;
         private String title;
         private String picture;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

@@ -12,6 +12,7 @@ import com.example.main.shop.Constans.MySelf;
 import com.example.main.shop.Constans.Order;
 import com.example.main.shop.Constans.Picture;
 import com.example.main.shop.Constans.PostInfo;
+import com.example.main.shop.Constans.Publish;
 import com.example.main.shop.Constans.RegistResult;
 import com.example.main.shop.Constans.Result;
 import com.example.main.shop.Constans.SpreadResult;
@@ -19,9 +20,12 @@ import com.example.main.shop.Constans.Travel;
 import com.example.main.shop.Constans.TravelInfo;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.Constans.UserList;
+import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -38,7 +42,9 @@ import retrofit2.http.QueryMap;
  */
 
 public class NetClient implements RequestServer {
+    //Public/Uploads/3.jpg
     public static String BASE_URL="http://renrenshang.tongyi100.cn/index.php/Api/";
+    public static String IMAGE_URL="http://renrenshang.tongyi100.cn/";
     private static NetClient mNetClient;
     private final RequestServer mGetApi;
 
@@ -52,9 +58,10 @@ public class NetClient implements RequestServer {
     public NetClient() {
         //初始化retrofit
         OkHttpClient okHttpClient=new OkHttpClient.Builder().build();
+        Gson gson= new Gson();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
                 .build();
         mGetApi = retrofit.create(RequestServer.class);
@@ -81,9 +88,9 @@ public class NetClient implements RequestServer {
     @Override
     public Call<Result> addUserInfo(
             @Part("uid") String uid,
-            @Part("photo") String photo, @Part("user_name") String name,
+            @Part ("picture")String picture, @Part("user_name") String name,
             @Part("like") String like, @Part("sex") String sex){
-        return mGetApi.addUserInfo(uid, photo, name, like, sex);
+        return mGetApi.addUserInfo(uid, picture, name, like, sex);
     }
 
 
@@ -92,16 +99,30 @@ public class NetClient implements RequestServer {
     public Call<Picture> getPicture(){
         return  mGetApi.getPicture();
     }
-   //发表动态
+
+    /**
+     * Uid	用户id
+     * Content	内容
+     * Picture	图片
+     * is_share	是否分享有奖 有奖为1 无奖为2
+     * Count	有奖数量
+     * money_one	每个钱数
+     *
+     * @param uid
+     * @param content
+     * @param picture
+     * @param is_share
+     * @param count
+     * @param moneyone
+     */
     @Override
-    public Call<Result> addPost(@Part("uid") String id,
-                                @Part("content") String content,
-                                @Part("picture") String picture,
-                                @Part("is_share") int award,
-                                @Part("count") int count,
-                                @Part("money_one") double money) {
-        return mGetApi.addPost(id, content, picture, award, count, money);
+    public Call<Result> addPost(@Part("uid") String uid, @Part("content") String content, @Part ("picture")List<String> picture, @Part("is_share") String is_share, @Part("count") String count, @Part("money_one") String moneyone) {
+        return mGetApi.addPost(uid, content, picture, is_share, count, moneyone);
     }
+
+
+    //发表动态
+
     //添加动态
 
     //朋友圈消息
@@ -149,7 +170,7 @@ public class NetClient implements RequestServer {
     }
     //查找朋友
     @Override
-    public Call<FindFriend> findFriend(@Query("mobile") String mobile) {
+    public Call<FindFriend.FriendInfo> findFriend(@Query("mobile") String mobile) {
         return mGetApi.findFriend(mobile);
     }
      //手机号查找添加好友
@@ -159,7 +180,7 @@ public class NetClient implements RequestServer {
     }
     //培训课程
     @Override
-    public Call<Course> course() {
+    public Call<Course.InfoBean> course() {
         return mGetApi.course();
     }
    //课程详情
@@ -204,7 +225,8 @@ public class NetClient implements RequestServer {
      * @param sign
      */
     @Override
-    public Call<Result> modifyUserInfo(@Part("uid") String uid, @Part("picture") String picture, @Part("user_name") String name, @Part("like") String like, @Part("sex") String sex, @Part("sign") String sign) {
+    public Call<Result> modifyUserInfo(@Part("uid") String uid, @Part MultipartBody.Part picture, @Part("user_name") String name, @Part("like") String like, @Part("sex") String sex, @Part("sign") String sign) {
+
         return mGetApi.modifyUserInfo(uid, picture, name, like, sex, sign);
     }
    // 提现账户
@@ -224,7 +246,7 @@ public class NetClient implements RequestServer {
     }
    //我的发布
     @Override
-    public Call<Dynamic.DynamicInfo> myPublish(@Query("uid") String uid) {
+    public Call<Publish> myPublish(@Query("uid") String uid) {
         return mGetApi.myPublish(uid);
     }
     //订单

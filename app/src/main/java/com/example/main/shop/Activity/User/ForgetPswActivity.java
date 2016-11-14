@@ -58,6 +58,37 @@ public class ForgetPswActivity extends AppCompatActivity {
         }
         TimeCount timeCount = new TimeCount(mTextView, 60000, 1000);
         timeCount.start();
+        Map<String,String> map=new HashMap<>();
+        map.put("mobile",mTelNumber);
+        map.put("type", String.valueOf(2));
+        Call<Result> code = NetClient.getInstance().getCode(map);
+        code.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Result result = response.body();
+                String msg = result.getMsg();
+                int code1 = result.getCode();
+                if (code1 == 101) {
+                    mUtils.showToast(msg);
+                    return;
+                }  if (code1 == 102) {
+                    mUtils.showToast(msg);
+                    return;
+                }  if (code1 == 103) {
+                    mUtils.showToast(msg);
+                    return;
+                } if (code1 == 104) {
+                    mUtils.showToast(msg);
+                    return;
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
     }
     //确认密码
     @OnClick(R.id.l_sure)

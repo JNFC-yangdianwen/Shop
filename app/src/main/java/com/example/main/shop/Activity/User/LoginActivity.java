@@ -8,9 +8,9 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.main.shop.Activity.UserInfoActivity;
+import com.example.main.shop.Activity.UserInfo.UserInfoActivity;
 import com.example.main.shop.Constans.LoginResult;
-import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.Constans.User1;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.MainActivity;
 import com.example.main.shop.R;
@@ -127,7 +127,16 @@ public class LoginActivity extends AppCompatActivity {
                LoginResult result = response.body();
                String msg = result.getMsg();
                int code = result.getCode();
-               String uid = UserInfo.getInstance().getUid();
+               String uid = result.getUid();
+               if (uid == null) {
+                   mUtils.showToast("用户名和密码都不能为空 ");
+                   mProgressDialog.dismiss();
+                   return;
+               }
+               SharedPreferences sp = getSharedPreferences("uid", MODE_PRIVATE);
+               SharedPreferences.Editor edit = sp.edit().putString("user_uid", uid);
+               edit.commit();
+               User1.getInstance().setUid(uid);
                Log.d(TAG, "onResponse: ........................"+uid);
                //登陆成功
                if (code==101){

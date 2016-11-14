@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.main.shop">
-<uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,9 +21,11 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
+        android:icon="@drawable/tou1"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".Activity.User.LoginActivity"
             android:screenOrientation="portrait">
@@ -35,11 +38,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Activity.User.RegistActivity" />
         <activity android:name=".Activity.LeadActivity" />
-        <activity android:name=".Activity.UserInfoActivity" />
+        <activity android:name=".Activity.UserInfo.UserInfoActivity" />
         <activity android:name=".Activity.MyMssAcitivity" />
         <activity android:name=".Activity.RechargeActivity" />
         <activity android:name=".Activity.DetailActivity" />
-        //支付宝
+        //支付宝声明
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -57,7 +60,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".Activity.User.ForgetPswActivity" />
-        <activity android:name=".Activity.PersonalSign" />
+        <activity android:name=".Activity.UserInfo.PersonalSign" />
         <activity android:name=".Activity.SuggestActivity" />
         <activity android:name=".Activity.SpreadActivity" />
         <activity android:name=".Activity.User.ResetMobileActivity" />
@@ -69,28 +72,29 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 融云配置 -->
         <!-- 会话列表 -->
         <activity
-            android:name=".Activity.MessageActivity"
+            android:name=".Activity.Rong.Conversation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
+                <!-- host为你自己当前工程的包名 -->
                 <data
-                    android:host="io.rong.fast"
+                    android:host="com.example.main.shop"
                     android:pathPrefix="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ReleaseMsgActivity" />
-        <activity android:name=".Activity.UserNameActivity" />
-        <activity android:name=".Activity.LikeActivity" />
+        <activity android:name=".Activity.Publish.ReleaseMsgActivity" />
+        <activity android:name=".Activity.UserInfo.UserNameActivity" />
+        <activity android:name=".Activity.UserInfo.LikeActivity" />
         <activity android:name=".Activity.AddFriend.AddFeiendActivity" />
-        <activity android:name=".Activity.MyInfoActivity" />
-        <activity android:name=".Activity.QrcodeAcitivity" />
+        <activity android:name=".Activity.UserInfo.MyInfoActivity" />
+        <activity android:name=".Activity.UserInfo.QrcodeAcitivity" />
         <activity android:name=".Activity.User.ResetPswActivity" />
         <activity android:name=".Activity.PayActivity.CashActivity" />
         <activity android:name=".Activity.PayActivity.WeachatPayActivity" />
@@ -98,8 +102,11 @@
         <activity android:name=".Activity.PayActivity.AlipayActivity" />
         <activity android:name=".Activity.AddFriend.SameHobby" />
         <activity android:name=".Activity.AddFriend.ContactActivity" />
-        <activity android:name=".Activity.ShareReward" />
-        <activity android:name=".Activity.MyRelease" />
+        <activity android:name=".Activity.UserInfo.ShareReward" />
+        <activity android:name=".Activity.Publish.MyRelease" />
+        <activity android:name=".Activity.CourseActivity" />
+        <activity android:name=".Activity.CoureseDetail" />
+        <activity android:name=".Activity.AddFriend.SearchResult"></activity>
     </application>
 
 </manifest>

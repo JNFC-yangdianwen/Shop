@@ -4,6 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 <LinearLayout
+    android:background="@drawable/qianbao"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="250dp">
@@ -34,11 +35,17 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
     <RelativeLayout
+        android:background="@drawable/qianbao"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </RelativeLayout>
+    <TextView
+        android:background="@color/rulesColor"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 </LinearLayout>
     <GridView
+        android:layout_marginTop="20dp"
         android:verticalSpacing="20dp"
         android:id="@+id/gv"
         android:numColumns="3"

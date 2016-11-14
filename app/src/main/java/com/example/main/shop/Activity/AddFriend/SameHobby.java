@@ -65,7 +65,7 @@ public class SameHobby extends AppCompatActivity {
     @OnClick(R.id.tv_find)
     public  void save(){
         String uid = UserInfo.getInstance().getUid();
-        Call<UserList.UserListInfo> likeFriend = NetClient.getInstance().likeFriend(7, item);
+        Call<UserList.UserListInfo> likeFriend = NetClient.getInstance().likeFriend(String.valueOf(7), item);
         likeFriend.enqueue(new Callback<UserList.UserListInfo>() {
             @Override
             public void onResponse(Call<UserList.UserListInfo> call, Response<UserList.UserListInfo> response) {

@@ -8,65 +8,35 @@ import java.util.List;
  */
 public class Dynamic extends Result{
 
-    private List<DynamicInfo> info;
-    public List<DynamicInfo> getInfo() {
+
+    /**
+     * photo : Public/Uploads/581bf85c6eaaa.jpg
+     * user_name : \"123\"
+     * time : 2016-11-04 09:25:44
+     * content : \"\"
+     * picture : []
+     * is_share : 1
+     * click_count : 0
+     */
+
+    private List<InfoBean> info;
+
+    public List<InfoBean> getInfo() {
         return info;
     }
 
-    public void setInfo(List<DynamicInfo> info) {
+    public void setInfo(List<InfoBean> info) {
         this.info = info;
     }
 
-   public static class DynamicInfo{
-
-        private int id;// 动态id
-        private String photo;//用户头像
-        private String user_name;//用户名
-        private int is_share;//是否分享有奖，有奖为1，无奖为2
-        private String content;//内容
-        private String picture;//图片
-        private String time;//创建时间
-        private int click_count;//点赞数量
-        private int comment_count;//评论数量
-        public String getPicture() {
-            return picture;
-        }
-
-        public void setPicture(String picture) {
-            this.picture = picture;
-        }
-
-        public int getComment_count() {
-            return comment_count;
-        }
-
-        public void setComment_count(int comment_count) {
-            this.comment_count = comment_count;
-        }
-
-        public int getClick_count() {
-            return click_count;
-        }
-
-        public void setClick_count(int click_count) {
-            this.click_count = click_count;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
+    public static class InfoBean {
+        private String photo;
+        private String user_name;
+        private String time;
+        private String content;
+        private String is_share;
+        private String click_count;
+        private List<?> picture;
 
         public String getPhoto() {
             return photo;
@@ -84,12 +54,12 @@ public class Dynamic extends Result{
             this.user_name = user_name;
         }
 
-        public int is_share() {
-            return is_share;
+        public String getTime() {
+            return time;
         }
 
-        public void setIs_share(int is_share) {
-            this.is_share = is_share;
+        public void setTime(String time) {
+            this.time = time;
         }
 
         public String getContent() {
@@ -98,6 +68,30 @@ public class Dynamic extends Result{
 
         public void setContent(String content) {
             this.content = content;
+        }
+
+        public String getIs_share() {
+            return is_share;
+        }
+
+        public void setIs_share(String is_share) {
+            this.is_share = is_share;
+        }
+
+        public String getClick_count() {
+            return click_count;
+        }
+
+        public void setClick_count(String click_count) {
+            this.click_count = click_count;
+        }
+
+        public List<?> getPicture() {
+            return picture;
+        }
+
+        public void setPicture(List<?> picture) {
+            this.picture = picture;
         }
     }
 }

@@ -1,13 +1,13 @@
-package com.example.main.shop.Activity;
+package com.example.main.shop.Activity.UserInfo;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,8 +18,11 @@ import com.example.main.shop.Activity.User.LoginActivity;
 import com.example.main.shop.Activity.User.ResetMobileActivity;
 import com.example.main.shop.Activity.User.ResetPswActivity;
 import com.example.main.shop.Constans.Result;
+import com.example.main.shop.Constans.User1;
 import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.HttpUtils.MyRequest;
 import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.HttpUtils.NetOkHttp;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -27,16 +30,22 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.hybridsquad.android.library.CropHandler;
 import org.hybridsquad.android.library.CropHelper;
 import org.hybridsquad.android.library.CropParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.example.main.shop.Activity.UserInfoActivity.CHOOSE_PICTURE;
-import static com.example.main.shop.Activity.UserInfoActivity.TAKE_PICTURE;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 我的个人信息页面
@@ -50,6 +59,8 @@ public class MyInfoActivity extends AppCompatActivity {
     @Bind(R.id.tv_sign)TextView sign;//个性签名
     @Bind(R.id.tv_mobile)TextView mobile;//手机号
     @Bind(R.id.iv_qr)ImageView ivQrCode;//二维码
+    protected static final int CHOOSE_PICTURE = 0;
+    protected static final int TAKE_PICTURE = 1;
     private ActivityUtils mActivityUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,28 +69,54 @@ public class MyInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mActivityUtils=new ActivityUtils(this);
         //进入此页面则立即获取个人信息
-        String uid = UserInfo.getInstance().getUid();
-        Call<UserInfo> userInfoCall = NetClient.getInstance().userInfo(uid);
-        userInfoCall.enqueue(new Callback<UserInfo>() {
+        String uid = User1.getInstance().getUid();
+        Request request = MyRequest.getInstance().getMyinfo(uid);
+        Call call = NetOkHttp.getInstance().getCall(request);
+        call.enqueue(new Callback() {
+
+            private String userSign;
+            private String userSex;
+            private String userLike;
+            private String userPhoto;
+            private String userName;
+
             @Override
-            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-                
-                UserInfo userInfo = response.body();
-                String photo = userInfo.getPhoto();
-                String sign = userInfo.getSign();
+            public void onFailure(Call call, IOException e) {
 
             }
+
             @Override
-            public void onFailure(Call<UserInfo> call, Throwable t) {
+            public void onResponse(Call call, Response response) throws IOException {
+                String string = response.body().string();
+                Log.d(TAG, "myinfo: ............"+string);
+                try {
+                    JSONObject jsonObject=new JSONObject(string);
+                    JSONObject info = (JSONObject) jsonObject.get("info");
+                    //用户信息
+                    for (int i = 0; i <info.length() ; i++) {
+                        userPhoto= info.getString("photo");
+                        userName = info.getString("user_name");
+                        userLike=info.getString("like");
+                        userSign=info.getString("sign");
+                        userSex=info.getString("sex");
+                    }
 
-
+                       runOnUiThread(new Runnable() {
+                           @Override
+                           public void run() {
+                               name.setText(userName);
+                               sign.setText(userSign);
+                               ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+userPhoto,photo);
+                               tvSex.setText(userSex);
+                               like.setText(userLike);
+                           }
+                       });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
-        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),photo);
-        name.setText(UserInfo.getInstance().getUser_name());
-        like.setText(UserInfo.getInstance().getLike());
-        tvSex.setText(UserInfo.getInstance().getSex());
-//        sign.setText(UserInfo.getInstance().);
+        sign.setText(UserInfo.getInstance().getSign());
         SharedPreferences preferences = getSharedPreferences(LoginActivity.Login, MODE_PRIVATE);
         String userMobile = preferences.getString(LoginActivity.Mobile, "");
         mobile.setText(userMobile);
@@ -89,9 +126,11 @@ public class MyInfoActivity extends AppCompatActivity {
         @Override
         public void onPhotoCropped(Uri uri) {
             Log.d(TAG, "onPhotoCropped: .................        运行");
-            String picture = "file://" + uri.getPath();
-            ImageLoader.getInstance().displayImage(picture, photo);
-            UserInfo.getInstance().setPhoto(picture);
+            File file=new File(uri.getPath());
+            Log.d(TAG, "onPhotoCropped: ..."+file);
+            Log.d(TAG, "onPhotoCropped: ...................."+file.length());
+            ImageLoader.getInstance().displayImage("file://"+file.getAbsolutePath(), photo);
+            UserInfo.getInstance().setPhoto(file.getName());
         }
 
         @Override
@@ -263,36 +302,99 @@ public class MyInfoActivity extends AppCompatActivity {
                       mActivityUtils.startActivity(ResetPswActivity.class);
                     break;
                 case R.id.tv_saveInfo://保存个人信息
-                    UserInfo userInfo = UserInfo.getInstance();
-                    Call<Result> saveUserInfo = NetClient.getInstance().modifyUserInfo(userInfo.getUid(),userInfo.getPhoto()
-                    ,userInfo.getUser_name(),userInfo.getLike(),userInfo.getSex(),"opjknoippokjnmkj");
-                    saveUserInfo.enqueue(new Callback<Result>() {
+                    String uid = User1.getInstance().getUid();
+//                    Map<String,String> map=new HashMap<>();
+//                    map.put("uid",uid);
+//                    map.put("like",UserInfo.getInstance().getLike());
+//                    map.put("sex",UserInfo.getInstance().getSex());
+//                    map.put("user_name",UserInfo.getInstance().getUser_name());
+//                    map.put("sign",UserInfo.getInstance().getSign());
+//                    File file=new File(UserInfo.getInstance().getPhoto());
+//                    Request request = MyRequest.getFileRequest("http://renrenshang.tongyi100.cn/index.php/Api/user_info_edit", file, map);
+//                    Call call = NetOkHttp.getInstance().getCall(request);
+//                    call.enqueue(new Callback() {
+//                        @Override
+//                        public void onFailure(Call call, IOException e) {
+//
+//                        }
+//                        @Override
+//                        public void onResponse(Call call, Response response) throws IOException {
+//                                String string = response.body().string();
+//                                Log.d(TAG, "onResponse: ..............................."+string);
+//                        }
+//                    });
+//                    Request request = MyRequest.getInstance().modifyUserInfo(uid,
+//                            UserInfo.getInstance().getUser_name(),
+//                            UserInfo.getInstance().getPhoto(),
+//                            UserInfo.getInstance().getLike(), UserInfo.getInstance().getSex(), UserInfo.getInstance().getSign());
+//                    Log.d(TAG, "setInfo: .................................."+UserInfo.getInstance().getPhoto().length());
+//                   okhttp3.Call call = NetOkHttp.getInstance().getCall(request);
+//                    call.enqueue(new okhttp3.Callback() {
+//                        @Override
+//                        public void onFailure(okhttp3.Call call, IOException e) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+//                            String string = response.body().string();
+//                            try {
+//                                JSONObject jsonObject=new JSONObject(string);
+//                                int code = (int) jsonObject.get("code");
+//                                Object msg = jsonObject.get("msg");
+//                                if (code == 101) {
+//                                    Log.d(TAG, "onResponse: ........................................"+string);
+//                                   mActivityUtils.showToast(msg.toString());
+//                                }     if (code == 102) {
+//                                    Log.d(TAG, "onResponse: ........................................"+string);
+//                                   mActivityUtils.showToast(msg.toString());
+//                                }     if (code == 103) {
+//                                    Log.d(TAG, "onResponse: ........................................"+string);
+//                                   mActivityUtils.showToast(msg.toString());
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
+////                    RequestBody body = RequestBody.create(null, UserInfo.getInstance().getPhoto());
+//
+                    File file1=new File(UserInfo.getInstance().getPhoto());
+                    RequestBody photoRequestBody = RequestBody.create(MediaType.parse("image/png"), file1);
+                    MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file1.getName(), photoRequestBody);
+                    retrofit2.Call<Result> modifyUserInfo = NetClient.getInstance().modifyUserInfo(uid,photo,
+                            UserInfo.getInstance().getUser_name(),
+                            UserInfo.getInstance().getLike(),
+                            UserInfo.getInstance().getSex(), UserInfo.getInstance().getSign());
+                    modifyUserInfo.enqueue(new retrofit2.Callback<Result>() {
                         @Override
-                        public void onResponse(Call<Result> call, Response<Result> response) {
+                        public void onResponse(retrofit2.Call<Result> call, retrofit2.Response<Result> response) {
                             Result result = response.body();
                             int code = result.getCode();
                             String msg = result.getMsg();
                             if (code == 101) {
                                 mActivityUtils.showToast(msg);
                                 return;
-                            }
-                            if (code == 102) {
+                            }     if (code == 102) {
                                 mActivityUtils.showToast(msg);
                                 return;
-                            }  if (code == 103) {
+                            }     if (code == 103) {
                                 mActivityUtils.showToast(msg);
                                 return;
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<Result> call, Throwable t) {
-                              new Throwable(t.getMessage());
+                        public void onFailure(retrofit2.Call<Result> call, Throwable t) {
+
                         }
                     });
                     break;
 
             }
         }
-
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
+    }
     }

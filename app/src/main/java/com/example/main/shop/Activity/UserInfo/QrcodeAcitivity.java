@@ -1,4 +1,4 @@
-package com.example.main.shop.Activity;
+package com.example.main.shop.Activity.UserInfo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

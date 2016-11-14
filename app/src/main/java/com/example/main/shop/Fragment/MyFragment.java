@@ -11,22 +11,31 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.main.shop.Activity.MyInfoActivity;
+import com.example.main.shop.Activity.UserInfo.MyInfoActivity;
 import com.example.main.shop.Activity.MyMssAcitivity;
-import com.example.main.shop.Activity.MyRelease;
+import com.example.main.shop.Activity.Publish.MyRelease;
 import com.example.main.shop.Activity.SpreadActivity;
 import com.example.main.shop.Activity.SuggestActivity;
 import com.example.main.shop.Activity.User.LoginActivity;
 import com.example.main.shop.Constans.MySelf;
+import com.example.main.shop.Constans.User1;
 import com.example.main.shop.Constans.UserInfo;
+import com.example.main.shop.HttpUtils.MyRequest;
 import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.HttpUtils.NetOkHttp;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,19 +52,15 @@ public class MyFragment extends Fragment{
     @Bind(R.id.userName)TextView tvName;//昵称
     @Bind(R.id.userHobby)TextView hobby;//爱好
     private ActivityUtils mActivityUtils;
+    private String user_name;
+    private String photo;
+    private String like;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my, container, false);
         return view;
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        //设置头像
-        getData();
-
     }
     //请求网络数据
     private void getData() {
@@ -86,9 +91,46 @@ public class MyFragment extends Fragment{
         ButterKnife.bind(this,view);
         mActivityUtils=new ActivityUtils(this);
         //设置头像
-       getData();
+        setData();
+
+
 //        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),imageView);
 //        tvName.setText(UserInfo.getInstance().getUser_name());
+    }
+
+    private void setData() {
+        Request request = MyRequest.getInstance().getMyinfo(User1.getInstance().getUid());
+        okhttp3.Call call = NetOkHttp.getInstance().getCall(request);
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                 mActivityUtils.showToast(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                String string = response.body().string();
+                Log.d(TAG, "myinfo: .........."+string);
+                try {
+                    JSONObject jsonObject=new JSONObject(string);
+                    JSONObject info = (JSONObject) jsonObject.get("info");
+                    user_name =  info.getString("user_name");
+                    photo = info.getString("photo");
+                    like =  info.getString("like");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+photo,imageView);
+                        tvName.setText(user_name);
+                        hobby.setText("兴趣："+like);
+                    }
+                });
+            }
+
+        });
     }
 
     @OnClick({R.id.userInfo,R.id.rl_mss,
@@ -132,6 +174,9 @@ public class MyFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData();
+
     }
+//    public  void run(Activity activity){
+//       activity. runOnUiThread();
+//    }
 }
