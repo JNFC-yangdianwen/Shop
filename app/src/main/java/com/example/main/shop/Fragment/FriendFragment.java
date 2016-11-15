@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.main.shop.Activity.Publish.ReleaseMsgActivity;
-import com.example.main.shop.Adapter.LvAdapter;
+import com.example.main.shop.Adapter.FriendAdapter;
 import com.example.main.shop.Constans.Publish;
 import com.example.main.shop.Constans.User1;
 import com.example.main.shop.HttpUtils.MyRequest;
@@ -58,6 +58,7 @@ public class FriendFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        mListview.setItemsCanFocus(true);//设置listview 的item子控件获取焦点
         mUtils = new ActivityUtils(this);
         mData=new ArrayList<>();
 //        // 获取朋友圈信息
@@ -92,8 +93,8 @@ public class FriendFragment extends Fragment {
 ////        mListview.setAdapter(friendAdapter);
 //        //add a FooterView R
         getData();
-        LvAdapter lvAdapter=new LvAdapter(getContext(),R.layout.friend_item,getActivity(),mData);
-        mListview.setAdapter(lvAdapter);
+        FriendAdapter adapter=new FriendAdapter(mData,getContext());
+        mListview.setAdapter(adapter);
 
     }
 

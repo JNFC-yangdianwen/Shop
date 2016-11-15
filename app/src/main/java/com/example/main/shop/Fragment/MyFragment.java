@@ -92,10 +92,6 @@ public class MyFragment extends Fragment{
         mActivityUtils=new ActivityUtils(this);
         //设置头像
         setData();
-
-
-//        ImageLoader.getInstance().displayImage(UserInfo.getInstance().getPhoto(),imageView);
-//        tvName.setText(UserInfo.getInstance().getUser_name());
     }
 
     private void setData() {

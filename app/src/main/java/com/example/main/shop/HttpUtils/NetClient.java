@@ -170,7 +170,7 @@ public class NetClient implements RequestServer {
     }
     //查找朋友
     @Override
-    public Call<FindFriend.FriendInfo> findFriend(@Query("mobile") String mobile) {
+    public Call<FindFriend.InfoBean> findFriend(@Query("mobile") String mobile) {
         return mGetApi.findFriend(mobile);
     }
      //手机号查找添加好友

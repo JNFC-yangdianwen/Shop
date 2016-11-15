@@ -11,11 +11,9 @@
     android:id="@+id/fl"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 </FrameLayout>
 
     <LinearLayout
-
         android:id="@+id/llb"
         android:background="@color/white"
         android:weightSum="4"

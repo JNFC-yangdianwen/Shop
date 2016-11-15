@@ -48,6 +48,6 @@ public class CourseAdapter extends BaseAdapter {
         ImageView iv = (ImageView) convertView.findViewById(R.id.iv);
         title.setText(data.get(position).getTitle());
         ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+data.get(position).getPicture(),iv);
-        return null;
+        return convertView;
     }
 }

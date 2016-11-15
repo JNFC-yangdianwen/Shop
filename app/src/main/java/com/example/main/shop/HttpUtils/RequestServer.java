@@ -117,7 +117,7 @@ public interface RequestServer {
     Call<FriendList> friendList(@Query("uid") String id);
     //16查找朋友
     @GET("find_user")
-    Call<FindFriend.FriendInfo> findFriend(@Query("mobile") String mobile);
+    Call<FindFriend.InfoBean> findFriend(@Query("mobile") String mobile);
     //17手机号查找添加好友
     @GET("mobile_add")
     Call<Result> addFriend(@Query("uid")String uid ,@Query("fid") int fid);

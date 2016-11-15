@@ -13,17 +13,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.main.shop.Constans.FindFriend;
-import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.HttpUtils.MyRequest;
+import com.example.main.shop.HttpUtils.NetOkHttp;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 //import com.xys.libzxing.zxing.activity.CaptureActivity;
 
@@ -58,28 +64,55 @@ public class AddFeiendActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.iv_search: //根据手机号查找好友，返回所查手机号的id及用户信息
                 String mobile = eTmobile.getText().toString().trim();
-                Call<FindFriend.FriendInfo> friendCall = NetClient.getInstance().findFriend(mobile);
-                friendCall.enqueue(new Callback<FindFriend.FriendInfo>() {
+//                Call<FindFriend.InfoBean> friendCall = NetClient.getInstance().findFriend(mobile);
+//                friendCall.enqueue(new Callback<FindFriend.InfoBean>() {
+//                    @Override
+//                    public void onResponse(Call<FindFriend.InfoBean> call, Response<FindFriend.InfoBean> response) {
+//                        FindFriend.InfoBean body = response.body();
+//                        Log.d(TAG, "addActivity查询号码的信息。。。。。。。。。" +body);
+//                        FindFriend.InfoBean friend = response.body();
+//                        //所查手机号的id
+//                        id = friend.getId();
+//                        account = friend.getAccount();
+//                        photo = friend.getPhoto();
+//                        user_name = friend.getUser_name();
+//                        Log.d(TAG, "addActivity查询号码的信息。。。。。。。。。。。。。。。。: "+id+account+photo+user_name);
+//                        //跳转结果页面
+//                        activityUtils.startActivity(SearchResult.class);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<FindFriend.InfoBean> call, Throwable t) {
+//
+//                    }
+//                });
+                Request request = MyRequest.getInstance().getFrdMobile(mobile);
+                Call call = NetOkHttp.getInstance().getCall(request);
+                call.enqueue(new Callback() {
                     @Override
-                    public void onResponse(Call<FindFriend.FriendInfo> call, Response<FindFriend.FriendInfo> response) {
-                        FindFriend.FriendInfo body = response.body();
-                        Log.d(TAG, "addActivity查询号码的信息。。。。。。。。。" +body);
-                        FindFriend.FriendInfo friend = response.body();
-                        //所查手机号的id
-                        id = friend.getId();
-                        account = friend.getAccount();
-                        photo = friend.getPhoto();
-                        user_name = friend.getUser_name();
-                        //跳转结果页面
-                        activityUtils.startActivity(SearchResult.class);
+                    public void onFailure(Call call, IOException e) {
+
                     }
 
                     @Override
-                    public void onFailure(Call<FindFriend.FriendInfo> call, Throwable t) {
-
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String string = response.body().string();
+                        Log.d(TAG, "call: ....................."+string);
+                        try {
+                            JSONObject jsonObject=new JSONObject(string);
+                            JSONObject info = (JSONObject) jsonObject.get("info");
+                             id = info.getString("id");
+                             user_name = info.getString("user_name");
+                             photo = info.getString("photo");
+                             account = info.getString("account");
+                            Log.d(TAG, "addActivity查询号码的信息。。。。。。。。。。。。。。。。: "+id+account+photo+user_name);
+                            //跳转结果页面
+                        activityUtils.startActivity(SearchResult.class);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
-
 
                 break;
             case R.id.rl_scan://扫描二维码

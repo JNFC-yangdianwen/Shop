@@ -126,7 +126,22 @@ public class MyRequest {
     }
     public Request getCourse(){
         Request request = new Request.Builder().url(BASE_URL + "course_list").build();
-return request;
+        return request;
+    }
+    //手机号查找好友
+    public Request getFrdMobile(String mobile){
+        Request request=new Request.Builder().url(BASE_URL+"find_user?mobile="+mobile).build();
+        return request;
+    }
+    //手机号添加好友
+    public Request addFrd(String uid,String fid){
+        Request request =new Request.Builder().url(BASE_URL+"mobile_add?uid="+uid+"&fid="+fid).build();
+        return  request;
+    }
+    //分享回调,用户uid 动态id
+    public Request shareBack(String uid,String pid){
+        Request request =new Request.Builder().url(BASE_URL+"share_return?uid="+uid+"pid="+pid).build();
+        return request;
     }
 
 }
