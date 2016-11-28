@@ -11,10 +11,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_Height">
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/iv_back"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="50dp"
-        android:layout_height="match_parent" />
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp" />
     <TextView
         android:textSize="@dimen/titleSize"
         android:textColor="@color/white"
@@ -37,6 +38,7 @@
         android:layout_height="match_parent" />
         <EditText
             android:id="@+id/et_name"
+            android:background="@null"
             android:layout_toRightOf="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -59,6 +61,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent" />
         <EditText
+            android:background="@null"
             android:id="@+id/et_cardNum"
             android:layout_toRightOf="@+id/cardNumber"
             android:layout_width="match_parent"
@@ -82,17 +85,22 @@
         android:layout_width="100dp"
         android:layout_height="match_parent" />
         <EditText
+            android:background="@null"
             android:id="@+id/et_bank"
             android:layout_toRightOf="@+id/bank"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:background="#dedbdb"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content">
         <TextView
             android:textColor="#ba4a2b"
-            android:textSize="15sp"
             android:layout_centerInParent="true"
             android:text="• 请正确填写卡号和开户行以方便我们为您打钱。"
             android:layout_width="wrap_content"

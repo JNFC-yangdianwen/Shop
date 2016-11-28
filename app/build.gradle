@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion '25'
     defaultConfig {
-            multiDexEnabled true
+            multiDexEnabled false
         applicationId "com.example.main.shop"
         minSdkVersion 16
         targetSdkVersion 19
@@ -12,6 +12,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //解决httpclient问题
+        useLibrary 'org.apache.http.legacy'
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

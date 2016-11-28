@@ -7,21 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.main.shop.Activity.CameraActivity">
-<RelativeLayout
+<LinearLayout
 
     android:background="@color/titleColor"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_Height">
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/iv_back"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"/>
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp"/>
     <ImageView
         android:id="@+id/option"
         android:src="@mipmap/option"
         android:layout_alignParentRight="true"
         android:layout_width="40dp"
         android:layout_height="match_parent"/>
-</RelativeLayout>
+</LinearLayout>
 </LinearLayout>

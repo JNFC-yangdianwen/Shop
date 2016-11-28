@@ -7,31 +7,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.main.shop.Activity.UserInfo.PersonalSign">
-<LinearLayout
-    android:background="@color/titleColor"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/title_Height">
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_gravity="center"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:src="@drawable/fanhui"/>
-    <TextView
-        android:gravity="center"
-        android:text="个性签名"
-        android:textSize="@dimen/titleSize"
-        android:textColor="@color/white"
-        android:layout_width="280dp"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:id="@+id/tv_save"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:text="保存"
-        android:layout_width="50dp"
-        android:layout_height="40dp" />
-</LinearLayout>
+
+    <LinearLayout
+        android:background="@color/titleColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_Height">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:src="@drawable/fanhui"/>
+        <TextView
+            android:gravity="center"
+            android:text="个性签名"
+            android:textSize="@dimen/titleSize"
+            android:textColor="@color/white"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_save"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="保存"
+            android:layout_width="50dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
     <EditText
         android:maxLength="30"
         android:layout_marginTop="8dp"

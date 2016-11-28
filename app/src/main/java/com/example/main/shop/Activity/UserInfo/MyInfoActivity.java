@@ -41,7 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -61,6 +60,7 @@ public class MyInfoActivity extends AppCompatActivity {
     @Bind(R.id.iv_qr)ImageView ivQrCode;//二维码
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
+    public static String userName;
     private ActivityUtils mActivityUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class MyInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mActivityUtils=new ActivityUtils(this);
         //进入此页面则立即获取个人信息
+
         String uid = User1.getInstance().getUid();
         Request request = MyRequest.getInstance().getMyinfo(uid);
         Call call = NetOkHttp.getInstance().getCall(request);
@@ -78,7 +79,7 @@ public class MyInfoActivity extends AppCompatActivity {
             private String userSex;
             private String userLike;
             private String userPhoto;
-            private String userName;
+
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -130,7 +131,7 @@ public class MyInfoActivity extends AppCompatActivity {
             Log.d(TAG, "onPhotoCropped: ..."+file);
             Log.d(TAG, "onPhotoCropped: ...................."+file.length());
             ImageLoader.getInstance().displayImage("file://"+file.getAbsolutePath(), photo);
-            UserInfo.getInstance().setPhoto(file.getName());
+            UserInfo.getInstance().setPhoto(file.getPath());
         }
 
         @Override
@@ -162,7 +163,7 @@ public class MyInfoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //处理回传的数据
         switch (requestCode){
-            case 1000:
+            case 1000://处理昵称
                 if (data == null) {
                     return;
                 }
@@ -171,7 +172,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 UserInfo.getInstance().setUser_name(result_value);
                 Log.d(TAG, "onActivityResult: 。。。。。。用户名"+result_value);
                 break;
-            case 1001:
+            case 1001://处理爱好
                 if (data == null) {
                     return;
                 }
@@ -180,9 +181,8 @@ public class MyInfoActivity extends AppCompatActivity {
                 UserInfo.getInstance().setLike(hobby);
                 Log.d(TAG, "onActivityResult: ........爱好"+hobby);
                 break;
-            case 1002:
+            case 1002://处理个性签名
                 if (data == null) {
-                    sign.setText("未设置个性签名");
                     return;
                 }
                 String userSign = data.getStringExtra("sign");
@@ -299,98 +299,44 @@ public class MyInfoActivity extends AppCompatActivity {
 
                     break;
                 case R.id.rl_fix://修改密码
-                      mActivityUtils.startActivity(ResetPswActivity.class);
+                    mActivityUtils.startActivity(ResetPswActivity.class);
                     break;
                 case R.id.tv_saveInfo://保存个人信息
+                    String photo1 = UserInfo.getInstance().getPhoto();
+                    Log.d(TAG, "setInfo: 。。。。。。。。。。保存信息  mmmmmmmmm................"+photo1);
                     String uid = User1.getInstance().getUid();
-//                    Map<String,String> map=new HashMap<>();
-//                    map.put("uid",uid);
-//                    map.put("like",UserInfo.getInstance().getLike());
-//                    map.put("sex",UserInfo.getInstance().getSex());
-//                    map.put("user_name",UserInfo.getInstance().getUser_name());
-//                    map.put("sign",UserInfo.getInstance().getSign());
-//                    File file=new File(UserInfo.getInstance().getPhoto());
-//                    Request request = MyRequest.getFileRequest("http://renrenshang.tongyi100.cn/index.php/Api/user_info_edit", file, map);
-//                    Call call = NetOkHttp.getInstance().getCall(request);
-//                    call.enqueue(new Callback() {
-//                        @Override
-//                        public void onFailure(Call call, IOException e) {
-//
-//                        }
-//                        @Override
-//                        public void onResponse(Call call, Response response) throws IOException {
-//                                String string = response.body().string();
-//                                Log.d(TAG, "onResponse: ..............................."+string);
-//                        }
-//                    });
-//                    Request request = MyRequest.getInstance().modifyUserInfo(uid,
-//                            UserInfo.getInstance().getUser_name(),
-//                            UserInfo.getInstance().getPhoto(),
-//                            UserInfo.getInstance().getLike(), UserInfo.getInstance().getSex(), UserInfo.getInstance().getSign());
-//                    Log.d(TAG, "setInfo: .................................."+UserInfo.getInstance().getPhoto().length());
-//                   okhttp3.Call call = NetOkHttp.getInstance().getCall(request);
-//                    call.enqueue(new okhttp3.Callback() {
-//                        @Override
-//                        public void onFailure(okhttp3.Call call, IOException e) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-//                            String string = response.body().string();
-//                            try {
-//                                JSONObject jsonObject=new JSONObject(string);
-//                                int code = (int) jsonObject.get("code");
-//                                Object msg = jsonObject.get("msg");
-//                                if (code == 101) {
-//                                    Log.d(TAG, "onResponse: ........................................"+string);
-//                                   mActivityUtils.showToast(msg.toString());
-//                                }     if (code == 102) {
-//                                    Log.d(TAG, "onResponse: ........................................"+string);
-//                                   mActivityUtils.showToast(msg.toString());
-//                                }     if (code == 103) {
-//                                    Log.d(TAG, "onResponse: ........................................"+string);
-//                                   mActivityUtils.showToast(msg.toString());
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
-////                    RequestBody body = RequestBody.create(null, UserInfo.getInstance().getPhoto());
-//
+
                     File file1=new File(UserInfo.getInstance().getPhoto());
-                    RequestBody photoRequestBody = RequestBody.create(MediaType.parse("image/png"), file1);
-                    MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file1.getName(), photoRequestBody);
+                    RequestBody photoRequestBody = RequestBody.create(null, file1);
+                    final MultipartBody.Part photo = MultipartBody.Part.createFormData("image", "photo.png", photoRequestBody);
                     retrofit2.Call<Result> modifyUserInfo = NetClient.getInstance().modifyUserInfo(uid,photo,
                             UserInfo.getInstance().getUser_name(),
                             UserInfo.getInstance().getLike(),
                             UserInfo.getInstance().getSex(), UserInfo.getInstance().getSign());
-                    modifyUserInfo.enqueue(new retrofit2.Callback<Result>() {
+                        modifyUserInfo.enqueue(new retrofit2.Callback<Result>() {
                         @Override
                         public void onResponse(retrofit2.Call<Result> call, retrofit2.Response<Result> response) {
                             Result result = response.body();
+                            Log.d(TAG, "onResponse: .................................."+photo);
+                            Log.d(TAG, "onResponse: .................................................保存个人信息。。。。。。。"+result);
                             int code = result.getCode();
                             String msg = result.getMsg();
-                            if (code == 101) {
+                            if (code==101) {
                                 mActivityUtils.showToast(msg);
                                 return;
-                            }     if (code == 102) {
+                            }     if (code==102) {
                                 mActivityUtils.showToast(msg);
                                 return;
-                            }     if (code == 103) {
+                            }     if (code==103) {
                                 mActivityUtils.showToast(msg);
                                 return;
                             }
                         }
-
                         @Override
                         public void onFailure(retrofit2.Call<Result> call, Throwable t) {
-
                         }
                     });
                     break;
-
             }
         }
     @OnClick(R.id.iv_back)

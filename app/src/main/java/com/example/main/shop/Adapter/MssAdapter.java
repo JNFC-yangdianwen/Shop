@@ -18,18 +18,18 @@ import java.util.List;
 
 public class MssAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<MyMsg.MessageInfo> mData;
+    private List<MyMsg.InfoBean> mData;
     public MssAdapter() {
     }
-    public MssAdapter(Context context,List<MyMsg.MessageInfo> data) {
+    public MssAdapter(Context context,List<MyMsg.InfoBean> data) {
         mData=data;
         mInflater = LayoutInflater.from(context);
     }
     //添加一条消息
-    public void addMsg(MyMsg.MessageInfo msg){
+    public void addMsg(MyMsg.InfoBean msg){
         mData.add(msg);
     }
-    public void addAll(List<MyMsg.MessageInfo> data){
+    public void addAll(List<MyMsg.InfoBean> data){
         mData.addAll(data);
     }
     //删除消息

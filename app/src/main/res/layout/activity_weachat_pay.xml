@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.main.shop.Activity.PayActivity.WeachatPayActivity">
+
     <LinearLayout
         android:background="@color/titleColor"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_Height">
         <ImageView
+            android:layout_gravity="center"
             android:id="@+id/iv_back"
-            android:src="@mipmap/left_arrow"
-            android:layout_width="50dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/fanhui"
+            android:layout_width="30dp"
+            android:layout_height="20dp" />
         <TextView
             android:textSize="@dimen/titleSize"
             android:textColor="@color/white"
@@ -23,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
     <RelativeLayout
         android:layout_marginLeft="8dp"
         android:layout_width="match_parent"
@@ -36,6 +39,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent" />
         <EditText
+            android:background="@null"
             android:id="@+id/et_name"
             android:layout_toRightOf="@+id/name"
             android:layout_width="match_parent"
@@ -59,6 +63,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent" />
         <EditText
+            android:background="@null"
             android:id="@+id/et_wechatNum"
             android:layout_toRightOf="@+id/wechatNum"
             android:layout_width="match_parent"
@@ -74,7 +79,6 @@
         android:layout_height="40dp">
         <TextView
             android:textColor="#ba4a2b"
-            android:textSize="15sp"
             android:layout_centerInParent="true"
             android:text="• 请正确填写微信账号方便我们为您打钱。"
             android:layout_width="wrap_content"

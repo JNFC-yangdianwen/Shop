@@ -1,8 +1,10 @@
 package com.example.main.shop.Fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.main.shop.Activity.OrderActivity;
+import com.example.main.shop.Activity.PlatForm;
+import com.example.main.shop.Activity.Publish.MyPublish;
 import com.example.main.shop.Activity.UserInfo.MyInfoActivity;
 import com.example.main.shop.Activity.MyMssAcitivity;
-import com.example.main.shop.Activity.Publish.MyRelease;
 import com.example.main.shop.Activity.SpreadActivity;
 import com.example.main.shop.Activity.SuggestActivity;
 import com.example.main.shop.Activity.User.LoginActivity;
@@ -55,6 +59,7 @@ public class MyFragment extends Fragment{
     private String user_name;
     private String photo;
     private String like;
+    private String sex;
 
     @Nullable
     @Override
@@ -71,7 +76,7 @@ public class MyFragment extends Fragment{
             public void onResponse(Call<MySelf> call, Response<MySelf> response) {
                 MySelf mySelf = response.body();
                 int code = mySelf.getCode();
-                if (code == 101) {
+                if (code==101) {
                     Log.d(TAG, "onResponse: .................."+mySelf.getInfo().getUser_name()+mySelf.getInfo().getLike());
                     tvName.setText(mySelf.getInfo().getUser_name());
                     ImageLoader.getInstance().displayImage(mySelf.getInfo().getPhoto(),imageView);
@@ -113,6 +118,9 @@ public class MyFragment extends Fragment{
                     user_name =  info.getString("user_name");
                     photo = info.getString("photo");
                     like =  info.getString("like");
+                    UserInfo.getInstance().setLike(like);
+                    UserInfo.getInstance().setSex(sex);
+                    UserInfo.getInstance().setPhoto(photo);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -146,33 +154,38 @@ public class MyFragment extends Fragment{
 //                mActivityUtils.startActivity(UserInfoActivity.class);
             break;
             case R.id.rl_publish://进入我的发布页面
-                mActivityUtils.startActivity(MyRelease.class);
+                mActivityUtils.startActivity(MyPublish.class);
             break;
             case R.id.rl_order://进入我的订单页面
-//                mActivityUtils.startActivity(UserInfoActivity.class);
+                mActivityUtils.startActivity(OrderActivity.class);
             break;
             case R.id.rl_spread://进入我的推广页面
                 mActivityUtils.startActivity(SpreadActivity.class);
             break;
             case R.id.rl_platform://进入关于平台页面
-//                mActivityUtils.startActivity(UserInfoActivity.class);
+                mActivityUtils.startActivity(PlatForm.class);
             break;
             case R.id.rl_suggest://进入反馈意见页面
                 mActivityUtils.startActivity(SuggestActivity.class);
             break;
             case R.id.rl_exit://退出登录
-                mActivityUtils.startActivity(LoginActivity.class);
-                getActivity().supportFinishAfterTransition();
+                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                builder.setTitle("确定退出？");
+                builder.setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mActivityUtils.startActivity(LoginActivity.class);
+                        getActivity().supportFinishAfterTransition();
+                    }
+                });
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
             break;
         }
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-//    public  void run(Activity activity){
-//       activity. runOnUiThread();
-//    }
 }

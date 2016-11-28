@@ -67,17 +67,17 @@ public class ForgetPswActivity extends AppCompatActivity {
             public void onResponse(Call<Result> call, Response<Result> response) {
                 Result result = response.body();
                 String msg = result.getMsg();
-                int code1 = result.getCode();
-                if (code1 == 101) {
+                int code = result.getCode();
+                if (code==101) {
                     mUtils.showToast(msg);
                     return;
-                }  if (code1 == 102) {
+                }  if (code==102) {
                     mUtils.showToast(msg);
                     return;
-                }  if (code1 == 103) {
+                }  if (code==103) {
                     mUtils.showToast(msg);
                     return;
-                } if (code1 == 104) {
+                } if (code==104) {
                     mUtils.showToast(msg);
                     return;
                 }
@@ -107,36 +107,36 @@ public class ForgetPswActivity extends AppCompatActivity {
                     int code = result.getCode();
                     String msg = result.getMsg();
                     //修改密码成功
-                    if (code == 101) {
+                    if (code==101) {
                         mUtils.showToast(msg);
                         mUtils.startActivity(LoginActivity.class);
                         return;
                     }
-                    if (code == 102) {
+                    if (code==102) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 103) {
+                    if (code==103) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 104) {
+                    if (code==104) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 105) {
+                    if (code==105) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 106) {
+                    if (code==106) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 107) {
+                    if (code==107) {
                         mUtils.showToast(msg);
                         return;
                     }
-                    if (code == 108) {
+                    if (code==108) {
                         mUtils.showToast(msg);
                         return;
                     }
@@ -147,7 +147,6 @@ public class ForgetPswActivity extends AppCompatActivity {
                          new Throwable(t.getMessage());
                 }
             });
-
         }
     //返回按键
     @OnClick(R.id.iv_back)

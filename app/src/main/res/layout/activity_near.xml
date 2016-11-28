@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_near"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.main.shop.Activity.AddFriend.NearActivity">
+<RelativeLayout
+    android:orientation="horizontal"
+    android:background="@color/titleColor"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_Height">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp" />
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="@dimen/titleSize"
+        android:gravity="center"
+        android:text="附近的人"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/iv_near"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/fujin"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+</RelativeLayout>
+</RelativeLayout>

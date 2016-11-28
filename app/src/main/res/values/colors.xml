@@ -3,9 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="titleColor">#32acd4</color>
+    <color name="titleColor">#5abaf7</color>
     <color name="white">#FFFFFFFF</color>
     <!--分割 线颜色-->
     <color name="rulesColor">#e4e3e3</color>
     <color name="dark">#000</color>
+    <color name="red">#ec3030</color>
 </resources>

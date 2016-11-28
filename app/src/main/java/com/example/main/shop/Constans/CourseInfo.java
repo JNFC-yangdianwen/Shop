@@ -1,68 +1,105 @@
 package com.example.main.shop.Constans;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/10/18 0018.
  * 课程的详情
  */
 
 public class CourseInfo extends Result {
-    /**
-     * 出参	参数
-     * Result	返回结果fail失败suc成功
-     * Msg	提示信息
-     * Code	返回状态
-     * 102	参数不能为空
-     * 101	获取成功
-     * Info	课程
-     * Picture	图片
-     * Title	标题
-     * Money	金额
-     * Time	课程时间
-     * Teacher	讲师
-     * Intro	介绍
-     * Mobile	联系电话
-     * Address	地址
-     */
-    private List<CourseData> info;
 
-    class CourseData {
-        private String title;
+    /**
+     * picture :
+     * title : 英语课
+     * money : 200.00
+     * time : 55分钟
+     * teacher : 张新玲
+     * intro : 美式英语祝你不不
+     * mobile : 15636984562
+     * adress : 济南市
+     */
+
+    private InfoBean info;
+
+    public InfoBean getInfo() {
+        return info;
+    }
+
+    public void setInfo(InfoBean info) {
+        this.info = info;
+    }
+
+    public static class InfoBean {
         private String picture;
+        private String title;
+        private String money;
         private String time;
         private String teacher;
+        private String intro;
+        private String mobile;
+        private String adress;
+
+        public String getPicture() {
+            return picture;
+        }
+
+        public void setPicture(String picture) {
+            this.picture = picture;
+        }
 
         public String getTitle() {
             return title;
         }
 
-        public String getPicture() {
-            return picture;
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getMoney() {
+            return money;
+        }
+
+        public void setMoney(String money) {
+            this.money = money;
         }
 
         public String getTime() {
             return time;
         }
 
+        public void setTime(String time) {
+            this.time = time;
+        }
+
         public String getTeacher() {
             return teacher;
+        }
+
+        public void setTeacher(String teacher) {
+            this.teacher = teacher;
         }
 
         public String getIntro() {
             return intro;
         }
 
+        public void setIntro(String intro) {
+            this.intro = intro;
+        }
+
         public String getMobile() {
             return mobile;
         }
 
-        public String getAddress() {
-            return address;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
 
-        private String intro;
-        private String mobile;
-        private String address;
+        public String getAdress() {
+            return adress;
+        }
+
+        public void setAdress(String adress) {
+            this.adress = adress;
+        }
     }
 }

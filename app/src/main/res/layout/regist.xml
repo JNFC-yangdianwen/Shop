@@ -14,9 +14,9 @@
     <ImageView
         android:id="@+id/iv_back"
         android:layout_gravity="center"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp"/>
     <TextView
         android:gravity="center"
         android:text="注册"
@@ -37,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
     <EditText
-        android:background="@drawable/bg_et"
+        style="?android:attr/textViewStyle"
+        android:background="@null"
         android:hint="请输入手机号"
         android:id="@+id/et_phoneNumber"
         android:layout_width="wrap_content"
@@ -56,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <TextView
-
             android:textColor="@color/dark"
             android:padding="8dp"
             android:textSize="20sp"
@@ -67,10 +67,11 @@
 
         <EditText
             android:textSize="15sp"
-            android:background="@drawable/bg_et"
+            style="?android:attr/textViewStyle"
+            android:background="@null"
             android:hint="可选填"
             android:id="@+id/et_inviteNum"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
     </LinearLayout>
     <RelativeLayout
@@ -82,12 +83,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp" />
     </RelativeLayout>
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <TextView
-
+            android:id="@+id/tv"
             android:textColor="@color/dark"
             android:padding="8dp"
             android:textSize="20sp"
@@ -95,12 +96,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <EditText
-            android:background="@drawable/bg_et"
+            android:layout_toRightOf="@+id/tv"
+            style="?android:attr/textViewStyle"
+            android:background="@null"
             android:hint="请输入验证码"
             android:id="@+id/et_ident"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <TextView
+            android:layout_margin="@dimen/dp_10"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:background="@drawable/bg_tv"
             android:gravity="center"
             android:text="获取验证码"
@@ -108,7 +114,7 @@
             android:layout_marginLeft="100dp"
             android:layout_width="80dp"
             android:layout_height="30dp"/>
-    </LinearLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="5dp">
@@ -118,6 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -129,23 +136,28 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <EditText
-            android:background="@drawable/bg_et"
+            android:inputType="numberPassword"
+            style="?android:attr/textViewStyle"
+            android:background="@null"
             android:hint="请输入6位以上密码"
             android:id="@+id/et_psw"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
 
     </LinearLayout>
-<RelativeLayout
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <LinearLayout
+    android:layout_below="@+id/webView"
     android:id="@+id/l_sure"
     android:background="@color/titleColor"
     android:layout_centerInParent="true"
     android:layout_width="200dp"
-    android:layout_height="40dp">
+    android:layout_height="25dp">
     <TextView
+
         android:textSize="18sp"
         android:gravity="center"
         android:textColor="@color/white"

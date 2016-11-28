@@ -2,10 +2,10 @@ package com.example.main.shop.Constans;
 
 /**
  * Created by Administrator on 2016/10/10 0010.
- * 用户实体类
+ * 用户实体类,注册使用
  */
 
-public class User {
+public class Account {
     private String mobile;//手机号
     private String pwd;//密码
     private String code;//验证码

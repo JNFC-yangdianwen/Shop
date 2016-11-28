@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -35,7 +36,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     @Bind(R.id.iv_login)ImageView mImageView;
-    @Bind(R.id.et_user)EditText userName;
+    @Bind(R.id.et_mobile)EditText etMobile;
     @Bind(R.id.et_psw)EditText psw;
     private ActivityUtils mUtils;
     public static String Login="login";
@@ -48,74 +49,36 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mUtils = new ActivityUtils(this);
-//        //自动登陆
-//        SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
-//        String mobile = login.getString(Mobile, "");
-//        String passWord = login.getString(PassWord, "");
-//        Map<String,String> map=new HashMap<>();
-//        map.put("mobile", mobile);
-//        map.put("pwd",passWord);
-//        Call<LoginResult> loginResultCall = NetClient.getInstance().login(map);
-//        loginResultCall.enqueue(new Callback<LoginResult>() {
-//            @Override
-//            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-////                  mProgressDialog=ProgressDialog.show(LoginActivity.this,"","登陆中，请稍后");
-//                LoginResult result = response.body();
-//                String msg = result.getMsg();
-//                int code = result.getCode();
-//                //登陆成功
-//                if (code==101){
-////                    mProgressDialog.dismiss();
-//                    mUtils.showToast(msg);
-//                    int uid = result.getUid();
-//                    UserInfo userInfo=new UserInfo();
-//                    userInfo.setUid(uid);
-//                    Log.d(TAG, "onResponse: "+uid);
-//                    int type = result.getType();
-//                    /**
-//                     * 登陆之后如果type=0，不需要填写个人信息，
-//                     * 如果type =1，填写个人信息
-//                     */
-//                    if (type == 0) {
-//                        mUtils.startActivity(MainActivity.class);
-//                        return;
-//                    }
-//                    if (type==1){
-//                        //填写个人信息
-//                        mUtils.startActivity(UserInfoActivity.class);
-//                    }
-//                    return;
-//                }if (code==102){
-//                    mUtils.showToast(msg);
-//                    return;
-//                }if (code==103){
-//                    mUtils.showToast(msg);
-//                    return;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LoginResult> call, Throwable t) {
-//                new Throwable(t.getMessage());
-//            }
-//        });
-////        PayTask payTask =new PayTask(this);
-////        String version = payTask.getVersion();
-////        Log.d(TAG, "onCreate: "+version);
+       //自动登陆，把之前保存的手机号，密码  显示
+        etMobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etMobile.setCursorVisible(true);
+            }
+        });
+        SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
+        String mobile = login.getString(Mobile, "");
+        String passWord = login.getString(PassWord, "");
+        etMobile.setText(mobile);
+        psw.setText(passWord);
     }
-
    @OnClick({R.id.iv_login})
-    public void login(){
-//       mUtils.startActivity(UserInfoActivity.class);
-       mProgressDialog=ProgressDialog.show(this,"","登陆中，请稍后");
-       String  mobile = userName.getText().toString().trim();
-       String passWord = psw.getText().toString().trim();
-       //保存手机号,密码
+    public void action(){
+       String mobile = etMobile.getText().toString().trim();
+       String pwd = psw.getText().toString().trim();
+       //保存用户手机号，密码
        SharedPreferences sp=getSharedPreferences(Login,MODE_PRIVATE);
        SharedPreferences.Editor edit = sp.edit();
        edit.putString(Mobile,mobile);
-       edit.putString(PassWord,passWord);
+       edit.putString(PassWord,pwd);
        edit.commit();
+       login(mobile,pwd);
+   }
+    //登陆方法
+   public void login (String mobile,String passWord){
+       mProgressDialog=ProgressDialog.show(this,"","登陆中，请稍后");
+       mProgressDialog.setCancelable(true);//设置按返回键消失
+       //保存手机号,密码
        Map<String,String> map=new HashMap<>();
        map.put("mobile", mobile);
        map.put("pwd",passWord);

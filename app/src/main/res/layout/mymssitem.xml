@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--该页面为消息的item，当点击出现listview的item的时候出现事件响应无效，
+    则在item布局的主属性添加  android:descendantFocusability="blocksDescendants"-->
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"

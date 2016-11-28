@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.main.shop.Constans.FriendList;
+import com.example.main.shop.Constans.Order;
 import com.example.main.shop.HttpUtils.NetClient;
 import com.example.main.shop.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,16 +16,15 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/11/11.
+ * Created by Administrator on 2016/11/16.
  */
 
-public class PeopleAdapter extends BaseAdapter {
-    private List<FriendList.InfoBean> mData;
-    private LayoutInflater mInflater;
-
-    public PeopleAdapter(List<FriendList.InfoBean> mData, Context context) {
-        this.mData = mData;
-        this.mInflater = LayoutInflater.from(context);
+public class OrderAdapter extends BaseAdapter {
+      private List<Order.InfoBean> mData;
+      private LayoutInflater inflater;
+      public OrderAdapter(Context context,List<Order.InfoBean> mData) {
+          this.mData = mData;
+          inflater=LayoutInflater.from(context);
     }
 
     @Override
@@ -36,6 +35,7 @@ public class PeopleAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return mData.get(position);
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -43,13 +43,12 @@ public class PeopleAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-             convertView = mInflater.inflate(R.layout.contact_item, null);
+           convertView= inflater.inflate(R.layout.order_item, null);
         }
-        ImageView photo = (ImageView) convertView.findViewById(R.id.iv_photo);
-        TextView name = (TextView) convertView.findViewById(R.id.tv_name);
-        //设置头像
-        ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+ mData.get(position).getPhoto(),photo);
-        name.setText(mData.get(position).getUser_name());
+        TextView title = (TextView) convertView.findViewById(R.id.tv_title);//标题
+        ImageView pic = (ImageView) convertView.findViewById(R.id.iv_pic);//图片
+        title.setText(mData.get(position).getTitle());
+        ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+mData.get(position).getPicture(),pic);
         return convertView;
     }
 }

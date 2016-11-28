@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -16,16 +17,16 @@
     android:text="实训课程"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
-        <TextView
+        <Button
             android:id="@+id/buy"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:textColor="@color/white"
             android:background="@color/titleColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="购买"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="60dp"
+            android:layout_height="30dp" />
     </RelativeLayout>
     <ImageView
         android:id="@+id/iv"

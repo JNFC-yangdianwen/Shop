@@ -8,24 +8,50 @@ import java.util.List;
  */
 
 public class MyMsg extends Result{
-    public List<MessageInfo> getInfo() {
+
+    /**
+     * id : 2
+     * message : 小心翼翼
+     * time : 2016-09-13 09:54:12
+     */
+
+    private List<InfoBean> info;
+
+    public List<InfoBean> getInfo() {
         return info;
     }
-    private List<MessageInfo> info;
-    public static class MessageInfo{
-    private String id;//消息id
-    private  String message;//消息内容
-    private String time;//时间
-    public String getId() {
-        return id;
+
+    public void setInfo(List<InfoBean> info) {
+        this.info = info;
     }
+
+    public static class InfoBean {
+        private String id;
+        private String message;
+        private String time;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getMessage() {
             return message;
         }
 
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
         public String getTime() {
-        return time;
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
     }
-}
 }

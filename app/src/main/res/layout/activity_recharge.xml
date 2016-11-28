@@ -26,36 +26,51 @@
     android:layout_height="match_parent"/>
 </LinearLayout>
 <LinearLayout
+    android:background="@color/rulesColor"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="100dp">
     <TextView
+        android:textColor="@color/dark"
         android:layout_marginLeft="8dp"
+        android:gravity="center|left"
         android:text="充值金额"
         android:textSize="@dimen/titleSize"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
+
     <RelativeLayout
+        android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <EditText
-            android:textSize="25sp"
-            android:layout_marginLeft="8dp"
-            android:hint="请输入充值金额"
-            android:background="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+
         <TextView
+            android:textColor="@color/dark"
+            android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:text="元"
             android:textSize="@dimen/titleSize"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
+
+        <EditText
+            android:inputType="numberDecimal"
+            android:layout_marginLeft="8dp"
+            android:textSize="15sp"
+            android:hint="请输入充值金额"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/et_money" />
     </RelativeLayout>
 </LinearLayout>
     <LinearLayout
+        android:background="@color/rulesColor"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -63,78 +78,117 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
         <TextView
+            android:gravity="center|left"
+            android:textColor="@color/dark"
             android:layout_marginLeft="8dp"
             android:textSize="@dimen/titleSize"
             android:text="充值方式"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
         <RelativeLayout
+            android:id="@+id/rlyong"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
             <TextView
+                android:gravity="center|left"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
-                android:text="佣 金  支 付"
+                android:textSize="18sp"
+                android:text="佣金支付"
                 android:id="@+id/brokerage"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:src="@mipmap/circle"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@drawable/xuanze3"
                 android:layout_alignParentRight="true"
                 android:id="@+id/iv_brokerage"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </RelativeLayout>
-        <RelativeLayout
+        <TextView
+            android:background="@color/rulesColor"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="1dp" />
+        <RelativeLayout
+            android:id="@+id/rl_alipay"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
             <TextView
+                android:gravity="center|left"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="支付宝支付"
                 android:id="@+id/alipay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:src="@mipmap/circle"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+
+                android:src="@drawable/xuanze3"
                 android:layout_alignParentRight="true"
                 android:id="@+id/iv_alipay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </RelativeLayout>
-        <RelativeLayout
+        <TextView
+            android:background="@color/rulesColor"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="1dp" />
+        <RelativeLayout
+            android:id="@+id/rl_wechat_pay"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
             <TextView
+                android:gravity="center|left"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
-                android:text="微 信  支 付"
+                android:textSize="18sp"
+                android:text="微信支付"
                 android:id="@+id/wechat_Pay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:src="@mipmap/circle"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:visibility="gone"
+                android:src="@drawable/xuanze3"
                 android:layout_alignParentRight="true"
                 android:id="@+id/iv_wechatPay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </RelativeLayout>
+        <TextView
+            android:background="@color/rulesColor"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
         <RelativeLayout
+            android:id="@+id/rl_bank"
+            android:background="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
             <TextView
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
-                android:text="银 联  支 付"
+                android:textSize="18sp"
+                android:text="银联支付"
                 android:id="@+id/bankPay"
+                android:gravity="center|left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:src="@mipmap/circle"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:visibility="gone"
+                android:src="@drawable/xuanze3"
                 android:layout_alignParentRight="true"
                 android:id="@+id/iv_bankPay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"

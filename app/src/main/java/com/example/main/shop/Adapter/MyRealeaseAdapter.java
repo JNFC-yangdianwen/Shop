@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.main.shop.Constans.Dynamic;
+import com.example.main.shop.Constans.Publish;
 import com.example.main.shop.Constans.UserInfo;
 import com.example.main.shop.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,10 +21,10 @@ import java.util.List;
  */
 
 public class MyRealeaseAdapter extends BaseAdapter {
-    private List<Dynamic.InfoBean> mData;
+    private List<Publish.InfoBean> mData;
     private LayoutInflater mInflater;
 
-    public MyRealeaseAdapter(List<Dynamic.InfoBean> mData,Context context) {
+    public MyRealeaseAdapter(List<Publish.InfoBean> mData,Context context) {
         this.mData = mData;
         mInflater=LayoutInflater.from(context);
     }

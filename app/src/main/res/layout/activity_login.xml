@@ -37,10 +37,11 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView"/>
         <EditText
-            android:background="@drawable/bg_et"
+            android:cursorVisible="false"
+            android:background="@null"
             android:layout_marginLeft="50dp"
             android:hint="@string/phoneNumber"
-            android:id="@+id/et_user"
+            android:id="@+id/et_mobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -65,8 +66,7 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"/>
         <EditText
-
-            android:background="@drawable/bg_et"
+            android:background="@null"
             android:layout_marginLeft="50dp"
             android:inputType="numberPassword"
             android:hint="@string/password"

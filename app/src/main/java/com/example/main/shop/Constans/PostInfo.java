@@ -9,26 +9,36 @@ import java.util.List;
 
 public class PostInfo extends Result{
 
+
     /**
-     * result : fail
-     * msg : 参数不能为空
-     * code : 102
-     * user_photo	用户头像
-     * user_name	用户名
-     * Time	发布时间
-     * Content	内容
-     * Picture	图片
-     * click_count	点赞数量
+     * uid : 2
+     * user_photo :
+     * user_name : 老张
+     * time : 2016-09-23 17:01:00
+     * content : 添加动态测试
+     * picture : ["Public/Uploads/57e4ef4c5b7c4.jpg"]
+     * click_count : 0
+     * isclick : 0
+     * data : []
      */
 
-
+    private String uid;
     private String user_photo;
     private String user_name;
     private String time;
     private String content;
-    private String picture;
-    private int click_count;
-    private List<InfoData> info;
+    private String click_count;
+    private int isclick;
+    private List<String> picture;
+    private List<Content> data;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getUser_photo() {
         return user_photo;
@@ -62,51 +72,61 @@ public class PostInfo extends Result{
         this.content = content;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public int getClick_count() {
+    public String getClick_count() {
         return click_count;
     }
 
-    public void setClick_count(int click_count) {
+    public void setClick_count(String click_count) {
         this.click_count = click_count;
     }
 
-
-    public List<InfoData> getInfo() {
-        return info;
+    public int getIsclick() {
+        return isclick;
     }
 
-    public void setInfo(List<InfoData> info) {
-        this.info = info;
+    public void setIsclick(int isclick) {
+        this.isclick = isclick;
     }
 
+    public List<String> getPicture() {
+        return picture;
+    }
 
-//    内容
-//    send_id	发送人id
-//    send_name	发送人姓名
-//    send_photo	发送人头像
-//    Content	评论内容
-//    time	评论时间
+    public void setPicture(List<String> picture) {
+        this.picture = picture;
+    }
 
-    class InfoData {
-        private int send_id;
-        private String send_name;
-        private String send_photo;
-        private String content;
-        private String time;
+    public List<Content> getData() {
+        return data;
+    }
 
-        public int getSend_id() {
+    public void setData(List<Content> data) {
+        this.data = data;
+    }
+    public  static class Content{
+//        send_id	发送人id
+//        send_name	发送人姓名
+//        send_photo	发送人头像
+//        Content	评论内容
+//        time	评论时间
+        String send_id;
+        String send_name;
+        String send_photo;
+        String content;
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getSend_id() {
             return send_id;
         }
 
-        public void setSend_id(int send_id) {
+        public void setSend_id(String send_id) {
             this.send_id = send_id;
         }
 
@@ -129,14 +149,12 @@ public class PostInfo extends Result{
         public String getContent() {
             return content;
         }
+
         public void setContent(String content) {
             this.content = content;
         }
-        public String getTime() {
-            return time;
-        }
-        public void setTime(String time) {
-            this.time = time;
-        }
+
+        String time;
+
     }
 }

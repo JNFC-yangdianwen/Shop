@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.main.shop">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +18,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -85,10 +86,17 @@
                 <!-- host为你自己当前工程的包名 -->
                 <data
                     android:host="com.example.main.shop"
-                    android:pathPrefix="/conversationlist"
+                    android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+        <!-- 微信分享的回调 -->
+        <!-- <activity -->
+        <!-- android:name="com.example.main.shop.wxapi.WXEntryActivity" -->
+        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" -->
+        <!-- android:exported="true" -->
+        <!-- android:screenOrientation="portrait"> -->
+        <!-- </activity> -->
         <activity android:name=".Activity.Publish.ReleaseMsgActivity" />
         <activity android:name=".Activity.UserInfo.UserNameActivity" />
         <activity android:name=".Activity.UserInfo.LikeActivity" />
@@ -103,10 +111,16 @@
         <activity android:name=".Activity.AddFriend.SameHobby" />
         <activity android:name=".Activity.AddFriend.ContactActivity" />
         <activity android:name=".Activity.UserInfo.ShareReward" />
-        <activity android:name=".Activity.Publish.MyRelease" />
-        <activity android:name=".Activity.CourseActivity" />
-        <activity android:name=".Activity.CoureseDetail" />
-        <activity android:name=".Activity.AddFriend.SearchResult"></activity>
+        <activity android:name=".Activity.Publish.MyPublish" />
+        <activity android:name=".Activity.Wallet.CourseActivity" />
+        <activity android:name=".Activity.Wallet.CourseDetail" />
+        <activity android:name=".Activity.AddFriend.SearchResult" />
+        <activity android:name=".Activity.OrderActivity" />
+        <activity android:name=".Activity.Wallet.TravelActivity" />
+        <activity android:name=".Activity.Wallet.TravelInfoActivity" />
+        <activity android:name=".Activity.AddFriend.NearActivity" />
+        <activity android:name=".Activity.CommentActivity" />
+        <activity android:name=".Activity.PlatForm"></activity>
     </application>
 
 </manifest>

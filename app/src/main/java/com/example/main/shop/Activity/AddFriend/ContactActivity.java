@@ -3,8 +3,11 @@ package com.example.main.shop.Activity.AddFriend;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.main.shop.Activity.Rong.Conversation;
 import com.example.main.shop.Adapter.ContactAdaptr;
 import com.example.main.shop.Constans.FriendList;
 import com.example.main.shop.Constans.User1;
@@ -28,7 +31,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-
+//通讯录
 public class ContactActivity extends AppCompatActivity {
 @Bind(R.id.lv_contact)ListView listView;
     private ActivityUtils activityUtils;
@@ -43,20 +46,7 @@ public class ContactActivity extends AppCompatActivity {
         data=new ArrayList<>();
         activityUtils = new ActivityUtils(this);
         String uid = User1.getInstance().getUid();
-//        Call<FriendList> listCall = NetClient.getInstance().friendList(uid);
-//        listCall.enqueue(new Callback<FriendList>() {
-//            @Override
-//            public void onResponse(Call<FriendList> call, Response<FriendList> response) {
-//                FriendList body = response.body();
-//                data.add(body);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<FriendList> call, Throwable t) {
-//
-//            }
-//        });
-        Request frd = MyRequest.getInstance().getFrd(uid);
+        Request frd = MyRequest.getInstance().getFrdList(uid);
         Call call = NetOkHttp.getInstance().getCall(frd);
         call.enqueue(new Callback() {
             @Override
@@ -73,9 +63,9 @@ public class ContactActivity extends AppCompatActivity {
                     JSONArray info = (JSONArray) jsonObject.get("info");
                     for (int i = 0; i < info.length(); i++) {
                         FriendList.InfoBean friendList= new FriendList.InfoBean();
-                        String user_name = (String) info.getJSONObject(i).get("user_name");
-                        String photo = (String) info.getJSONObject(i).get("photo");
-                        String id = (String) info.getJSONObject(i).get("id");
+                        String user_name = info.getJSONObject(i).getString("user_name");
+                        String photo =  info.getJSONObject(i).getString("photo");
+                        String id = info.getJSONObject(i).getString("id");
                         friendList.setPhoto(photo);
                         friendList.setId(id);
                         friendList.setUser_name(user_name);
@@ -90,6 +80,14 @@ public class ContactActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ............................."+data.size());
         ContactAdaptr contactAdaptr=new ContactAdaptr(this,data);
         listView.setAdapter(contactAdaptr);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == id) {
+                    activityUtils.startActivity(Conversation.class);
+                }
+            }
+        });
     }
     @OnClick(R.id.iv_add)
     public void addFrd(){

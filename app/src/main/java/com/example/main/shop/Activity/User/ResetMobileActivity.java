@@ -2,6 +2,7 @@ package com.example.main.shop.Activity.User;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -53,9 +54,13 @@ public class ResetMobileActivity extends AppCompatActivity {
     @OnClick(R.id.tv_getCode)
     public void getCode() {
         mOriginNumber = originNumber.getText().toString().trim();//原来的手机号
+        if (TextUtils.isEmpty(mOriginNumber)|mOriginNumber.length()<11) {
+            mUtils.showToast("请输入正确的手机号");
+            return;
+        }
         mCode = identNumber.getText().toString().trim();//验证码
         mNewNumber = newNumber.getText().toString().trim();//新手机号
-        TimeCount timeCount = new TimeCount(tvCode, 6000, 1000);
+        TimeCount timeCount = new TimeCount(tvCode, 60000, 1000);
         //开始倒计时
         timeCount.start();
         Map<String, String> map = new HashMap<>();
@@ -66,26 +71,26 @@ public class ResetMobileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
                 Result result = response.body();
-                int code1 = result.getCode();
+                int code = result.getCode();
                 String msg = result.getMsg();
 
-                if (code1 == 101) {
+                if (code==101) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code1 == 102) {
+                if (code==102) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code1 == 103) {
+                if (code==103) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code1 == 104) {
+                if (code==104) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code1 == 105) {
+                if (code==105) {
                     mUtils.showToast(msg);
                     return;
                 }
@@ -102,7 +107,7 @@ public class ResetMobileActivity extends AppCompatActivity {
     @OnClick(R.id.tv_save)
     public void saveNewNumber() {
         Map<String, String> map = new HashMap<>();
-        UserInfo userInfo=new UserInfo(getApplicationContext());
+        UserInfo userInfo = UserInfo.getInstance();
         String uid = userInfo.getUid();
         map.put("uid", String.valueOf(uid));
         map.put("mobile", mOriginNumber);
@@ -116,31 +121,31 @@ public class ResetMobileActivity extends AppCompatActivity {
                 int code = result1.getCode();
                 String msg = result1.getMsg();
                 //修改成功之后，则
-                if (code == 101) {
+                if (code==101) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 102) {
+                if (code==102) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 103) {
+                if (code==103) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 104) {
+                if (code==104) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 105) {
+                if (code==105) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 106) {
+                if (code==106) {
                     mUtils.showToast(msg);
                     return;
                 }
-                if (code == 107) {
+                if (code==107) {
                     mUtils.showToast(msg);
                     return;
                 }

@@ -7,16 +7,11 @@ import java.util.List;
  */
 
 public class Travel extends Result{
+
     /**
-     * result : suc
-     * msg : 获取成功
-     * code : 101
-     * info : [{"id":"1","title":"英语课","picture":""}]
-     */
-    /**
-     * id : 1
-     * title : 英语课
-     * picture :
+     * id : 2
+     * title : 秦皇岛三日游
+     * picture : Public/Uploads/58292a1d3985e.jpg
      */
 
     private List<InfoBean> info;

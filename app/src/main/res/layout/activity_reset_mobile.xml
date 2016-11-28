@@ -14,9 +14,9 @@
     <ImageView
         android:id="@+id/iv_back"
         android:layout_gravity="center"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp"/>
     <TextView
         android:gravity="center"
         android:textSize="@dimen/titleSize"
@@ -37,8 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
         <EditText
+            android:background="@null"
             android:layout_marginTop="5dp"
-            android:background="@drawable/bg_et"
+            style="?android:attr/textViewStyle"
             android:id="@+id/et_originNumber"
             android:layout_width="120dp"
             android:layout_height="40dp"/>
@@ -58,8 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
         <EditText
-
-            android:background="@drawable/bg_et"
+            android:background="@null"
+            style="?android:attr/textViewStyle"
             android:id="@+id/et_identNumber"
             android:layout_width="100dp"
             android:layout_height="40dp"/>
@@ -87,8 +88,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
         <EditText
+            android:background="@null"
             android:layout_marginTop="5dp"
-            android:background="@drawable/bg_et"
+            style="?android:attr/textViewStyle"
             android:id="@+id/et_newNumber"
             android:layout_width="120dp"
             android:layout_height="40dp"/>

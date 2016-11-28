@@ -4,10 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -28,7 +27,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 //主界面使用frament,开启融云连接服务
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     //Appkey:17bfcb6cd2ea8
     private static final String TAG = "MainActivity";
@@ -43,14 +42,21 @@ public class MainActivity extends AppCompatActivity {
     private FriendFragment mFriendFragment;
     // 定义一个变量，来标识是否退出
     private static boolean isExit = false;
+    private ChatFragment chatFragment;
+    private WalletFragment walletFragment;
+    private MyFragment myFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        FragmentTransaction transaction = getFragmentTransaction();
+        //加载朋友圈的fragment
+        mFriendFragment=new FriendFragment();
+        transaction.add(R.id.fl,mFriendFragment);
+        transaction.commit();
         String token="3A3QI7k6o8AV7jwGcC0VrLO0Zp8veqjrL783P9LaIfQgvbReLntYP/ZB7tLtpxkTzC7DWbCQ9/1F6Xqv4dp/1A==";
-        mFriendFragment = new FriendFragment();
-        replaceFragment(mFriendFragment);
         //连接融云
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
@@ -71,21 +77,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
-
-
-
-
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -95,8 +86,20 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.iv_frd, R.id.iv_mss, R.id.iv_wallet, R.id.iv_my})
     public void onClick(View v) {
+        FragmentTransaction transaction = getFragmentTransaction();
+        hideFragment(transaction);
         switch (v.getId()) {
             case R.id.iv_frd:
+                if (mFriendFragment == null) {
+                    mFriendFragment=new FriendFragment();
+                    transaction.add(R.id.fl,mFriendFragment);
+                    transaction.commit();
+                    Log.d(TAG, "onClick: ......................"+mFriendFragment);
+
+                }else {
+                    transaction.show(mFriendFragment);
+                    transaction.commit();
+                }
                 //tag图片的切换
                 mIvFriend.setImageResource(R.drawable.shouye1);
                 mIvMss.setImageResource(R.drawable.shouye2_);
@@ -107,10 +110,18 @@ public class MainActivity extends AppCompatActivity {
                 mTvMss.setTextColor(0x8A000000);//灰色
                 mTvWallet.setTextColor(0x8A000000);
                 mTvMy.setTextColor(0x8A000000);
-                replaceFragment(mFriendFragment);
+
                 break;
             case R.id.iv_mss:
                 //加载聊天的fragment
+                if (chatFragment == null) {
+                    chatFragment=new ChatFragment();
+                    transaction.add(R.id.fl,chatFragment);
+                    transaction.commit();
+                }else {
+                    transaction.show(chatFragment);
+                    transaction.commit();
+                }
                 mIvFriend.setImageResource(R.drawable.shouye1_);
                 mIvMss.setImageResource(R.drawable.shouye2);
                 mIvWallet.setImageResource(R.drawable.shouye3_);
@@ -119,13 +130,17 @@ public class MainActivity extends AppCompatActivity {
                 mTvFriend.setTextColor(0x8A000000);
                 mTvWallet.setTextColor(0x8A000000);
                 mTvMy.setTextColor(0x8A000000);
-                ChatFragment chatFragment = new ChatFragment();
-                replaceFragment(chatFragment);
                 break;
             case R.id.iv_wallet:
                 //加载钱包的fragment
-                WalletFragment walletFragment=new WalletFragment();
-                replaceFragment(walletFragment);
+                if (walletFragment == null) {
+                    walletFragment=new WalletFragment();
+                    transaction.add(R.id.fl,walletFragment);
+                    transaction.commit();
+                }else {
+                    transaction.show(walletFragment);
+                    transaction.commit();
+                }
                 mIvFriend.setImageResource(R.drawable.shouye1_);
                 mIvMss.setImageResource(R.drawable.shouye2_);
                 mIvWallet.setImageResource(R.drawable.shouye3);
@@ -137,8 +152,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.iv_my:
                 //加载我的fragment
-                MyFragment myFragment=new MyFragment();
-                replaceFragment(myFragment);
+                if (myFragment == null) {
+                    myFragment=new MyFragment();
+                    transaction.add(R.id.fl,myFragment);
+                    transaction.commit();
+                }else {
+                    transaction.show(myFragment);
+                    transaction.commit();
+                }
                 mIvFriend.setImageResource(R.drawable.shouye1_);
                 mIvMss.setImageResource(R.drawable.shouye2_);
                 mIvWallet.setImageResource(R.drawable.shouye3_);
@@ -150,15 +171,26 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-      //切换fragment的方法
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();//获取fragment的管理者
-        FragmentTransaction transaction = fragmentManager.beginTransaction();//开启事物
-        transaction.replace(R.id.fl,fragment);
-        transaction.commit();//提交事务
+
+    //获取事务
+    private FragmentTransaction getFragmentTransaction() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        return fragmentManager.beginTransaction();
     }
 
 
+    //隐藏fragment
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mFriendFragment != null) {
+            transaction.hide(mFriendFragment);
+        }  if (myFragment != null) {
+            transaction.hide(myFragment);
+        }  if (walletFragment != null) {
+            transaction.hide(walletFragment);
+        }  if (chatFragment != null) {
+            transaction.hide(chatFragment);
+        }
+    }
     Handler mHandler = new Handler() {
 
         @Override

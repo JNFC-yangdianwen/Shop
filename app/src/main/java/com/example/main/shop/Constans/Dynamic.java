@@ -8,15 +8,18 @@ import java.util.List;
  */
 public class Dynamic extends Result{
 
-
     /**
-     * photo : Public/Uploads/581bf85c6eaaa.jpg
-     * user_name : \"123\"
-     * time : 2016-11-04 09:25:44
-     * content : \"\"
-     * picture : []
+     * id : 33
+     * uid : 9
+     * photo :
+     * user_name : null
      * is_share : 1
+     * content : \"第一次发布\"
+     * picture : []
+     * time : 2016-11-07 09:35:06
      * click_count : 0
+     * comment_count : 0
+     * isclick : 0
      */
 
     private List<InfoBean> info;
@@ -30,13 +33,33 @@ public class Dynamic extends Result{
     }
 
     public static class InfoBean {
+        private String id;
+        private String uid;
         private String photo;
         private String user_name;
-        private String time;
-        private String content;
         private String is_share;
+        private String content;
+        private String time;
         private String click_count;
-        private List<?> picture;
+        private String comment_count;
+        private int isclick;
+        private List<String> picture;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
 
         public String getPhoto() {
             return photo;
@@ -54,12 +77,12 @@ public class Dynamic extends Result{
             this.user_name = user_name;
         }
 
-        public String getTime() {
-            return time;
+        public String getIs_share() {
+            return is_share;
         }
 
-        public void setTime(String time) {
-            this.time = time;
+        public void setIs_share(String is_share) {
+            this.is_share = is_share;
         }
 
         public String getContent() {
@@ -70,12 +93,12 @@ public class Dynamic extends Result{
             this.content = content;
         }
 
-        public String getIs_share() {
-            return is_share;
+        public String getTime() {
+            return time;
         }
 
-        public void setIs_share(String is_share) {
-            this.is_share = is_share;
+        public void setTime(String time) {
+            this.time = time;
         }
 
         public String getClick_count() {
@@ -86,11 +109,27 @@ public class Dynamic extends Result{
             this.click_count = click_count;
         }
 
-        public List<?> getPicture() {
+        public String getComment_count() {
+            return comment_count;
+        }
+
+        public void setComment_count(String comment_count) {
+            this.comment_count = comment_count;
+        }
+
+        public int getIsclick() {
+            return isclick;
+        }
+
+        public void setIsclick(int isclick) {
+            this.isclick = isclick;
+        }
+
+        public List<String> getPicture() {
             return picture;
         }
 
-        public void setPicture(List<?> picture) {
+        public void setPicture(List<String> picture) {
             this.picture = picture;
         }
     }

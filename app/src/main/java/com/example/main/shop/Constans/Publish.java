@@ -4,18 +4,23 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/7.
+ *
+ * 我的发布实体类
  */
 
 public class Publish extends Result {
 
+
     /**
-     * photo : Public/Uploads/581bf85c6eaaa.jpg
-     * user_name : \"123\"
-     * time : 2016-11-04 09:25:44
-     * content : \"\"
+     * id : 55
+     * photo :
+     * user_name : 123
+     * time : 2016-11-08 09:09:16
+     * content : 1243564
      * picture : []
-     * is_share : 1
-     * click_count : 0
+     * is_share : 2
+     * click_count : 2
+     * isclick : 1
      */
 
     private List<InfoBean> info;
@@ -29,13 +34,23 @@ public class Publish extends Result {
     }
 
     public static class InfoBean {
+        private String id;
         private String photo;
         private String user_name;
         private String time;
         private String content;
         private String is_share;
         private String click_count;
-        private List<?> picture;
+        private int isclick;
+        private List<String> picture;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getPhoto() {
             return photo;
@@ -85,11 +100,19 @@ public class Publish extends Result {
             this.click_count = click_count;
         }
 
-        public List<?> getPicture() {
+        public int getIsclick() {
+            return isclick;
+        }
+
+        public void setIsclick(int isclick) {
+            this.isclick = isclick;
+        }
+
+        public List<String> getPicture() {
             return picture;
         }
 
-        public void setPicture(List<?> picture) {
+        public void setPicture(List<String> picture) {
             this.picture = picture;
         }
     }

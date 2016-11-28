@@ -12,10 +12,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_Height">
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/iv_back"
-        android:src="@mipmap/left_arrow"
-        android:layout_width="50dp"
-        android:layout_height="match_parent" />
+        android:src="@drawable/fanhui"
+        android:layout_width="30dp"
+        android:layout_height="20dp" />
     <TextView
         android:textSize="@dimen/titleSize"
         android:gravity="center"

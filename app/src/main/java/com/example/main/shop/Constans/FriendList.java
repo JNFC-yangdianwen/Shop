@@ -9,9 +9,9 @@ import java.util.List;
 public class FriendList extends Result {
 
     /**
-     * user_name : 00212
-     * photo : Public/Uploads/3.jpg
-     * id : 9
+     * user_name : null
+     * photo : null
+     * id : null
      */
 
     private List<InfoBean> info;

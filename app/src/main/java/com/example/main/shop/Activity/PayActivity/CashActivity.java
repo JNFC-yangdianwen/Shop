@@ -13,10 +13,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 //提现页面
 public class CashActivity extends AppCompatActivity {
-@Bind(R.id.pay)ImageView imageView;//支付宝
+    @Bind(R.id.pay)ImageView imageView;//支付宝
     @Bind(R.id.wechat_pay)ImageView iv_wechat;//微信
     @Bind(R.id.cash_card)ImageView iv_cashCard;//银行卡
-    private int payType;
+    public static String payType="0";
     private ActivityUtils activityUtils;
 
     @Override
@@ -34,38 +34,49 @@ public class CashActivity extends AppCompatActivity {
                 imageView.setImageResource(R.mipmap.sure);
                 iv_wechat.setVisibility(View.INVISIBLE);
                 iv_cashCard.setVisibility(View.INVISIBLE);
-                payType=1;
+                payType="1";
                 break;
             case R.id.rl_wechatPay://微信支付
                 iv_wechat.setVisibility(View.VISIBLE);
                 iv_wechat.setImageResource(R.mipmap.sure);
                 imageView.setVisibility(View.INVISIBLE);
                 iv_cashCard.setVisibility(View.INVISIBLE);
-                payType=2;
+                payType="2";
                 break;
             case R.id.rl_cash://银行卡支付
                 iv_cashCard.setVisibility(View.VISIBLE);
                 iv_cashCard.setImageResource(R.mipmap.sure);
                 iv_wechat.setVisibility(View.INVISIBLE);
                 imageView.setVisibility(View.INVISIBLE);
-                payType=3;
+                payType="3";
                 break;
         }
     }
     @OnClick(R.id.tv_sure)
     public void sure(){
-        if (payType==1) {
+        if (payType.equals("0")) {
+            activityUtils.showToast("请选择提现方式");
+            return;
+        }
+        if (payType.equals("1")) {
             //进入绑定支付宝页面
            activityUtils.startActivity(AlipayActivity.class);
             return;
-        }if (payType==2) {
+        }if (payType.equals("2")) {
             //进入绑定微信页面
            activityUtils.startActivity(WeachatPayActivity.class);
             return;
-        }if (payType==3) {
+        }if (payType.equals("3")) {
             //进入银行卡绑定页面
           activityUtils.startActivity(BankCardActivity.class);
             return;
         }
+    }
+    //按键返回
+    @OnClick(R.id.iv_back)
+    public void back(){
+        //返回之后置0
+        payType="0";
+        finish();
     }
 }

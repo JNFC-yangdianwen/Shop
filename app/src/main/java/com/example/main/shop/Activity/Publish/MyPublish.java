@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.example.main.shop.Adapter.FriendAdapter;
+import com.example.main.shop.Adapter.PublishAdapter;
 import com.example.main.shop.Constans.Publish;
 import com.example.main.shop.Constans.User1;
 import com.example.main.shop.HttpUtils.MyRequest;
@@ -29,15 +29,17 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 //我的发布页面
-public class MyRelease extends AppCompatActivity {
-    private static final String TAG = "MyRelease";
-@Bind(R.id.lv_my)ListView listView;
+public class MyPublish extends AppCompatActivity {
+    private static final String TAG = "MyPublish";
+    @Bind(R.id.lv_my)ListView listView;
     private List<Publish.InfoBean> data;
+    private List<String > pictureData;//图片集合
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_release);
         ButterKnife.bind(this);
+        pictureData=new ArrayList<>();
          data=new ArrayList<>();
         String uid = User1.getInstance().getUid();
 //        Call<Publish> call = NetClient.getInstance().myPublish(uid);
@@ -77,28 +79,36 @@ public class MyRelease extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(string);
                     JSONArray jsonArray = (JSONArray) jsonObject.get("info");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                       Publish.InfoBean infoBean=new Publish.InfoBean();
-                        String photo = (String) jsonArray.getJSONObject(i).getString("photo");
-                        String user_name = (String) jsonArray.getJSONObject(i).getString("user_name");
-                        String time = (String) jsonArray.getJSONObject(i).getString("time");
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        String content = (String) jsonArray.getJSONObject(i).getString("content");
+                        Publish.InfoBean infoBean=new Publish.InfoBean();//我的发布实体类
+                        String photo =  jsonArray.getJSONObject(i).getString("photo");//图像
+                        String user_name =  jsonArray.getJSONObject(i).getString("user_name");//昵称
+                        String time =  jsonArray.getJSONObject(i).getString("time");//时间
+                        String content =  jsonArray.getJSONObject(i).getString("content");//发布的内容
+                        String id = jsonArray.getJSONObject(i).getString("id");
+                        String click_count = jsonArray.getJSONObject(i).getString("click_count");//点赞数量
+                        JSONArray picture = jsonArray.getJSONObject(i).getJSONArray("picture");
+                        for (int j = 0; j < picture.length(); j++) {
+                            String pic = (String) picture.get(i);
+                            pictureData.add(pic);
+                        }
                         infoBean.setUser_name(user_name);
                         infoBean.setPhoto(photo);
                         infoBean.setContent(content);
-//                        infoBean.setPicture(List<?> picture);
+                        infoBean.setId(id);
+                        infoBean.setClick_count(click_count);
+                        infoBean.setPicture(pictureData);
                         infoBean.setTime(time);
                         data.add(infoBean);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-        FriendAdapter friendAdapter=new FriendAdapter(data,this);
-        Log.d(TAG, "onCreate: ............................." +data.size());
-        listView.setAdapter(friendAdapter);
+
+        PublishAdapter adapter=new PublishAdapter(data,getApplicationContext(),this);
+//        Log.d(TAG, "onCreate: ............................." +data.size());
+        listView.setAdapter(adapter);
     }
     @OnClick(R.id.iv_back)
     public void back(){

@@ -8,47 +8,71 @@ import java.util.List;
  */
 
 public class Order extends Result {
+
+
     /**
-     * Result	返回结果fail失败suc成功
-     * Msg	提示信息
-     * Code	返回状态
-     * 102	参数不能为空
-     * 101	获取成功
-     * Info	我的订单
-     * Title	标题
-     * Picture	图片
-     * order_no	订单号
-     * Type 	订单状态  2下单中  1支付成功  3已完成
-     * Id	课程或订单id
+     * title : 英语课
+     * picture :
+     * order_no : 1479949997166
+     * type : 2
+     * id : 1
      */
 
-    private List<OrderInfo> info;
+    private List<InfoBean> info;
 
-    public List<OrderInfo> getInfo() {
+    public List<InfoBean> getInfo() {
         return info;
     }
 
-    class OrderInfo {
+    public void setInfo(List<InfoBean> info) {
+        this.info = info;
+    }
+
+    public static class InfoBean {
         private String title;
-        private String picre;
+        private String picture;
         private String order_no;
-        private int type;
-        private int id;
+        private String type;
+        private String id;
+
         public String getTitle() {
             return title;
         }
-        public String getPicre() {
-            return picre;
+
+        public void setTitle(String title) {
+            this.title = title;
         }
+
+        public String getPicture() {
+            return picture;
+        }
+
+        public void setPicture(String picture) {
+            this.picture = picture;
+        }
+
         public String getOrder_no() {
             return order_no;
         }
-        public int getType() {
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
+
+        public String getType() {
             return type;
         }
-        public int getId() {
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getId() {
             return id;
         }
-    }
 
+        public void setId(String id) {
+            this.id = id;
+        }
+    }
 }

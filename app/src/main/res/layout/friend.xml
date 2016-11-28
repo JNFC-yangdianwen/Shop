@@ -36,4 +36,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
+    <RelativeLayout
+        android:id="@+id/rl_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:hint="输入评论"
+            android:visibility="gone" />
+    </RelativeLayout>
 </LinearLayout>

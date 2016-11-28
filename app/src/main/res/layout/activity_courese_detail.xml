@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.main.shop.Activity.CoureseDetail">
+    tools:context="com.example.main.shop.Activity.Wallet.CourseDetail">
 <RelativeLayout
     android:background="@color/titleColor"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_Height">
     <ImageView
+        android:id="@+id/iv_back"
         android:layout_centerVertical="true"
         android:src="@drawable/fanhui"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="20dp" />
     <TextView
         android:gravity="center"
         android:textSize="@dimen/titleSize"
@@ -29,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tv_title"
         android:textSize="25sp"
         android:textColor="@color/dark"
         android:layout_margin="10dp"
@@ -39,23 +41,68 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="VIP"
             android:textSize="15sp"
             android:layout_alignParentLeft="true"
+            android:id="@+id/vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#de3434"
+            android:layout_toRightOf="@+id/vip"
+            android:textSize="15sp"
             android:id="@+id/tv_vip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_toLeftOf="@+id/tv_Novip"
+            android:text="原价"
             android:textSize="15sp"
+            android:id="@+id/Novip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#de3434"
             android:layout_alignParentRight="true"
+            android:textSize="15sp"
             android:id="@+id/tv_Novip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-    <TextView
-        android:textSize="15sp"
-        android:id="@+id/tv_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="15sp"
+            android:id="@+id/tv_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="15sp"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="15sp"
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="15sp"
+            android:id="@+id/tv_adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/dark"
+            android:textSize="15sp"
+            android:id="@+id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_buy"
         android:textColor="@color/white"

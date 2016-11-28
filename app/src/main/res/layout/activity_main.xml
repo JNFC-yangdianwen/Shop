@@ -12,7 +12,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 </FrameLayout>
-
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:visibility="gone"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="3"
+            android:id="@+id/et_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:visibility="gone"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:id="@+id/send"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/llb"
         android:background="@color/white"
@@ -75,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"

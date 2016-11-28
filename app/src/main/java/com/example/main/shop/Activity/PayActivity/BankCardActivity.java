@@ -5,21 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.example.main.shop.Constans.Result;
-import com.example.main.shop.Constans.UserInfo;
-import com.example.main.shop.HttpUtils.NetClient;
+import com.example.main.shop.Constans.User1;
+import com.example.main.shop.HttpUtils.MyRequest;
+import com.example.main.shop.HttpUtils.NetOkHttp;
 import com.example.main.shop.R;
 import com.example.main.shop.Utils.ActivityUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 //银行卡号页面
 public class BankCardActivity extends AppCompatActivity {
@@ -41,51 +44,59 @@ public class BankCardActivity extends AppCompatActivity {
         String name = etName.getText().toString().trim();
         String cardNum = etCardNum.getText().toString().trim();
         String bank = etBank.getText().toString().trim();
-        if (TextUtils.isEmpty(name)) {
-            activityUtils.showToast("姓名不能为空");
-            return;
-        }
-        if (cardNum.length()!=17) {
-            activityUtils.showToast("银行卡号不正确");
-            return;
-        }
-        if (TextUtils.isEmpty(bank)) {
-            activityUtils.showToast("请填写开户行");
-            return;
-        }
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(cardNum)&&TextUtils.isEmpty(bank))) {
-            String uid = UserInfo.getInstance().getUid();
-            Map<String,String> map=new HashMap<>();
-            map.put("uid", String.valueOf(uid));
-            map.put("type", String.valueOf(3));
-            map.put("user_name",name);
-            map.put("account",cardNum);
-            map.put("bank",bank);
-            Call<Result> call = NetClient.getInstance().modifyCashAccount(map);
-            call.enqueue(new Callback<Result>() {
+            String uid = User1.getInstance().getUid();
+            Request request = MyRequest.getInstance().cashAccount(uid, CashActivity.payType, name, cardNum, bank);
+            Call call = NetOkHttp.getInstance().getCall(request);
+            call.enqueue(new Callback() {
                 @Override
-                public void onResponse(Call<Result> call, Response<Result> response) {
-                    Result result = response.body();
-                    int code = result.getCode();
-                    String msg = result.getMsg();
-                    if (code==101) {
-                    activityUtils.showToast(msg);
-                        return;
-                    }   if (code==102) {
-                    activityUtils.showToast(msg);
-                        return;
-                    }   if (code==103) {
-                        activityUtils.showToast(msg);
-                        return;
-                    }
+                public void onFailure(Call call, IOException e) {
 
                 }
 
                 @Override
-                public void onFailure(Call<Result> call, Throwable t) {
-                    new Throwable(t.getMessage());
+                public void onResponse(Call call, Response response) throws IOException {
+                    String string = response.body().string();
+                    try {
+                        JSONObject jsonObject=new JSONObject(string);
+                        String code = jsonObject.getString("code");
+                        final   String msg = jsonObject.getString("msg");
+                        if (code.equals("101")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    activityUtils.showToast(msg);
+                                }
+                            });
+                            return;
+                        }
+                        if (code.equals("102")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    activityUtils.showToast(msg);
+                                }
+                            });
+                            return;
+                        } if (code.equals("103")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    activityUtils.showToast(msg);
+                                }
+                            });
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
+    }
+    //返回按键
+    @OnClick(R.id.iv_back)
+    public void back(){
+        finish();
     }
 }

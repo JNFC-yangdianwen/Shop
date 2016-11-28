@@ -22,6 +22,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.hybridsquad.android.library.CropHandler;
 import org.hybridsquad.android.library.CropHelper;
 import org.hybridsquad.android.library.CropParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -51,7 +53,6 @@ public class ReleaseMsgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_msg);
         ButterKnife.bind(this);
-        Log.d(TAG, "onCreate: ...................." + share);
         mActivityUtils = new ActivityUtils(this);
     }
 
@@ -76,28 +77,41 @@ public class ReleaseMsgActivity extends AppCompatActivity {
             @Override
             public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                 String string = response.body().string();
-                Log.d(TAG, "onResponse: ............................"+string);
+                try {
+                    JSONObject jsonObject =new JSONObject(string);
+                    final String msg = jsonObject.getString("msg");
+                    String code = jsonObject.getString("code");
+                    if (code .equals("101")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mActivityUtils.showToast(msg);
+                            }
+                        });
+                        return;
+                    }    if (code .equals("102")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mActivityUtils.showToast(msg);
+                            }
+                        });
+                        return;
+                    }    if (code .equals("103")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mActivityUtils.showToast(msg);
+                            }
+                        });
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
-//        File file=new File(photo);
-//        MultipartBody.Part formData = MultipartBody.Part.createFormData("image/png", file.getName());
-//        Call<Result> resultCall = NetClient.getInstance().addPost(uid, content, formData, String.valueOf(rewardcount), String.valueOf(rewardmoney), String.valueOf(rewardcount));
-//        resultCall.enqueue(new Callback<Result>() {
-//            @Override
-//            public void onResponse(Call<Result> call, Response<Result> response) {
-//                Result result = response.body();
-//                int code = result.getCode();
-//                String msg = result.getMsg();
-//                if (code == 101) {
-//                    mActivityUtils.showToast(msg);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Result> call, Throwable t) {
-//
-//            }
-//        });
     }
     //使用Universal—imageLoader截图
     private CropParams cropParams;

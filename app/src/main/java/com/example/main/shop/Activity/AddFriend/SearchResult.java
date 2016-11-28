@@ -34,21 +34,29 @@ import okhttp3.Response;
 
 public class SearchResult extends AppCompatActivity {
     private static final String TAG = "SearchResult";
-@Bind(R.id.tv_name)TextView name;///用户名
+    @Bind(R.id.tv_name)TextView name;///用户名
     @Bind(R.id.iv_photo)ImageView photo;//用户头像
     @Bind(R.id.tv_sign)TextView sign;//
     private ActivityUtils activityUtils;
-
+    public  static  int type;//如果为1，表明手机号查找，为2则表明扫描二维码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         ButterKnife.bind(this);
         activityUtils = new ActivityUtils(this);
-        name.setText(AddFeiendActivity.user_name);
-        ImageLoader.getInstance().clearMemoryCache();
-        ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+AddFeiendActivity.photo,photo);
-        sign.setText(AddFeiendActivity.account);
+        //手机号查找好友显示的结果
+        if (type == 1) {
+            name.setText(AddFeiendActivity.user_name);
+            ImageLoader.getInstance().clearMemoryCache();
+            ImageLoader.getInstance().displayImage(NetClient.IMAGE_URL+AddFeiendActivity.photo,photo);
+            sign.setText(AddFeiendActivity.account);
+        }
+        //扫描二维码的结果
+        if (type == 2) {
+            name.setText(AddFeiendActivity.result);
+        }
+
     }
     @OnClick ({R.id.iv_back,R.id.ll_sure})
     public void action(View v){

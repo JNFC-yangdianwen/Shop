@@ -39,7 +39,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 用户个人信息的界面
+ * 用户添加个人信息的界面
  */
 public class UserInfoActivity extends AppCompatActivity {
     @Bind(R.id.tv_name)TextView tvName;
